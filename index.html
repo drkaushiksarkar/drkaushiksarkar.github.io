@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kaushik Sarkar | Chief AI Officer | AI Engineering Leader</title>
-  <meta name="description" content="AI strategy, engineering, and P&L in one seat. 17 countries. 300M+ users. Production LLMs, multi-agent systems, enterprise data infrastructure." />
+  <title>Kaushik Sarkar | AI Engineering Leadership</title>
+  <meta name="description" content="Foundation model engineering, multi-agent systems, and enterprise data infrastructure across 17 countries." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
@@ -164,6 +164,33 @@
     .research-card h4 { font-size: 0.9rem; font-weight: 600; color: var(--w); margin-bottom: 0.5rem; }
     .research-card p { font-size: 0.8rem; color: var(--t2); }
 
+    /* TECHNICAL */
+    .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+    @media (max-width: 900px) { .tech-grid { grid-template-columns: 1fr; } }
+    .schematic { background: var(--bg2); border: 1px solid var(--border); padding: 2rem; position: relative; overflow: hidden; }
+    .schematic-label { font-family: var(--mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--t3); margin-bottom: 1.2rem; }
+    .schematic-title { font-size: 1rem; font-weight: 600; color: var(--w); margin-bottom: 1.5rem; }
+    .schematic svg { width: 100%; height: auto; display: block; }
+    .schematic svg text { font-family: 'Inter', sans-serif; }
+    .schematic svg .mono { font-family: 'JetBrains Mono', monospace; }
+    .schematic-full { grid-column: 1 / -1; }
+    .eq-block { background: var(--bg3); border-left: 2px solid var(--border3); padding: 1rem 1.2rem; margin: 0.8rem 0; font-family: var(--mono); font-size: 0.75rem; color: var(--t1); line-height: 1.8; overflow-x: auto; }
+    .eq-label { font-family: var(--mono); font-size: 0.62rem; color: var(--t3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.3rem; }
+    .eq-note { font-family: var(--sans); font-size: 0.72rem; color: var(--t3); margin-top: 0.4rem; font-style: italic; }
+    .flow-row { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin: 0.6rem 0; }
+    .flow-box { padding: 0.4rem 0.8rem; border: 1px solid var(--border2); font-family: var(--mono); font-size: 0.7rem; color: var(--t1); background: var(--bg2); white-space: nowrap; }
+    .flow-box.active { border-color: var(--w); color: var(--w); font-weight: 600; }
+    .flow-arrow { color: var(--t4); font-size: 0.8rem; }
+    .arch-layer { display: flex; align-items: stretch; margin: 0.4rem 0; gap: 0; }
+    .arch-cell { flex: 1; padding: 0.5rem 0.6rem; border: 1px solid var(--border); font-size: 0.68rem; text-align: center; }
+    .arch-cell.header { background: var(--bg3); font-weight: 600; color: var(--w); font-family: var(--mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .arch-cell.span { flex: unset; width: 100%; }
+    .param-table { width: 100%; border-collapse: collapse; margin-top: 0.8rem; }
+    .param-table th, .param-table td { padding: 0.35rem 0.5rem; font-size: 0.68rem; text-align: left; border-bottom: 1px solid var(--border); }
+    .param-table th { font-family: var(--mono); font-weight: 600; color: var(--w); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .param-table td { color: var(--t2); font-family: var(--mono); }
+    .param-table td:first-child { color: var(--t1); font-weight: 500; }
+
     /* CONNECT */
     #connect { text-align: center; }
     .connect-links { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 2rem; }
@@ -204,6 +231,7 @@
     <li><a href="#contributions">Engineering</a></li>
     <li><a href="#tech">Stack</a></li>
     <li><a href="#research">Research</a></li>
+    <li><a href="#technical">Architecture</a></li>
   </ul>
   <a href="#connect" class="btn btn-w" style="padding:0.45rem 1rem; font-size:0.78rem;">Contact</a>
 </nav>
@@ -441,6 +469,320 @@
   </div>
 </section>
 
+<section id="technical">
+  <div class="container">
+    <div class="label rv">Engineering</div>
+    <h2 class="title rv">Technical Architecture</h2>
+    <p class="sub rv">System design, training pipelines, mathematical foundations, and infrastructure schematics from production systems.</p>
+
+    <div class="tech-grid">
+
+      <!-- 1. Foundation Model Training Pipeline -->
+      <div class="schematic schematic-full rv">
+        <div class="schematic-label">Training Pipeline / SAGE 397B</div>
+        <div class="schematic-title">Three-Phase Domain Adaptation with Expert Routing</div>
+        <svg viewBox="0 0 940 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Phase boxes -->
+          <rect x="10" y="30" width="180" height="80" fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="100" y="55" text-anchor="middle" font-size="11" font-weight="600" fill="#0a0a0a">Continual Pre-Training</text>
+          <text x="100" y="72" text-anchor="middle" font-size="9" fill="#525252" class="mono">530M passages / 150B tokens</text>
+          <text x="100" y="86" text-anchor="middle" font-size="9" fill="#525252" class="mono">lr=1e-4  r=64  50K steps</text>
+          <text x="100" y="100" text-anchor="middle" font-size="8" fill="#737373">Domain knowledge injection</text>
+
+          <!-- Arrow 1 -->
+          <line x1="190" y1="70" x2="240" y2="70" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="237,66 245,70 237,74" fill="#0a0a0a"/>
+          <text x="217" y="62" text-anchor="middle" font-size="7" fill="#737373" class="mono">G3-G5</text>
+
+          <rect x="245" y="30" width="180" height="80" fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="335" y="55" text-anchor="middle" font-size="11" font-weight="600" fill="#0a0a0a">Supervised Fine-Tuning</text>
+          <text x="335" y="72" text-anchor="middle" font-size="9" fill="#525252" class="mono">796K records / ChatML</text>
+          <text x="335" y="86" text-anchor="middle" font-size="9" fill="#525252" class="mono">lr=2e-4  r=64  5K steps</text>
+          <text x="335" y="100" text-anchor="middle" font-size="8" fill="#737373">Instruction alignment</text>
+
+          <!-- Arrow 2 -->
+          <line x1="425" y1="70" x2="475" y2="70" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="472,66 480,70 472,74" fill="#0a0a0a"/>
+          <text x="452" y="62" text-anchor="middle" font-size="7" fill="#737373" class="mono">G6-G8</text>
+
+          <rect x="480" y="30" width="180" height="80" fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="570" y="55" text-anchor="middle" font-size="11" font-weight="600" fill="#0a0a0a">Direct Preference Opt.</text>
+          <text x="570" y="72" text-anchor="middle" font-size="9" fill="#525252" class="mono">132K pairs / hard neg</text>
+          <text x="570" y="86" text-anchor="middle" font-size="9" fill="#525252" class="mono">lr=5e-5  r=16  3K steps</text>
+          <text x="570" y="100" text-anchor="middle" font-size="8" fill="#737373">Preference alignment</text>
+
+          <!-- Arrow 3 -->
+          <line x1="660" y1="70" x2="710" y2="70" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="707,66 715,70 707,74" fill="#0a0a0a"/>
+          <text x="687" y="62" text-anchor="middle" font-size="7" fill="#737373" class="mono">G9-G10</text>
+
+          <rect x="715" y="30" width="180" height="80" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="805" y="55" text-anchor="middle" font-size="11" font-weight="600" fill="#ffffff">Expert Routing (MoLE)</text>
+          <text x="805" y="72" text-anchor="middle" font-size="9" fill="#a3a3a3" class="mono">8 domain experts</text>
+          <text x="805" y="86" text-anchor="middle" font-size="9" fill="#a3a3a3" class="mono">softmax gating / top-2</text>
+          <text x="805" y="100" text-anchor="middle" font-size="8" fill="#737373">SAGE 397B final model</text>
+
+          <!-- Bottom: QLoRA detail -->
+          <line x1="100" y1="110" x2="100" y2="140" stroke="#d4d4d4" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="335" y1="110" x2="335" y2="140" stroke="#d4d4d4" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="570" y1="110" x2="570" y2="140" stroke="#d4d4d4" stroke-width="1" stroke-dasharray="3,3"/>
+
+          <rect x="10" y="140" width="650" height="45" fill="none" stroke="#d4d4d4" stroke-width="1" stroke-dasharray="4,2"/>
+          <text x="30" y="158" font-size="8" font-weight="600" fill="#525252" class="mono">QLoRA (NF4)</text>
+          <text x="30" y="174" font-size="8" fill="#737373" class="mono">h = W_base . x + (alpha/r) . B . A . x</text>
+          <text x="280" y="158" font-size="8" fill="#525252" class="mono">72.7B params total</text>
+          <text x="280" y="174" font-size="8" fill="#737373" class="mono">659M trainable (0.9%)</text>
+          <text x="480" y="158" font-size="8" fill="#525252" class="mono">Targets: q,k,v,o,gate,up,down</text>
+          <text x="480" y="174" font-size="8" fill="#737373" class="mono">paged_adamw_8bit / bf16</text>
+
+          <!-- Validation gates -->
+          <rect x="715" y="140" width="180" height="45" fill="none" stroke="#d4d4d4" stroke-width="1" stroke-dasharray="4,2"/>
+          <text x="735" y="158" font-size="8" font-weight="600" fill="#525252" class="mono">12 Validation Gates</text>
+          <text x="735" y="174" font-size="8" fill="#737373" class="mono">G0 cluster .. G11 CHIB-60</text>
+        </svg>
+      </div>
+
+      <!-- 2. Mathematical Foundations -->
+      <div class="schematic rv">
+        <div class="schematic-label">Mathematical Foundations</div>
+        <div class="schematic-title">Objective Functions</div>
+
+        <div class="eq-label">Causal Language Modeling (CPT/SFT)</div>
+        <div class="eq-block">L_CLM = -sum_t log P(x_t | x_&lt;t)<br>NEFTune: e' = e + alpha . U(-1,1) / sqrt(d)</div>
+        <div class="eq-note">Autoregressive loss over packed 2048-token sequences. NEFTune noise alpha=5.0 during SFT.</div>
+
+        <div class="eq-label" style="margin-top:1.2rem;">Direct Preference Optimization</div>
+        <div class="eq-block">L_DPO = -E[log sigma(beta . (log pi_theta(y_w|x) / pi_ref(y_w|x)<br>         - log pi_theta(y_l|x) / pi_ref(y_l|x)))]</div>
+        <div class="eq-note">beta=0.1 controls KL divergence penalty from reference policy. Hard negatives enforce fine-grained preference margins.</div>
+
+        <div class="eq-label" style="margin-top:1.2rem;">Grouped Query Attention</div>
+        <div class="eq-block">Attn(Q,K,V) = softmax(Q . K^T / sqrt(d_k)) . V<br>GQA: 64 query heads / 8 key-value heads<br>RoPE positional encoding, 128K context</div>
+        <div class="eq-note">Qwen2.5 architecture: 80 transformer layers, 152K vocabulary.</div>
+      </div>
+
+      <!-- 3. Distributed Training Architecture -->
+      <div class="schematic rv">
+        <div class="schematic-label">Infrastructure / 8x GPU Cluster</div>
+        <div class="schematic-title">Distributed Training Layout</div>
+
+        <div class="arch-layer">
+          <div class="arch-cell header span" style="width:100%">Orchestration Layer</div>
+        </div>
+        <div class="arch-layer">
+          <div class="arch-cell" style="font-family:var(--mono);font-size:0.65rem;">torchrun --nnodes=8 --nproc_per_node=1</div>
+        </div>
+
+        <div style="height:0.6rem;border-left:1px dashed var(--border2);margin-left:50%;width:0;"></div>
+
+        <div class="arch-layer">
+          <div class="arch-cell header">GPU 0</div>
+          <div class="arch-cell header">GPU 1</div>
+          <div class="arch-cell header">GPU 2</div>
+          <div class="arch-cell header">...</div>
+          <div class="arch-cell header">GPU 7</div>
+        </div>
+        <div class="arch-layer">
+          <div class="arch-cell" style="font-size:0.6rem;">NF4 36GB</div>
+          <div class="arch-cell" style="font-size:0.6rem;">NF4 36GB</div>
+          <div class="arch-cell" style="font-size:0.6rem;">NF4 36GB</div>
+          <div class="arch-cell" style="font-size:0.6rem;">...</div>
+          <div class="arch-cell" style="font-size:0.6rem;">NF4 36GB</div>
+        </div>
+        <div class="arch-layer">
+          <div class="arch-cell" style="font-size:0.6rem;">LoRA 1.3GB</div>
+          <div class="arch-cell" style="font-size:0.6rem;">LoRA 1.3GB</div>
+          <div class="arch-cell" style="font-size:0.6rem;">LoRA 1.3GB</div>
+          <div class="arch-cell" style="font-size:0.6rem;">...</div>
+          <div class="arch-cell" style="font-size:0.6rem;">LoRA 1.3GB</div>
+        </div>
+        <div class="arch-layer">
+          <div class="arch-cell" style="font-size:0.6rem;">Optim 5.3GB</div>
+          <div class="arch-cell" style="font-size:0.6rem;">Optim 5.3GB</div>
+          <div class="arch-cell" style="font-size:0.6rem;">Optim 5.3GB</div>
+          <div class="arch-cell" style="font-size:0.6rem;">...</div>
+          <div class="arch-cell" style="font-size:0.6rem;">Optim 5.3GB</div>
+        </div>
+
+        <div style="height:0.6rem;border-left:1px dashed var(--border2);margin-left:50%;width:0;"></div>
+
+        <div class="arch-layer">
+          <div class="arch-cell header span" style="width:100%">NCCL All-Reduce over EFA</div>
+        </div>
+        <div class="arch-layer">
+          <div class="arch-cell span" style="width:100%;font-size:0.65rem;font-family:var(--mono);">effective_batch = per_device(2) x grad_accum(2) x 8 GPUs = 32</div>
+        </div>
+
+        <table class="param-table" style="margin-top:1rem;">
+          <tr><th>Resource</th><th>Per GPU</th><th>Total</th></tr>
+          <tr><td>Base Model (NF4)</td><td>36 GB</td><td>288 GB</td></tr>
+          <tr><td>LoRA Adapters</td><td>1.3 GB</td><td>10.4 GB</td></tr>
+          <tr><td>Optimizer States</td><td>5.3 GB</td><td>42.4 GB</td></tr>
+          <tr><td>Activations</td><td>~15 GB</td><td>~120 GB</td></tr>
+          <tr><td>Headroom</td><td>~38 GB</td><td>~307 GB</td></tr>
+        </table>
+      </div>
+
+      <!-- 4. Data Lake Architecture -->
+      <div class="schematic schematic-full rv">
+        <div class="schematic-label">Data Platform / SAGE Warehouse</div>
+        <div class="schematic-title">Lakehouse Architecture: Ingestion to Serving</div>
+        <svg viewBox="0 0 940 220" xmlns="http://www.w3.org/2000/svg">
+          <!-- Ingestion Layer -->
+          <text x="20" y="18" font-size="8" font-weight="600" fill="#525252" class="mono">INGESTION (150+ SOURCES)</text>
+          <rect x="10" y="25" width="110" height="35" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="65" y="40" text-anchor="middle" font-size="8" fill="#0a0a0a" class="mono">WHO / UNICEF</text>
+          <text x="65" y="52" text-anchor="middle" font-size="7" fill="#737373">APIs + EventBridge</text>
+
+          <rect x="130" y="25" width="110" height="35" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="185" y="40" text-anchor="middle" font-size="8" fill="#0a0a0a" class="mono">World Bank / UN</text>
+          <text x="185" y="52" text-anchor="middle" font-size="7" fill="#737373">Bulk + CDC</text>
+
+          <rect x="250" y="25" width="110" height="35" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="305" y="40" text-anchor="middle" font-size="8" fill="#0a0a0a" class="mono">PubMed / PMC</text>
+          <text x="305" y="52" text-anchor="middle" font-size="7" fill="#737373">5M full-text XML</text>
+
+          <rect x="370" y="25" width="110" height="35" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="425" y="40" text-anchor="middle" font-size="8" fill="#0a0a0a" class="mono">NOAA / ERA5</text>
+          <text x="425" y="52" text-anchor="middle" font-size="7" fill="#737373">Gridded NetCDF</text>
+
+          <rect x="490" y="25" width="110" height="35" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="545" y="40" text-anchor="middle" font-size="8" fill="#0a0a0a" class="mono">OpenFDA / CARD</text>
+          <text x="545" y="52" text-anchor="middle" font-size="7" fill="#737373">REST + S3</text>
+
+          <rect x="610" y="25" width="110" height="35" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="665" y="40" text-anchor="middle" font-size="8" fill="#0a0a0a" class="mono">GSOD / GHCN</text>
+          <text x="665" y="52" text-anchor="middle" font-size="7" fill="#737373">982M climate rows</text>
+
+          <rect x="730" y="25" width="110" height="35" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="785" y="40" text-anchor="middle" font-size="8" fill="#0a0a0a" class="mono">69+ Orgs Total</text>
+          <text x="785" y="52" text-anchor="middle" font-size="7" fill="#737373">21 EventBridge rules</text>
+
+          <!-- Arrows down -->
+          <line x1="470" y1="60" x2="470" y2="78" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="466,75 470,83 474,75" fill="#0a0a0a"/>
+
+          <!-- Processing Layer -->
+          <rect x="10" y="85" width="920" height="40" fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="30" y="102" font-size="8" font-weight="600" fill="#0a0a0a" class="mono">CANONICAL PIPELINE</text>
+          <text x="200" y="102" font-size="8" fill="#525252" class="mono">24 adapters</text>
+          <text x="320" y="102" font-size="8" fill="#525252" class="mono">SQLite checkpoint (WAL)</text>
+          <text x="510" y="102" font-size="8" fill="#525252" class="mono">Parallel runner</text>
+          <text x="660" y="102" font-size="8" fill="#525252" class="mono">Schema validation</text>
+          <text x="830" y="102" font-size="8" fill="#525252" class="mono">Dedup</text>
+          <text x="30" y="118" font-size="7" fill="#737373">Extract, normalize, validate, partition, load</text>
+
+          <!-- Arrow down -->
+          <line x1="470" y1="125" x2="470" y2="143" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="466,140 470,148 474,140" fill="#0a0a0a"/>
+
+          <!-- Storage Layer -->
+          <rect x="10" y="148" width="430" height="55" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="30" y="167" font-size="9" font-weight="600" fill="#ffffff" class="mono">ICEBERG LAKE (S3 + Athena v3)</text>
+          <text x="30" y="182" font-size="8" fill="#a3a3a3" class="mono">1.78B+ rows / 40K+ indicators</text>
+          <text x="30" y="196" font-size="7" fill="#737373">Parquet, Snappy, time-travel, partition pruning</text>
+          <text x="300" y="182" font-size="8" fill="#a3a3a3" class="mono">69+ organizations</text>
+          <text x="300" y="196" font-size="7" fill="#737373">ACID transactions on S3</text>
+
+          <rect x="460" y="148" width="225" height="55" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="480" y="167" font-size="9" font-weight="600" fill="#ffffff" class="mono">VECTOR STORE (AOSS)</text>
+          <text x="480" y="182" font-size="8" fill="#a3a3a3" class="mono">268M embeddings / 8.9 TB</text>
+          <text x="480" y="196" font-size="7" fill="#737373">Titan v2 1024d, HNSW, kNN</text>
+
+          <rect x="705" y="148" width="225" height="55" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="725" y="167" font-size="9" font-weight="600" fill="#ffffff" class="mono">KNOWLEDGE GRAPH</text>
+          <text x="725" y="182" font-size="8" fill="#a3a3a3" class="mono">33M causal relations</text>
+          <text x="725" y="196" font-size="7" fill="#737373">Entity linking, BM25, relation triples</text>
+
+          <!-- Serving arrow -->
+          <text x="375" y="216" text-anchor="middle" font-size="7" fill="#737373" class="mono">Enterprise views, dashboards, RAG retrieval, training data generation</text>
+        </svg>
+      </div>
+
+      <!-- 5. Multi-Agent Orchestration -->
+      <div class="schematic rv">
+        <div class="schematic-label">AI Systems / Evidence Intelligence</div>
+        <div class="schematic-title">Multi-Agent Orchestration</div>
+        <svg viewBox="0 0 380 260" xmlns="http://www.w3.org/2000/svg">
+          <!-- Router -->
+          <rect x="120" y="5" width="140" height="30" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="190" y="24" text-anchor="middle" font-size="9" font-weight="600" fill="#ffffff" class="mono">QUERY ROUTER</text>
+
+          <!-- Lines from router to agents -->
+          <line x1="150" y1="35" x2="60" y2="60" stroke="#d4d4d4" stroke-width="1"/>
+          <line x1="190" y1="35" x2="190" y2="60" stroke="#d4d4d4" stroke-width="1"/>
+          <line x1="230" y1="35" x2="320" y2="60" stroke="#d4d4d4" stroke-width="1"/>
+
+          <!-- Agent boxes row 1 -->
+          <rect x="10" y="60" width="100" height="40" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="60" y="78" text-anchor="middle" font-size="8" font-weight="500" fill="#0a0a0a">Synthesis Agent</text>
+          <text x="60" y="90" text-anchor="middle" font-size="7" fill="#737373" class="mono">Evidence fusion</text>
+
+          <rect x="140" y="60" width="100" height="40" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="190" y="78" text-anchor="middle" font-size="8" font-weight="500" fill="#0a0a0a">KG Agent</text>
+          <text x="190" y="90" text-anchor="middle" font-size="7" fill="#737373" class="mono">Causal reasoning</text>
+
+          <rect x="270" y="60" width="100" height="40" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="320" y="78" text-anchor="middle" font-size="8" font-weight="500" fill="#0a0a0a">Expert Agent</text>
+          <text x="320" y="90" text-anchor="middle" font-size="7" fill="#737373" class="mono">Domain routing</text>
+
+          <!-- Arrows down to retrieval -->
+          <line x1="60" y1="100" x2="60" y2="120" stroke="#d4d4d4" stroke-width="1"/>
+          <line x1="190" y1="100" x2="190" y2="120" stroke="#d4d4d4" stroke-width="1"/>
+          <line x1="320" y1="100" x2="320" y2="120" stroke="#d4d4d4" stroke-width="1"/>
+
+          <!-- Retrieval layer -->
+          <rect x="10" y="120" width="360" height="35" fill="none" stroke="#0a0a0a" stroke-width="1" stroke-dasharray="4,2"/>
+          <text x="25" y="137" font-size="7" font-weight="600" fill="#525252" class="mono">RETRIEVAL</text>
+          <text x="100" y="137" font-size="7" fill="#525252" class="mono">BM25</text>
+          <text x="155" y="137" font-size="7" fill="#525252" class="mono">kNN (HNSW)</text>
+          <text x="240" y="137" font-size="7" fill="#525252" class="mono">Hybrid rerank</text>
+          <text x="330" y="137" font-size="7" fill="#525252" class="mono">KG traverse</text>
+          <text x="25" y="150" font-size="7" fill="#737373" class="mono">268M vectors + 33M relations + 1.78B structured rows</text>
+
+          <!-- Arrow down -->
+          <line x1="190" y1="155" x2="190" y2="172" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="186,169 190,177 194,169" fill="#0a0a0a"/>
+
+          <!-- Reasoning -->
+          <rect x="80" y="177" width="220" height="30" fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="190" y="196" text-anchor="middle" font-size="8" font-weight="500" fill="#0a0a0a">Reasoning + Citation Assembly</text>
+
+          <!-- Arrow down -->
+          <line x1="190" y1="207" x2="190" y2="222" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="186,219 190,227 194,219" fill="#0a0a0a"/>
+
+          <!-- Output -->
+          <rect x="80" y="227" width="220" height="28" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="190" y="245" text-anchor="middle" font-size="8" font-weight="600" fill="#ffffff" class="mono">EVIDENCE SYNTHESIS OUTPUT</text>
+        </svg>
+      </div>
+
+      <!-- 6. Hyperparameter Reference -->
+      <div class="schematic rv">
+        <div class="schematic-label">Training Configuration</div>
+        <div class="schematic-title">Phase Hyperparameters</div>
+        <table class="param-table">
+          <tr><th>Parameter</th><th>CPT</th><th>SFT</th><th>DPO</th></tr>
+          <tr><td>Learning Rate</td><td>1e-4</td><td>2e-4</td><td>5e-5</td></tr>
+          <tr><td>LoRA Rank (r)</td><td>64</td><td>64</td><td>16</td></tr>
+          <tr><td>LoRA Alpha</td><td>64</td><td>64</td><td>16</td></tr>
+          <tr><td>Effective Batch</td><td>32</td><td>32</td><td>16</td></tr>
+          <tr><td>Max Steps</td><td>50,000</td><td>5,000</td><td>3,000</td></tr>
+          <tr><td>Warmup</td><td>500</td><td>3%</td><td>100</td></tr>
+          <tr><td>Sequence Length</td><td>2,048</td><td>2,048</td><td>1,024</td></tr>
+          <tr><td>Precision</td><td>bf16</td><td>bf16</td><td>bf16</td></tr>
+          <tr><td>Optimizer</td><td colspan="3" style="text-align:center;">paged_adamw_8bit</td></tr>
+          <tr><td>Grad Checkpoint</td><td colspan="3" style="text-align:center;">non-reentrant</td></tr>
+        </table>
+
+        <div class="eq-label" style="margin-top:1.2rem;">Memory Budget Per GPU (96 GB)</div>
+        <div class="eq-block">Base model (NF4)    36.0 GB<br>LoRA adapters         1.3 GB<br>Optimizer states      5.3 GB<br>Activations          ~15.0 GB<br>---------------------------<br>Total                ~58.0 GB<br>Headroom             ~38.0 GB</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <section id="connect" style="border-bottom:none;">
   <div class="container">
     <div class="label rv">Contact</div>
@@ -541,7 +883,7 @@ new Chart(document.getElementById('monthlyChart'), {
     responsive: true,
     plugins: {
       legend: { display: false },
-      tooltip: { backgroundColor: '#111111', borderColor: '#333333', borderWidth: 1, callbacks: { label: ctx => ctx.parsed.y.toLocaleString() + ' contributions' } }
+      tooltip: { backgroundColor: '#ffffff', borderColor: '#d4d4d4', titleColor: '#171717', bodyColor: '#525252', borderWidth: 1, callbacks: { label: ctx => ctx.parsed.y.toLocaleString() + ' contributions' } }
     },
     scales: {
       y: { beginAtZero: true, grid: { color: '#e5e5e5' }, ticks: { callback: v => v >= 1000 ? (v/1000).toFixed(1) + 'K' : v } },
