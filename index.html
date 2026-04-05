@@ -260,7 +260,7 @@
     <div class="stat rv"><div class="stat-val" data-target="300" data-suffix="M+">0</div><div class="stat-key">End Users</div></div>
     <div class="stat rv"><div class="stat-val" data-prefix="$" data-target="100" data-suffix="M+">0</div><div class="stat-key">Portfolio</div></div>
     <div class="stat rv"><div class="stat-val" data-target="397" data-suffix="B">0</div><div class="stat-key">Param LLM</div></div>
-    <div class="stat rv"><div class="stat-val" data-target="2" data-suffix="TB">0</div><div class="stat-key">Data Lake</div></div>
+    <div class="stat rv"><div class="stat-val" data-target="50" data-suffix="TB+">0</div><div class="stat-key">Data Lake</div></div>
     <div class="stat rv"><div class="stat-val" data-target="1000" data-suffix="+">0</div><div class="stat-key">Trained</div></div>
   </div>
 </section>
@@ -288,7 +288,7 @@
       <div class="card rv"><div class="card-icon"><i data-lucide="brain" style="width:22px;height:22px;"></i></div><h3>Large Language Models</h3><p>End-to-end LLM engineering: domain-adaptive pre-training, SFT on 500K+ instruction pairs, DPO alignment with hard negative mining, Mixture of LoRA Experts across 6 scientific domains.</p><div class="tags"><span class="tag">LoRA / QLoRA</span><span class="tag">DPO</span><span class="tag">RLHF</span><span class="tag">MoLE</span><span class="tag">vLLM</span></div></div>
       <div class="card rv"><div class="card-icon"><i data-lucide="bot" style="width:22px;height:22px;"></i></div><h3>Multi-Agent Systems</h3><p>Fan-out / fan-in agentic pipelines with 6+ specialised agents. MCP server architecture. Streaming SSE output. Real-time orchestration with graceful degradation.</p><div class="tags"><span class="tag">MCP</span><span class="tag">LangChain</span><span class="tag">ReAct</span><span class="tag">SSE</span></div></div>
       <div class="card rv"><div class="card-icon"><i data-lucide="search" style="width:22px;height:22px;"></i></div><h3>RAG and Knowledge Systems</h3><p>Hybrid retrieval (dense + BM25) with Reciprocal Rank Fusion. Cross-encoder re-ranking. 250M+ evidence spans in OpenSearch. GraphRAG for structured knowledge.</p><div class="tags"><span class="tag">OpenSearch</span><span class="tag">FAISS</span><span class="tag">RRF</span><span class="tag">GraphRAG</span></div></div>
-      <div class="card rv"><div class="card-icon"><i data-lucide="database" style="width:22px;height:22px;"></i></div><h3>Enterprise Data Platforms</h3><p>2TB S3 data lakes with Apache Iceberg, 700M+ row analytical stores, Athena serverless SQL, 24 EventBridge ingestion pipelines. Query time from 8s to &lt;400ms.</p><div class="tags"><span class="tag">Iceberg</span><span class="tag">Athena</span><span class="tag">Glue</span><span class="tag">Airflow</span></div></div>
+      <div class="card rv"><div class="card-icon"><i data-lucide="database" style="width:22px;height:22px;"></i></div><h3>Enterprise Data Platforms</h3><p>50TB+ S3 data lakes with Apache Iceberg, 700M+ row analytical stores, Athena serverless SQL, 24 EventBridge ingestion pipelines. Query time from 8s to &lt;400ms.</p><div class="tags"><span class="tag">Iceberg</span><span class="tag">Athena</span><span class="tag">Glue</span><span class="tag">Airflow</span></div></div>
       <div class="card rv"><div class="card-icon"><i data-lucide="zap" style="width:22px;height:22px;"></i></div><h3>Production ML Systems</h3><p>Real-time ML inference at 30+ geography scale. P95 latency &lt;150ms. Champion-challenger deployment. Canary rollouts with automated quality gates.</p><div class="tags"><span class="tag">SageMaker</span><span class="tag">MLOps</span><span class="tag">ONNX</span><span class="tag">Drift</span></div></div>
       <div class="card rv"><div class="card-icon"><i data-lucide="shield" style="width:22px;height:22px;"></i></div><h3>AI Governance and Strategy</h3><p>AI governance frameworks for regulated environments across 17 countries. Responsible AI embedded in pipelines. National expert committee leadership. $100M+ portfolio accountability.</p><div class="tags"><span class="tag">Governance</span><span class="tag">Responsible AI</span><span class="tag">Strategy</span></div></div>
     </div>
@@ -317,7 +317,7 @@
         <span class="kw">Router</span> &rarr; Claude Opus 4 &nbsp;&middot;&nbsp;
         <span class="kw">RAG</span> &rarr; OpenSearch, 250M+ spans &nbsp;&middot;&nbsp;
         <span class="kw">Foundation</span> &rarr; SAGE-397B<br/>
-        <span class="kw">Data</span> &rarr; 2TB S3, 700M+ rows Iceberg, 250M+ evidence spans, 30M+ causal relations<br/>
+        <span class="kw">Data</span> &rarr; 50TB+ S3, 700M+ rows Iceberg, 250M+ evidence spans, 30M+ causal relations<br/>
         <span class="kw">SLAs</span> &rarr; fast path &lt;3s &middot; full report 45-90s &middot; dashboard P95 &lt;150ms
       </div>
     </div>
@@ -333,7 +333,7 @@
         <div class="project-badge"><i data-lucide="server" style="width:14px;height:14px;"></i> Data Infrastructure</div>
         <h3>Global Evidence Data Platform</h3>
         <p>Enterprise-grade data lake unifying 100M+ records across 17 national health systems. Iceberg on S3. 24 EventBridge pipelines. P95 from 8s to &lt;400ms.</p>
-        <div class="project-metrics"><div><span class="metric-val">2TB</span><span class="metric-key">Data Lake</span></div><div><span class="metric-val">700M+</span><span class="metric-key">Rows</span></div></div>
+        <div class="project-metrics"><div><span class="metric-val">50TB+</span><span class="metric-key">Data Lake</span></div><div><span class="metric-val">700M+</span><span class="metric-key">Rows</span></div></div>
       </div>
     </div>
   </div>
@@ -570,7 +570,7 @@
 
       <!-- 2. Data Lake (3-Layer Lakehouse) -->
       <div class="schematic schematic-full rv">
-        <div class="schematic-label">Data Platform / 2TB Lakehouse / 85+ Organizations / 9 Domains</div>
+        <div class="schematic-label">Data Platform / 50TB+ Lakehouse / 85+ Organizations / 9 Domains</div>
         <div class="schematic-title">Three-Layer Architecture: Raw, Silver, Gold</div>
         <svg viewBox="0 0 940 310" xmlns="http://www.w3.org/2000/svg">
           <!-- Sources row -->
@@ -668,7 +668,7 @@
           <!-- Bottom summary -->
           <rect x="10" y="244" width="920" height="58" fill="var(--bg3)" stroke="none"/>
           <text x="30" y="260" font-size="7.5" font-weight="600" fill="#0a0a0a" class="mono">DATA ESTATE</text>
-          <text x="30" y="276" font-size="7" fill="#525252">2TB S3 lakehouse across 9 domains. Temporal coverage 1800-2100. Automated weekly ingestion via EventBridge + canonical pipeline.</text>
+          <text x="30" y="276" font-size="7" fill="#525252">50TB+ S3 lakehouse across 9 domains. Temporal coverage 1800-2100. Automated weekly ingestion via EventBridge + canonical pipeline.</text>
           <text x="30" y="290" font-size="7" fill="#525252">Cross-domain joins power the foundation model: climate x health x economics x population for multi-hop causal reasoning.</text>
         </svg>
       </div>
