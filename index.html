@@ -100,6 +100,22 @@
     .project-arch .kw { color: var(--w); }
     .project-arch .cmt { color: var(--t4); }
 
+    /* REPOSITORIES */
+    .repo-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 2rem 0 1.5rem; }
+    .repo-filter { font-family: var(--mono); font-size: 0.7rem; padding: 0.35rem 0.8rem; border: 1px solid var(--border2); background: transparent; color: var(--t3); cursor: pointer; transition: all 0.2s; letter-spacing: 0.02em; }
+    .repo-filter:hover { border-color: var(--border3); color: var(--t2); }
+    .repo-filter.active { background: var(--w); color: var(--bg); border-color: var(--w); }
+    .repo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
+    .repo-card { background: var(--bg2); padding: 1.3rem 1.5rem; transition: background 0.2s; display: flex; flex-direction: column; }
+    .repo-card:hover { background: var(--bg3); }
+    .repo-card-head { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
+    .repo-card-name { font-family: var(--mono); font-size: 0.78rem; font-weight: 600; color: var(--w); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .repo-card-lang { font-family: var(--mono); font-size: 0.62rem; padding: 0.15rem 0.45rem; border: 1px solid var(--border2); color: var(--t3); flex-shrink: 0; }
+    .repo-card-desc { font-size: 0.75rem; color: var(--t3); line-height: 1.5; flex: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .repo-count { font-family: var(--mono); font-size: 0.78rem; color: var(--t3); margin-top: 1rem; }
+    @media (max-width: 900px) { .repo-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .repo-grid { grid-template-columns: 1fr; } }
+
     /* CONTRIBUTIONS */
     .chart-wrap { background: var(--bg2); border: 1px solid var(--border); padding: 2rem; margin-top: 1.5rem; }
     .chart-wrap h3 { font-size: 0.95rem; font-weight: 600; color: var(--w); margin-bottom: 0.3rem; }
@@ -166,6 +182,7 @@
     <li><a href="#about">About</a></li>
     <li><a href="#capabilities">Capabilities</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#repos">Repos</a></li>
     <li><a href="#contributions">Engineering</a></li>
     <li><a href="#tech">Stack</a></li>
     <li><a href="#research">Research</a></li>
@@ -269,6 +286,27 @@
         <div class="project-metrics"><div><span class="metric-val">58TB</span><span class="metric-key">Data Lake</span></div><div><span class="metric-val">731M</span><span class="metric-key">Rows</span></div></div>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="repos">
+  <div class="container">
+    <div class="label rv">Open Source</div>
+    <h2 class="title rv">All Repositories</h2>
+    <p class="sub rv">56 public repositories across personal and organization accounts. Production systems, research platforms, and foundational tools.</p>
+    <div class="repo-filters rv">
+      <button class="repo-filter active" data-cat="all">All</button>
+      <button class="repo-filter" data-cat="sage">SAGE Platform</button>
+      <button class="repo-filter" data-cat="ai">AI / Deep Learning</button>
+      <button class="repo-filter" data-cat="surveillance">Surveillance</button>
+      <button class="repo-filter" data-cat="data">Data Engineering</button>
+      <button class="repo-filter" data-cat="climate">Climate / Global Health</button>
+      <button class="repo-filter" data-cat="apps">Applications</button>
+      <button class="repo-filter" data-cat="org">Organization</button>
+      <button class="repo-filter" data-cat="foundation">Foundation</button>
+    </div>
+    <div class="repo-count rv">Showing <span id="repo-shown">56</span> of 56 repositories</div>
+    <div class="repo-grid rv" id="repoGrid"></div>
   </div>
 </section>
 
@@ -465,6 +503,113 @@ new Chart(document.getElementById('monthlyChart'), {
     }
   }
 });
+
+// Repository data: advanced first, foundation last
+const repos = [
+  // SAGE AI Platform (most advanced)
+  {name:"sage-realtime-health-surveillance",desc:"Production real-time health anomaly detection engine processing 50K events/sec with 200ms latency across 194 countries",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-evidence-rag-engine",desc:"Multi-hop RAG engine over 268M PubMed embeddings and 33M causal knowledge graph triples with hybrid BM25+vector retrieval",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-dengue-gnn-forecaster",desc:"Spatio-temporal graph neural network for dengue outbreak prediction using 5.7M case records, ERA5 climate reanalysis, and WorldPop density rasters",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-climate-health-forecaster",desc:"Temporal fusion transformer for climate-health outcome prediction using ERA5 (362M rows), CMIP6 projections, and WHO health indicators",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-vaccine-equity-agent",desc:"Agentic AI platform with MCP tool servers for vaccine coverage equity analysis using UNICEF (8.8M rows), WHO immunization, and OECD ODA data",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-genomic-amr-tracker",desc:"Graph neural network for antimicrobial resistance tracking using CARD AMR genomes (271K), WHO GLASS surveillance, and transformer sequence classification",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-geospatial-health-platform",desc:"Full-stack geospatial health intelligence platform with TiTiler COG serving, interactive choropleth mapping, and cross-domain spatial statistics",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-ncd-risk-transformer",desc:"Transformer-based non-communicable disease risk stratification using longitudinal IHME GBD (47M rows) and World Bank socioeconomic indicators",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-pharma-supply-agent",desc:"Multi-agent pharmaceutical supply chain optimizer using OECD Pharma data (19.6M rows), World Bank financing, and reinforcement learning with MCP orchestration",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-population-dynamics-dashboard",desc:"Interactive population dynamics forecasting dashboard with uncertainty quantification using UN Population (11M rows), UNDP demographics, and D3.js",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-lulc-population-mapper",desc:"Geospatial AI for land use/land cover change detection correlated with population dynamics using WorldPop COGs and satellite imagery segmentation",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-climate-agent-orchestrator",desc:"Multi-agent climate data pipeline with MCP servers for SAGE Lake access, n8n workflow automation, and LLM-powered climate-health report generation",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+
+  // AI / Deep Learning
+  {name:"deep-neural-epi",desc:"Deep learning for epidemiological forecasting: LSTM, Transformer, GNN models for outbreak prediction and surveillance",lang:"Python",cat:"ai",owner:"drkaushiksarkar"},
+  {name:"biomedical-ai-framework",desc:"Biomedical AI framework for multi-modal learning, drug discovery, genomic analysis, and clinical knowledge graphs",lang:"Python",cat:"ai",owner:"drkaushiksarkar"},
+  {name:"clinical-ml-pipeline",desc:"Production ML pipeline for clinical decision support: risk scoring, treatment optimization, outcome prediction",lang:"Python",cat:"ai",owner:"drkaushiksarkar"},
+  {name:"medical-imaging-dx",desc:"Enterprise medical imaging diagnostics with automated triage, CNN-based classification, and clinical decision support integration",lang:"Python",cat:"ai",owner:"drkaushiksarkar"},
+  {name:"health-nlp-engine",desc:"Production NLP pipeline with agentic text processing, automated health communication analysis, and full-stack deployment",lang:"Python",cat:"ai",owner:"drkaushiksarkar"},
+  {name:"fever-prediction-platform",desc:"Production fever and malaria prediction platform with LSTM-Attention fusion models, SHAP explainability, and Bayesian hyperparameter optimization",lang:"Python",cat:"ai",owner:"drkaushiksarkar"},
+  {name:"pandemic-response-analytics",desc:"Real-time pandemic surveillance and response analytics: variant tracking, contact tracing, hospital capacity modeling",lang:"Python",cat:"ai",owner:"drkaushiksarkar"},
+
+  // Disease Surveillance
+  {name:"disease-surveillance-platform",desc:"Distributed disease surveillance system with real-time alerting and geospatial analytics",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"epidemiological-forecasting-engine",desc:"Advanced epidemiological forecasting using ensemble ML methods and real-time surveillance data",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"real-time-disease-monitor",desc:"Real-time disease outbreak monitoring with alerting, dashboards and automated situation reports",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"slewars",desc:"SLEWARS: Spatial-Longitudinal Early Warning and Response System for epidemic intelligence and outbreak prediction",lang:"JavaScript",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"epidemic-prediction-framework",desc:"Research framework for autonomous early warning algorithms with self-tuning thresholds and agent-driven anomaly detection",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"epidemic-intelligence-bd",desc:"AI-powered autonomous early warning system for infectious disease surveillance in Bangladesh with agent-driven alerting",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"bangladesh-disease-surveillance",desc:"Bangladesh disease early warning system with operational surveillance and alerting platform",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"pandemic-preparedness-index",desc:"Composite pandemic preparedness scoring system using WHO JEE, GHS Index and custom indicators",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"malaria-forecasting-system",desc:"ML-powered malaria incidence forecasting using climate, demographic and epidemiological data",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"malaria-surveillance-analytics",desc:"Malaria surveillance analytics platform with district-level monitoring, outbreak detection, and automated reporting",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+
+  // Data Engineering
+  {name:"vector-embedding-pipeline",desc:"High-throughput vector embedding pipeline for 237M+ biomedical text spans using Titan Embeddings",lang:"Python",cat:"data",owner:"drkaushiksarkar"},
+  {name:"global-health-data-pipeline",desc:"Scalable ETL pipeline for ingesting, normalizing and serving 150+ global health data sources",lang:"Python",cat:"data",owner:"drkaushiksarkar"},
+  {name:"health-analytics-studio",desc:"Interactive analytics studio for health data exploration, visualization and insight generation",lang:"Python",cat:"data",owner:"drkaushiksarkar"},
+  {name:"health-intelligence-dashboard",desc:"Real-time health intelligence dashboard with agent-driven indicator monitoring, geospatial mapping, and automated insights",lang:"Python",cat:"data",owner:"drkaushiksarkar"},
+  {name:"geospatial-health-toolkit",desc:"Geospatial analysis toolkit for health facility mapping, catchment modeling and spatial epidemiology",lang:"Python",cat:"data",owner:"drkaushiksarkar"},
+  {name:"health-informatics-toolkit",desc:"Health informatics platform with FHIR/HL7 integration, clinical data pipelines, and EHR interoperability",lang:"Python",cat:"data",owner:"drkaushiksarkar"},
+
+  // Climate / Global Health
+  {name:"climate-disease-forecast",desc:"Climate-disease correlation engine linking environmental data to health outcomes",lang:"Python",cat:"climate",owner:"drkaushiksarkar"},
+  {name:"climate-profiler-app",desc:"Country-level climate profiling with automated indicator benchmarking, temporal trend analysis, and multi-source data integration",lang:"Python",cat:"climate",owner:"drkaushiksarkar"},
+  {name:"environmental-health-correlator",desc:"Environmental exposure to health outcome correlation engine using ERA5 climate and WHO mortality data",lang:"Python",cat:"climate",owner:"drkaushiksarkar"},
+  {name:"vaccine-coverage-optimizer",desc:"Vaccine coverage optimization and equity analysis using WUENIC, administrative and survey data",lang:"Python",cat:"climate",owner:"drkaushiksarkar"},
+  {name:"antimicrobial-resistance-tracker",desc:"AMR surveillance and resistance pattern tracking using CARD genomics and WHO GLASS data",lang:"Python",cat:"climate",owner:"drkaushiksarkar"},
+  {name:"nutrition-deficiency-mapper",desc:"Nutritional deficiency mapping and intervention targeting using DHS, MICS and WASH survey data",lang:"Python",cat:"climate",owner:"drkaushiksarkar"},
+  {name:"epi-stat-computing",desc:"Statistical computing for epidemiological research: survival analysis, spatial statistics, Bayesian hierarchical models",lang:"Python",cat:"climate",owner:"drkaushiksarkar"},
+  {name:"global-ews-catalogue",desc:"Systematic global catalogue of 79 early warning systems with capability mapping, coverage analysis, and gap identification",lang:"Python",cat:"climate",owner:"drkaushiksarkar"},
+
+  // Applications
+  {name:"spectra-enterprise",desc:"High-performance spectral analysis platform for real-time disease pattern detection and forecasting",lang:"Python",cat:"apps",owner:"drkaushiksarkar"},
+  {name:"forecast-engine",desc:"Agentic forecasting application with autonomous model selection, multi-indicator prediction, and self-correcting pipelines",lang:"Python",cat:"apps",owner:"drkaushiksarkar"},
+  {name:"timeseries-explorer",desc:"Interactive time-series exploration platform with automated anomaly detection, statistical profiling, and Streamlit visualization",lang:"Python",cat:"apps",owner:"drkaushiksarkar"},
+  {name:"sit742",desc:"SIT742: Modern Data Science course materials and computational notebooks",lang:"Jupyter Notebook",cat:"apps",owner:"drkaushiksarkar"},
+  {name:"drkaushiksarkar.github.io",desc:"Personal contribution dashboard and activity analytics",lang:"HTML",cat:"apps",owner:"drkaushiksarkar"},
+
+  // Organization
+  {name:"DISHA",desc:"Data Integrated Solutions for Healthy Futures with AI: climate-informed health decision support platform",lang:"Jupyter Notebook",cat:"org",org:"Forecasting-Healthy-Futures"},
+  {name:"Global-EWS-Catalogue",desc:"Comprehensive catalogue of global early warning systems for infectious disease outbreaks",lang:"HTML",cat:"org",org:"Forecasting-Healthy-Futures"},
+  {name:"Odisha_2021_Official_Boundaries",desc:"Official administrative boundary shapefiles for Odisha state, India",lang:"GIS",cat:"org",org:"Forecasting-Healthy-Futures"},
+  {name:"Indonesia",desc:"Indonesia health system analytics: country-specific surveillance and forecasting deployment",lang:"N/A",cat:"org",org:"IMACS-Health-Modeling"},
+
+  // Foundation / Early Career
+  {name:"epidemiological-methods",desc:"Computational epidemiology: spatial statistics, meta-analysis, outbreak modeling, Bayesian hierarchical models, disease mapping",lang:"Python",cat:"foundation",owner:"drkaushiksarkar"},
+  {name:"global-health-statistics",desc:"R and Stata analysis of global health data: WHO GHO, World Bank WDI, UN Population, DHS surveys, GBD estimates",lang:"R",cat:"foundation",owner:"drkaushiksarkar"},
+  {name:"survival-analysis-matlab",desc:"MATLAB toolbox for survival analysis and time-varying models: Cox PH, Kaplan-Meier, competing risks, frailty models, cure rate models",lang:"R",cat:"foundation",owner:"drkaushiksarkar"},
+  {name:"numerical-methods-cpp",desc:"C++ implementations of numerical methods and data structures: sorting, graph algorithms, dynamic programming, matrix operations, Monte Carlo simulation",lang:"C++",cat:"foundation",owner:"drkaushiksarkar"},
+];
+
+const catLabels = {sage:"SAGE Platform",ai:"AI / Deep Learning",surveillance:"Surveillance",data:"Data Engineering",climate:"Climate / Global Health",apps:"Applications",org:"Organization",foundation:"Foundation"};
+
+function renderRepos(filter) {
+  const grid = document.getElementById('repoGrid');
+  const filtered = filter === 'all' ? repos : repos.filter(r => r.cat === filter);
+  document.getElementById('repo-shown').textContent = filtered.length;
+  grid.innerHTML = filtered.map(r => {
+    const owner = r.org || r.owner;
+    const url = r.org ? 'https://github.com/' + r.org + '/' + r.name : 'https://github.com/' + r.owner + '/' + r.name;
+    const orgBadge = r.org ? '<span class="repo-card-lang" style="color:#888;">' + r.org + '</span>' : '';
+    return '<a href="' + url + '" target="_blank" class="repo-card">' +
+      '<div class="repo-card-head">' +
+        '<i data-lucide="git-branch" style="width:13px;height:13px;color:var(--t4);flex-shrink:0;"></i>' +
+        '<span class="repo-card-name">' + r.name + '</span>' +
+        '<span class="repo-card-lang">' + r.lang + '</span>' +
+        orgBadge +
+      '</div>' +
+      '<div class="repo-card-desc">' + r.desc + '</div>' +
+    '</a>';
+  }).join('');
+  lucide.createIcons();
+}
+
+document.querySelectorAll('.repo-filter').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.repo-filter').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderRepos(btn.dataset.cat);
+  });
+});
+renderRepos('all');
 
 // Counter animation
 function animateCounter(el) {
