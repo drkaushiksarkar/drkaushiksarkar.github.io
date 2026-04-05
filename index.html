@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kaushik Sarkar - Contribution Activity</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: #0d1117;
+    color: #e6edf3;
+    padding: 2rem;
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+  h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #f0f6fc;
+  }
+  .subtitle {
+    color: #8b949e;
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .stat-card {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 1.2rem;
+  }
+  .stat-card .label { color: #8b949e; font-size: 0.85rem; margin-bottom: 0.3rem; }
+  .stat-card .value { font-size: 1.6rem; font-weight: 700; color: #58a6ff; }
+  .stat-card .detail { color: #8b949e; font-size: 0.8rem; margin-top: 0.2rem; }
+  .chart-section {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .chart-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #f0f6fc;
+  }
+  .chart-desc {
+    color: #8b949e;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+  canvas { max-height: 350px; }
+  .footer {
+    text-align: center;
+    color: #484f58;
+    font-size: 0.8rem;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #21262d;
+  }
+  .footer a { color: #58a6ff; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Kaushik Sarkar</h1>
+  <p class="subtitle">Contribution Activity Dashboard</p>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="label">Total Contributions (2009-2026)</div>
+      <div class="value" id="total-contributions">--</div>
+      <div class="detail">Commits, issues, PRs, reviews</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Active Years</div>
+      <div class="value">17+</div>
+      <div class="detail">2009 - present</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Peak Year</div>
+      <div class="value" id="peak-year">--</div>
+      <div class="detail" id="peak-count"></div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Last 30 Days</div>
+      <div class="value" id="last-month-total">--</div>
+      <div class="detail" id="last-month-avg"></div>
+    </div>
+  </div>
+
+  <div class="chart-section">
+    <div class="chart-title">Contribution Activity Since 2009</div>
+    <div class="chart-desc">Annual contributions across all repositories, showing growth from graduate research through clinical AI and global health platform development.</div>
+    <canvas id="yearlyChart"></canvas>
+  </div>
+
+  <div class="chart-section">
+    <div class="chart-title">Last 30 Days Activity</div>
+    <div class="chart-desc">Daily contribution activity showing current engineering velocity.</div>
+    <canvas id="monthlyChart"></canvas>
+  </div>
+</div>
+
+<div class="footer">
+  <a href="https://github.com/drkaushiksarkar">github.com/drkaushiksarkar</a>
+  &middot; Updated daily via GitHub Actions
+</div>
+
+<script>
+const yearlyData = [{"year": 2009, "total": 623, "commits": 623, "issues": 0, "prs": 0}, {"year": 2010, "total": 999, "commits": 999, "issues": 0, "prs": 0}, {"year": 2011, "total": 2053, "commits": 2053, "issues": 0, "prs": 0}, {"year": 2012, "total": 3201, "commits": 3201, "issues": 0, "prs": 0}, {"year": 2013, "total": 7924, "commits": 7924, "issues": 0, "prs": 0}, {"year": 2014, "total": 8500, "commits": 8500, "issues": 0, "prs": 0}, {"year": 2015, "total": 11994, "commits": 11994, "issues": 0, "prs": 0}, {"year": 2016, "total": 14585, "commits": 14585, "issues": 0, "prs": 0}, {"year": 2017, "total": 15292, "commits": 15292, "issues": 0, "prs": 0}, {"year": 2018, "total": 18076, "commits": 18076, "issues": 0, "prs": 0}, {"year": 2019, "total": 21400, "commits": 21400, "issues": 0, "prs": 0}, {"year": 2020, "total": 24904, "commits": 24900, "issues": 0, "prs": 0}, {"year": 2021, "total": 15117, "commits": 15102, "issues": 0, "prs": 0}, {"year": 2022, "total": 10495, "commits": 10426, "issues": 0, "prs": 0}, {"year": 2023, "total": 8640, "commits": 8586, "issues": 0, "prs": 0}, {"year": 2024, "total": 8064, "commits": 8053, "issues": 0, "prs": 0}, {"year": 2025, "total": 67221, "commits": 67172, "issues": 0, "prs": 0}, {"year": 2026, "total": 53145, "commits": 48709, "issues": 450, "prs": 315}];
+const monthlyData = [{"date": "2026-03-06", "count": 262}, {"date": "2026-03-07", "count": 204}, {"date": "2026-03-08", "count": 113}, {"date": "2026-03-09", "count": 3648}, {"date": "2026-03-10", "count": 50}, {"date": "2026-03-11", "count": 3}, {"date": "2026-03-12", "count": 502}, {"date": "2026-03-13", "count": 300}, {"date": "2026-03-14", "count": 1200}, {"date": "2026-03-15", "count": 109}, {"date": "2026-03-16", "count": 1484}, {"date": "2026-03-17", "count": 495}, {"date": "2026-03-18", "count": 319}, {"date": "2026-03-19", "count": 500}, {"date": "2026-03-20", "count": 345}, {"date": "2026-03-21", "count": 1202}, {"date": "2026-03-22", "count": 112}, {"date": "2026-03-23", "count": 2748}, {"date": "2026-03-24", "count": 594}, {"date": "2026-03-25", "count": 500}, {"date": "2026-03-26", "count": 223}, {"date": "2026-03-27", "count": 269}, {"date": "2026-03-28", "count": 1200}, {"date": "2026-03-29", "count": 62}, {"date": "2026-03-30", "count": 1915}, {"date": "2026-03-31", "count": 386}, {"date": "2026-04-01", "count": 1240}, {"date": "2026-04-02", "count": 540}, {"date": "2026-04-03", "count": 540}, {"date": "2026-04-04", "count": 8949}, {"date": "2026-04-05", "count": 1090}];
+
+// Stats
+const totalContrib = yearlyData.reduce((s, y) => s + y.total, 0);
+document.getElementById('total-contributions').textContent = totalContrib.toLocaleString();
+
+const peak = yearlyData.reduce((a, b) => a.total > b.total ? a : b);
+document.getElementById('peak-year').textContent = peak.year;
+document.getElementById('peak-count').textContent = peak.total.toLocaleString() + ' contributions';
+
+const monthTotal = monthlyData.reduce((s, d) => s + d.count, 0);
+document.getElementById('last-month-total').textContent = monthTotal.toLocaleString();
+document.getElementById('last-month-avg').textContent = Math.round(monthTotal / Math.max(monthlyData.length, 1)) + ' avg/day';
+
+// Chart defaults
+Chart.defaults.color = '#8b949e';
+Chart.defaults.borderColor = '#21262d';
+
+// Yearly trendline
+new Chart(document.getElementById('yearlyChart'), {
+  type: 'line',
+  data: {
+    labels: yearlyData.map(d => d.year),
+    datasets: [
+      {
+        label: 'Total Contributions',
+        data: yearlyData.map(d => d.total),
+        borderColor: '#58a6ff',
+        backgroundColor: 'rgba(88, 166, 255, 0.1)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        borderWidth: 2.5,
+      },
+      {
+        label: 'Commits',
+        data: yearlyData.map(d => d.commits),
+        borderColor: '#3fb950',
+        backgroundColor: 'transparent',
+        tension: 0.3,
+        pointRadius: 3,
+        borderWidth: 1.5,
+        borderDash: [5, 3],
+      },
+    ],
+  },
+  options: {
+    responsive: true,
+    interaction: { intersect: false, mode: 'index' },
+    plugins: {
+      legend: { position: 'top', labels: { usePointStyle: true, padding: 16 } },
+      tooltip: {
+        callbacks: {
+          label: (ctx) => ctx.dataset.label + ': ' + ctx.parsed.y.toLocaleString(),
+        },
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        grid: { color: '#21262d' },
+        ticks: { callback: (v) => v >= 1000 ? (v/1000).toFixed(0) + 'K' : v },
+      },
+      x: { grid: { display: false } },
+    },
+  },
+});
+
+// Monthly trendline
+new Chart(document.getElementById('monthlyChart'), {
+  type: 'bar',
+  data: {
+    labels: monthlyData.map(d => {
+      const dt = new Date(d.date);
+      return dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    }),
+    datasets: [{
+      label: 'Daily Contributions',
+      data: monthlyData.map(d => d.count),
+      backgroundColor: monthlyData.map(d => {
+        if (d.count > 5000) return '#da3633';
+        if (d.count > 1000) return '#58a6ff';
+        if (d.count > 100) return '#3fb950';
+        return '#238636';
+      }),
+      borderRadius: 3,
+      borderSkipped: false,
+    }],
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: (ctx) => ctx.parsed.y.toLocaleString() + ' contributions',
+        },
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        grid: { color: '#21262d' },
+        ticks: { callback: (v) => v >= 1000 ? (v/1000).toFixed(1) + 'K' : v },
+      },
+      x: {
+        grid: { display: false },
+        ticks: { maxRotation: 45 },
+      },
+    },
+  },
+});
+</script>
+</body>
+</html>
