@@ -338,126 +338,6 @@
   </div>
 </section>
 
-<section id="repos">
-  <div class="container">
-    <div class="label rv">Open Source</div>
-    <h2 class="title rv">All Repositories</h2>
-    <p class="sub rv">56 public repositories across personal and organization accounts. Production systems, research platforms, and foundational tools.</p>
-    <div class="repo-filters rv">
-      <button class="repo-filter active" data-cat="all">All</button>
-      <button class="repo-filter" data-cat="sage">SAGE Platform</button>
-      <button class="repo-filter" data-cat="ai">AI / Deep Learning</button>
-      <button class="repo-filter" data-cat="surveillance">Surveillance</button>
-      <button class="repo-filter" data-cat="data">Data Engineering</button>
-      <button class="repo-filter" data-cat="climate">Climate / Global Health</button>
-      <button class="repo-filter" data-cat="apps">Applications</button>
-      <button class="repo-filter" data-cat="org">Organization</button>
-      <button class="repo-filter" data-cat="foundation">Foundation</button>
-    </div>
-    <div class="repo-count rv">Showing <span id="repo-shown">56</span> of 56 repositories</div>
-    <div class="repo-grid rv" id="repoGrid"></div>
-  </div>
-</section>
-
-<section id="contributions">
-  <div class="container">
-    <div class="label rv">Engineering Activity</div>
-    <h2 class="title rv">Contribution History</h2>
-    <p class="sub rv">17 years of continuous open source development across AI, epidemiology, and global health platforms.</p>
-
-    <div class="contrib-stats rv">
-      <div class="contrib-stat"><div class="val" id="c-total">0</div><div class="key">Total Contributions</div></div>
-      <div class="contrib-stat"><div class="val">17</div><div class="key">Active Years</div></div>
-      <div class="contrib-stat"><div class="val" id="c-peak">0</div><div class="key">Peak Year</div></div>
-      <div class="contrib-stat"><div class="val" id="c-month">0</div><div class="key">Last 30 Days</div></div>
-    </div>
-
-    <div class="chart-wrap rv">
-      <h3>Since 2009</h3>
-      <div class="desc">Annual contributions. Growth from academic research through clinical AI, pandemic response, and production AI platform engineering.</div>
-      <canvas id="yearlyChart"></canvas>
-    </div>
-
-    <div class="chart-wrap rv">
-      <h3>Last 30 Days</h3>
-      <div class="desc">Daily engineering velocity across active repositories.</div>
-      <canvas id="monthlyChart"></canvas>
-    </div>
-  </div>
-</section>
-
-<section id="partners">
-  <div class="container">
-    <div class="label rv">Institutional Partnerships</div>
-    <h2 class="title rv">Who I Have Built With</h2>
-    <p class="sub rv">Technical roadmaps that became funded, multi-year programs.</p>
-    <div class="grid-3">
-      <div class="partner rv"><div class="partner-icon"><i data-lucide="rocket" style="width:20px;height:20px;"></i></div><div><div class="partner-name">NASA</div><div class="partner-role">Strategic Technology Partnership</div></div></div>
-      <div class="partner rv"><div class="partner-icon"><i data-lucide="globe" style="width:20px;height:20px;"></i></div><div><div class="partner-name">The Global Fund</div><div class="partner-role">Health Data Infrastructure</div></div></div>
-      <div class="partner rv"><div class="partner-icon"><i data-lucide="sparkles" style="width:20px;height:20px;"></i></div><div><div class="partner-name">McGovern Foundation</div><div class="partner-role">ARK Platform Funder</div></div></div>
-      <div class="partner rv"><div class="partner-icon"><i data-lucide="cloud" style="width:20px;height:20px;"></i></div><div><div class="partner-name">Amazon</div><div class="partner-role">Environmental Equity Initiative</div></div></div>
-      <div class="partner rv"><div class="partner-icon"><i data-lucide="graduation-cap" style="width:20px;height:20px;"></i></div><div><div class="partner-name">UCL</div><div class="partner-role">UKRI/MRC Research, GBP 2M</div></div></div>
-      <div class="partner rv"><div class="partner-icon"><i data-lucide="building-2" style="width:20px;height:20px;"></i></div><div><div class="partner-name">Ministry of Health India</div><div class="partner-role">$116M National Program, 8 States</div></div></div>
-    </div>
-  </div>
-</section>
-
-<section id="global-map">
-  <div class="container">
-    <div class="label rv">Global Reach</div>
-    <h2 class="title rv">17 Countries</h2>
-    <p class="sub rv">Each highlighted country represents a program I designed, built, or delivered. Technical and strategic leadership on the ground.</p>
-    <div class="map-wrap rv" id="mapContainer"></div>
-    <div class="map-legend rv">
-      <div class="map-legend-item"><div class="map-legend-dot"></div>India</div>
-      <div class="map-legend-item"><div class="map-legend-dot"></div>Bangladesh</div>
-      <div class="map-legend-item"><div class="map-legend-dot"></div>Indonesia</div>
-      <div class="map-legend-item"><div class="map-legend-dot"></div>Zambia</div>
-      <div class="map-legend-item"><div class="map-legend-dot"></div>Rwanda</div>
-      <div class="map-legend-item"><div class="map-legend-dot"></div>Ethiopia</div>
-      <div class="map-legend-item"><div class="map-legend-dot"></div>DR Congo</div>
-      <div class="map-legend-item"><div class="map-legend-dot"></div>Central African Rep.</div>
-      <div class="map-legend-item"><div class="map-legend-dot"></div>Niger</div>
-      <div class="map-legend-item"><div class="map-legend-dot"></div>Sierra Leone</div>
-      <div class="map-legend-item"><div class="map-legend-dot"></div>Egypt</div>
-      <div class="map-legend-item"><div class="map-legend-dot"></div>Jordan</div>
-      <div class="map-legend-item"><div class="map-legend-dot"></div>Lebanon</div>
-      <div class="map-legend-item"><div class="map-legend-dot"></div>Oman</div>
-      <div class="map-legend-item"><div class="map-legend-dot"></div>Iraq</div>
-      <div class="map-legend-item"><div class="map-legend-dot"></div>Chile</div>
-      <div class="map-legend-item"><div class="map-legend-dot"></div>United Kingdom</div>
-    </div>
-  </div>
-</section>
-
-<section id="tech">
-  <div class="container">
-    <div class="label rv">Technical Stack</div>
-    <h2 class="title rv">Tools I Build With</h2>
-    <p class="sub rv">Production-grade proficiency. Primary tools highlighted.</p>
-    <div class="stack-group rv">
-      <div class="stack-label"><i data-lucide="brain" style="width:14px;height:14px;"></i> AI / LLM</div>
-      <div class="stack-items"><span class="stack-tag pri">Claude / Anthropic</span><span class="stack-tag pri">Mistral</span><span class="stack-tag pri">LoRA / QLoRA</span><span class="stack-tag pri">DPO / RLHF</span><span class="stack-tag">LangChain</span><span class="stack-tag">LlamaIndex</span><span class="stack-tag">vLLM</span><span class="stack-tag">HuggingFace</span><span class="stack-tag">ONNX</span></div>
-    </div>
-    <div class="stack-group rv">
-      <div class="stack-label"><i data-lucide="bot" style="width:14px;height:14px;"></i> Agentic / Dev Tools</div>
-      <div class="stack-items"><span class="stack-tag pri">Claude Code</span><span class="stack-tag pri">MCP Servers</span><span class="stack-tag pri">Cursor</span><span class="stack-tag">Lovable</span><span class="stack-tag">v0 by Vercel</span><span class="stack-tag">Windsurf</span><span class="stack-tag">Replit</span><span class="stack-tag">GitHub Copilot</span></div>
-    </div>
-    <div class="stack-group rv">
-      <div class="stack-label"><i data-lucide="cloud" style="width:14px;height:14px;"></i> Cloud / Infrastructure</div>
-      <div class="stack-items"><span class="stack-tag pri">AWS SageMaker</span><span class="stack-tag pri">AWS Bedrock</span><span class="stack-tag">Fargate</span><span class="stack-tag">Glue</span><span class="stack-tag">Athena</span><span class="stack-tag">EventBridge</span><span class="stack-tag">Azure</span><span class="stack-tag">Kubernetes</span><span class="stack-tag">Terraform</span><span class="stack-tag">Docker</span></div>
-    </div>
-    <div class="stack-group rv">
-      <div class="stack-label"><i data-lucide="bar-chart-3" style="width:14px;height:14px;"></i> Data Engineering</div>
-      <div class="stack-items"><span class="stack-tag pri">Apache Iceberg</span><span class="stack-tag pri">OpenSearch</span><span class="stack-tag">Spark</span><span class="stack-tag">Airflow</span><span class="stack-tag">Flink</span><span class="stack-tag">FAISS</span><span class="stack-tag">Kafka</span><span class="stack-tag">dbt</span></div>
-    </div>
-    <div class="stack-group rv">
-      <div class="stack-label"><i data-lucide="flask-conical" style="width:14px;height:14px;"></i> ML / Research</div>
-      <div class="stack-items"><span class="stack-tag pri">PyTorch</span><span class="stack-tag">TensorFlow</span><span class="stack-tag">XGBoost</span><span class="stack-tag">scikit-learn</span><span class="stack-tag">SHAP</span><span class="stack-tag">MLflow</span><span class="stack-tag">Python</span><span class="stack-tag">Triton</span></div>
-    </div>
-  </div>
-</section>
-
 
 <section id="technical">
   <div class="container">
@@ -823,6 +703,7 @@
   </div>
 </section>
 
+
 <!-- SECTION 2: Engineering Knowledge -->
 <section id="knowledge">
   <div class="container">
@@ -1047,6 +928,128 @@
     </div>
   </div>
 </section>
+
+
+<section id="repos">
+  <div class="container">
+    <div class="label rv">Open Source</div>
+    <h2 class="title rv">All Repositories</h2>
+    <p class="sub rv">56 public repositories across personal and organization accounts. Production systems, research platforms, and foundational tools.</p>
+    <div class="repo-filters rv">
+      <button class="repo-filter active" data-cat="all">All</button>
+      <button class="repo-filter" data-cat="sage">SAGE Platform</button>
+      <button class="repo-filter" data-cat="ai">AI / Deep Learning</button>
+      <button class="repo-filter" data-cat="surveillance">Surveillance</button>
+      <button class="repo-filter" data-cat="data">Data Engineering</button>
+      <button class="repo-filter" data-cat="climate">Climate / Global Health</button>
+      <button class="repo-filter" data-cat="apps">Applications</button>
+      <button class="repo-filter" data-cat="org">Organization</button>
+      <button class="repo-filter" data-cat="foundation">Foundation</button>
+    </div>
+    <div class="repo-count rv">Showing <span id="repo-shown">56</span> of 56 repositories</div>
+    <div class="repo-grid rv" id="repoGrid"></div>
+  </div>
+</section>
+
+<section id="contributions">
+  <div class="container">
+    <div class="label rv">Engineering Activity</div>
+    <h2 class="title rv">Contribution History</h2>
+    <p class="sub rv">17 years of continuous open source development across AI, epidemiology, and global health platforms.</p>
+
+    <div class="contrib-stats rv">
+      <div class="contrib-stat"><div class="val" id="c-total">0</div><div class="key">Total Contributions</div></div>
+      <div class="contrib-stat"><div class="val">17</div><div class="key">Active Years</div></div>
+      <div class="contrib-stat"><div class="val" id="c-peak">0</div><div class="key">Peak Year</div></div>
+      <div class="contrib-stat"><div class="val" id="c-month">0</div><div class="key">Last 30 Days</div></div>
+    </div>
+
+    <div class="chart-wrap rv">
+      <h3>Since 2009</h3>
+      <div class="desc">Annual contributions. Growth from academic research through clinical AI, pandemic response, and production AI platform engineering.</div>
+      <canvas id="yearlyChart"></canvas>
+    </div>
+
+    <div class="chart-wrap rv">
+      <h3>Last 30 Days</h3>
+      <div class="desc">Daily engineering velocity across active repositories.</div>
+      <canvas id="monthlyChart"></canvas>
+    </div>
+  </div>
+</section>
+
+<section id="partners">
+  <div class="container">
+    <div class="label rv">Institutional Partnerships</div>
+    <h2 class="title rv">Who I Have Built With</h2>
+    <p class="sub rv">Technical roadmaps that became funded, multi-year programs.</p>
+    <div class="grid-3">
+      <div class="partner rv"><div class="partner-icon"><i data-lucide="rocket" style="width:20px;height:20px;"></i></div><div><div class="partner-name">NASA</div><div class="partner-role">Strategic Technology Partnership</div></div></div>
+      <div class="partner rv"><div class="partner-icon"><i data-lucide="globe" style="width:20px;height:20px;"></i></div><div><div class="partner-name">The Global Fund</div><div class="partner-role">Health Data Infrastructure</div></div></div>
+      <div class="partner rv"><div class="partner-icon"><i data-lucide="sparkles" style="width:20px;height:20px;"></i></div><div><div class="partner-name">McGovern Foundation</div><div class="partner-role">ARK Platform Funder</div></div></div>
+      <div class="partner rv"><div class="partner-icon"><i data-lucide="cloud" style="width:20px;height:20px;"></i></div><div><div class="partner-name">Amazon</div><div class="partner-role">Environmental Equity Initiative</div></div></div>
+      <div class="partner rv"><div class="partner-icon"><i data-lucide="graduation-cap" style="width:20px;height:20px;"></i></div><div><div class="partner-name">UCL</div><div class="partner-role">UKRI/MRC Research, GBP 2M</div></div></div>
+      <div class="partner rv"><div class="partner-icon"><i data-lucide="building-2" style="width:20px;height:20px;"></i></div><div><div class="partner-name">Ministry of Health India</div><div class="partner-role">$116M National Program, 8 States</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="global-map">
+  <div class="container">
+    <div class="label rv">Global Reach</div>
+    <h2 class="title rv">17 Countries</h2>
+    <p class="sub rv">Each highlighted country represents a program I designed, built, or delivered. Technical and strategic leadership on the ground.</p>
+    <div class="map-wrap rv" id="mapContainer"></div>
+    <div class="map-legend rv">
+      <div class="map-legend-item"><div class="map-legend-dot"></div>India</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Bangladesh</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Indonesia</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Zambia</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Rwanda</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Ethiopia</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>DR Congo</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Central African Rep.</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Niger</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Sierra Leone</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Egypt</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Jordan</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Lebanon</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Oman</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Iraq</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Chile</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>United Kingdom</div>
+    </div>
+  </div>
+</section>
+
+<section id="tech">
+  <div class="container">
+    <div class="label rv">Technical Stack</div>
+    <h2 class="title rv">Tools I Build With</h2>
+    <p class="sub rv">Production-grade proficiency. Primary tools highlighted.</p>
+    <div class="stack-group rv">
+      <div class="stack-label"><i data-lucide="brain" style="width:14px;height:14px;"></i> AI / LLM</div>
+      <div class="stack-items"><span class="stack-tag pri">Claude / Anthropic</span><span class="stack-tag pri">Mistral</span><span class="stack-tag pri">LoRA / QLoRA</span><span class="stack-tag pri">DPO / RLHF</span><span class="stack-tag">LangChain</span><span class="stack-tag">LlamaIndex</span><span class="stack-tag">vLLM</span><span class="stack-tag">HuggingFace</span><span class="stack-tag">ONNX</span></div>
+    </div>
+    <div class="stack-group rv">
+      <div class="stack-label"><i data-lucide="bot" style="width:14px;height:14px;"></i> Agentic / Dev Tools</div>
+      <div class="stack-items"><span class="stack-tag pri">Claude Code</span><span class="stack-tag pri">MCP Servers</span><span class="stack-tag pri">Cursor</span><span class="stack-tag">Lovable</span><span class="stack-tag">v0 by Vercel</span><span class="stack-tag">Windsurf</span><span class="stack-tag">Replit</span><span class="stack-tag">GitHub Copilot</span></div>
+    </div>
+    <div class="stack-group rv">
+      <div class="stack-label"><i data-lucide="cloud" style="width:14px;height:14px;"></i> Cloud / Infrastructure</div>
+      <div class="stack-items"><span class="stack-tag pri">AWS SageMaker</span><span class="stack-tag pri">AWS Bedrock</span><span class="stack-tag">Fargate</span><span class="stack-tag">Glue</span><span class="stack-tag">Athena</span><span class="stack-tag">EventBridge</span><span class="stack-tag">Azure</span><span class="stack-tag">Kubernetes</span><span class="stack-tag">Terraform</span><span class="stack-tag">Docker</span></div>
+    </div>
+    <div class="stack-group rv">
+      <div class="stack-label"><i data-lucide="bar-chart-3" style="width:14px;height:14px;"></i> Data Engineering</div>
+      <div class="stack-items"><span class="stack-tag pri">Apache Iceberg</span><span class="stack-tag pri">OpenSearch</span><span class="stack-tag">Spark</span><span class="stack-tag">Airflow</span><span class="stack-tag">Flink</span><span class="stack-tag">FAISS</span><span class="stack-tag">Kafka</span><span class="stack-tag">dbt</span></div>
+    </div>
+    <div class="stack-group rv">
+      <div class="stack-label"><i data-lucide="flask-conical" style="width:14px;height:14px;"></i> ML / Research</div>
+      <div class="stack-items"><span class="stack-tag pri">PyTorch</span><span class="stack-tag">TensorFlow</span><span class="stack-tag">XGBoost</span><span class="stack-tag">scikit-learn</span><span class="stack-tag">SHAP</span><span class="stack-tag">MLflow</span><span class="stack-tag">Python</span><span class="stack-tag">Triton</span></div>
+    </div>
+  </div>
+</section>
+
 
 <section id="connect" style="border-bottom:none;">
   <div class="container">
