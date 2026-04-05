@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     :root {
@@ -131,6 +133,22 @@
     .partner-icon { color: var(--t3); flex-shrink: 0; }
     .partner-name { font-size: 0.9rem; font-weight: 600; color: var(--w); }
     .partner-role { font-size: 0.75rem; color: var(--t3); }
+
+    /* MAP */
+    #global-map { overflow: hidden; }
+    .map-wrap { position: relative; margin-top: 2rem; background: var(--bg2); border: 1px solid var(--border); padding: 1.5rem; }
+    .map-wrap svg { width: 100%; height: auto; display: block; }
+    .map-wrap .land { fill: #1a1a1a; stroke: #222222; stroke-width: 0.3; }
+    .map-wrap .highlight { fill: #ffffff; stroke: #ffffff; stroke-width: 0.5; opacity: 0.85; transition: opacity 0.3s; }
+    .map-wrap .highlight:hover { opacity: 1; }
+    .map-label { font-family: var(--mono); font-size: 8px; fill: #999999; text-anchor: middle; pointer-events: none; }
+    .map-dot { fill: #ffffff; opacity: 0.9; }
+    .map-pulse { fill: none; stroke: rgba(255,255,255,0.3); stroke-width: 0.5; }
+    @keyframes pulse-ring { 0% { r: 3; opacity: 0.6; } 100% { r: 8; opacity: 0; } }
+    .map-pulse { animation: pulse-ring 2.5s ease-out infinite; }
+    .map-legend { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.5rem; }
+    .map-legend-item { font-family: var(--mono); font-size: 0.7rem; color: var(--t3); display: flex; align-items: center; gap: 0.4rem; }
+    .map-legend-dot { width: 6px; height: 6px; background: var(--w); border-radius: 50%; flex-shrink: 0; }
 
     /* STACK */
     .stack-group { margin-top: 2rem; }
@@ -349,6 +367,34 @@
       <div class="partner rv"><div class="partner-icon"><i data-lucide="cloud" style="width:20px;height:20px;"></i></div><div><div class="partner-name">Amazon</div><div class="partner-role">Environmental Equity Initiative</div></div></div>
       <div class="partner rv"><div class="partner-icon"><i data-lucide="graduation-cap" style="width:20px;height:20px;"></i></div><div><div class="partner-name">UCL</div><div class="partner-role">UKRI/MRC Research, GBP 2M</div></div></div>
       <div class="partner rv"><div class="partner-icon"><i data-lucide="building-2" style="width:20px;height:20px;"></i></div><div><div class="partner-name">Ministry of Health India</div><div class="partner-role">$116M National Program, 8 States</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="global-map">
+  <div class="container">
+    <div class="label rv">Global Reach</div>
+    <h2 class="title rv">17 Countries. Real Programs. Real Impact.</h2>
+    <p class="sub rv">Every highlighted country represents a program I led, designed, or delivered. Not advisory. Hands-on technical and strategic leadership.</p>
+    <div class="map-wrap rv" id="mapContainer"></div>
+    <div class="map-legend rv">
+      <div class="map-legend-item"><div class="map-legend-dot"></div>India</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Bangladesh</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Indonesia</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Zambia</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Rwanda</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Ethiopia</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>DR Congo</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Central African Rep.</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Niger</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Sierra Leone</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Egypt</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Jordan</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Lebanon</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Oman</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Iraq</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Chile</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>United Kingdom</div>
     </div>
   </div>
 </section>
@@ -610,6 +656,61 @@ document.querySelectorAll('.repo-filter').forEach(btn => {
   });
 });
 renderRepos('all');
+
+// World map with D3
+const highlightCountries = {
+  356:"India", 50:"Bangladesh", 360:"Indonesia", 894:"Zambia", 646:"Rwanda",
+  231:"Ethiopia", 180:"DR Congo", 140:"Central African Rep.", 562:"Niger",
+  694:"Sierra Leone", 818:"Egypt", 400:"Jordan", 422:"Lebanon", 512:"Oman",
+  368:"Iraq", 152:"Chile", 826:"United Kingdom"
+};
+
+const countryCoords = [
+  {name:"India",lat:20.5,lon:79},{name:"Bangladesh",lat:23.7,lon:90.4},
+  {name:"Indonesia",lat:-2,lon:118},{name:"Zambia",lat:-13.1,lon:28},
+  {name:"Rwanda",lat:-1.9,lon:29.9},{name:"Ethiopia",lat:9.1,lon:40.5},
+  {name:"DR Congo",lat:-4,lon:21.8},{name:"CAR",lat:6.6,lon:20.9},
+  {name:"Niger",lat:17.6,lon:8.1},{name:"Sierra Leone",lat:8.5,lon:-11.8},
+  {name:"Egypt",lat:26.8,lon:30.8},{name:"Jordan",lat:31.5,lon:36.2},
+  {name:"Lebanon",lat:33.9,lon:35.9},{name:"Oman",lat:21.5,lon:55.9},
+  {name:"Iraq",lat:33.2,lon:43.7},{name:"Chile",lat:-35.7,lon:-71.5},
+  {name:"UK",lat:54,lon:-2}
+];
+
+fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+  .then(r => r.json())
+  .then(world => {
+    const container = document.getElementById('mapContainer');
+    const w = container.clientWidth - 48;
+    const h = Math.min(w * 0.5, 480);
+
+    const svg = d3.select('#mapContainer')
+      .append('svg')
+      .attr('viewBox', '0 0 ' + w + ' ' + h)
+      .attr('preserveAspectRatio', 'xMidYMid meet');
+
+    const projection = d3.geoNaturalEarth1()
+      .fitSize([w, h], topojson.feature(world, world.objects.countries));
+
+    const path = d3.geoPath().projection(projection);
+    const countries = topojson.feature(world, world.objects.countries);
+    const highlightIds = Object.keys(highlightCountries).map(Number);
+
+    svg.selectAll('.land')
+      .data(countries.features)
+      .enter().append('path')
+      .attr('d', path)
+      .attr('class', d => highlightIds.includes(+d.id) ? 'highlight' : 'land');
+
+    const g = svg.append('g');
+    countryCoords.forEach(c => {
+      const p = projection([c.lon, c.lat]);
+      if (!p) return;
+      g.append('circle').attr('class','map-pulse').attr('cx',p[0]).attr('cy',p[1]).attr('r',3)
+        .style('animation-delay', (Math.random()*2).toFixed(1)+'s');
+      g.append('circle').attr('class','map-dot').attr('cx',p[0]).attr('cy',p[1]).attr('r',2.5);
+    });
+  });
 
 // Counter animation
 function animateCounter(el) {
