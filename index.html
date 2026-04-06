@@ -77,7 +77,7 @@
     .stat-key { font-size: 0.72rem; color: var(--t3); margin-top: 0.3rem; text-transform: uppercase; letter-spacing: 0.05em; }
 
     /* ABOUT */
-    .about-text { max-width: 720px; }
+    .about-text { max-width: none; }
     .about-text p { margin-bottom: 1rem; font-size: 0.92rem; }
     .about-text strong { color: var(--t1); }
     .about-cred { font-family: var(--mono); font-size: 0.78rem; color: var(--t3); margin-top: 1.5rem; }
@@ -268,16 +268,53 @@
   <div class="container">
     <div class="label rv">About</div>
     <h2 class="title rv">Two decades of shipping AI systems<br/>that survive contact with reality.</h2>
-    <div class="about-text rv">
-      <p><strong>Most AI and digital technologies never ship.</strong> They get presented in board decks, run in IDEs, make it through pilots, and then quietly disappear when the real constraints show up: the messy data, the interoperability challenges, the governance requirements, the stakeholders who all have to say yes, the infrastructure that was never built to run a model in production.</p>
-      <p>Over the past two decades, I have come to believe that the problem is rarely the data silos, the algorithms, or the infrastructure. <strong>It is almost always the absence of one person</strong> who can sit in the board conversation about AI strategy and then go and design the architecture the next morning, without losing anything in the translation.</p>
-      <p>Someone who has held the P&amp;L, navigated the institutional politics, put smiles on partners' faces, and still knows exactly why their team's retrieval pipeline is underperforming or why the loss function they landed on is working against them.</p>
-      <p style="border-left:2px solid var(--border3); padding-left:1rem; color:var(--t1); font-style:italic; margin-top:1.2rem;"><strong>That person is harder to find than any technology.</strong> And every single morning, I ask myself how much of that person I still have left to become.</p>
-      <div class="about-cred">Director of IMACS (An AI Centre of Excellence).<br/>Co-Principal Investigator, AI for disease forecasting using satellite data (funded by NASA Earth Sciences).<br/>PhD Researcher in AI | MBA | MDataSci | MS AI/ML</div>
-      <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:1rem;">
-        <span style="font-family:var(--mono); font-size:0.7rem; padding:0.3rem 0.7rem; background:var(--bg3); color:var(--t1); font-weight:500;">40 Under 40</span>
-        <span style="font-family:var(--mono); font-size:0.7rem; padding:0.3rem 0.7rem; background:var(--bg3); color:var(--t1); font-weight:500;">Outstanding Leadership Award</span>
-        <span style="font-family:var(--mono); font-size:0.7rem; padding:0.3rem 0.7rem; background:var(--bg3); color:var(--t1); font-weight:500;">Digital Transformation Leader</span>
+    <div style="display:grid; grid-template-columns:1fr 340px; gap:2.5rem; align-items:start;" class="rv">
+      <div class="about-text">
+        <p><strong>Most AI and digital technologies never ship.</strong> They get presented in board decks, run in IDEs, make it through pilots, and then quietly disappear when the real constraints show up: the messy data, the interoperability challenges, the governance requirements, the stakeholders who all have to say yes, the infrastructure that was never built to run a model in production.</p>
+        <p>Over the past two decades, I have come to believe that the problem is rarely the data silos, the algorithms, or the infrastructure. <strong>It is almost always the absence of one person</strong> who can sit in the board conversation about AI strategy and then go and design the architecture the next morning, without losing anything in the translation.</p>
+        <p>Someone who has held the P&amp;L, navigated the institutional politics, put smiles on partners' faces, and still knows exactly why their team's retrieval pipeline is underperforming or why the loss function they landed on is working against them.</p>
+        <p style="border-left:2px solid var(--border3); padding-left:1rem; color:var(--t1); font-style:italic; margin-top:1.2rem;"><strong>That person is harder to find than any technology.</strong> And every single morning, I ask myself how much of that person I still have left to become.</p>
+        <div class="about-cred">Director of IMACS (An AI Centre of Excellence).<br/>Co-Principal Investigator, AI for disease forecasting using satellite data (funded by NASA Earth Sciences).<br/>PhD Researcher in AI | MBA | MDataSci | MS AI/ML</div>
+        <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:1rem;">
+          <span style="font-family:var(--mono); font-size:0.7rem; padding:0.3rem 0.7rem; background:var(--bg3); color:var(--t1); font-weight:500;">40 Under 40</span>
+          <span style="font-family:var(--mono); font-size:0.7rem; padding:0.3rem 0.7rem; background:var(--bg3); color:var(--t1); font-weight:500;">Outstanding Leadership Award</span>
+          <span style="font-family:var(--mono); font-size:0.7rem; padding:0.3rem 0.7rem; background:var(--bg3); color:var(--t1); font-weight:500;">Digital Transformation Leader</span>
+        </div>
+      </div>
+
+      <!-- Math formulation -->
+      <div style="background:var(--bg3); padding:1.5rem; position:sticky; top:5rem;">
+        <div style="font-family:var(--mono); font-size:0.62rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--t3); margin-bottom:1rem;">The Shipping Equation</div>
+        <div style="font-family:var(--mono); font-size:0.72rem; color:var(--t1); line-height:2; margin-bottom:1rem;">
+          <div style="color:var(--t3); font-size:0.6rem; margin-bottom:0.3rem;">DEFINE THE FIELD</div>
+          <div><strong>&Phi;</strong>(S, E, B, I, T, t)</div>
+          <div style="font-size:0.62rem; color:var(--t3);">S=strategy E=engineering B=business<br/>I=institutional T=technical t=time</div>
+        </div>
+        <div style="font-family:var(--mono); font-size:0.72rem; color:var(--t1); line-height:1.9; margin-bottom:1rem;">
+          <div style="color:var(--t3); font-size:0.6rem; margin-bottom:0.3rem;">THE EVOLUTION (PDE)</div>
+          <div>&part;&Phi;/&part;t = &alpha;&nabla;&sup2;&Phi;</div>
+          <div>&nbsp;&nbsp;+ &lambda;<sub>SE</sub> &middot; &part;&sup2;&Phi;/&part;S&part;E</div>
+          <div>&nbsp;&nbsp;+ &lambda;<sub>BT</sub> &middot; &part;&sup2;&Phi;/&part;B&part;T</div>
+          <div>&nbsp;&nbsp;- &delta; &middot; C(S,E,B,I,T,t)</div>
+        </div>
+        <div style="font-family:var(--mono); font-size:0.72rem; color:var(--t1); line-height:1.9; margin-bottom:1rem;">
+          <div style="color:var(--t3); font-size:0.6rem; margin-bottom:0.3rem;">WHY MOST AI NEVER SHIPS</div>
+          <div>Specialist: &part;&Phi;/&part;E &gt;&gt; 0, &part;&Phi;/&part;S &asymp; 0</div>
+          <div>That person: &part;&sup2;&Phi;/&part;S&part;E &gt;&gt; 0</div>
+          <div style="font-size:0.62rem; color:var(--t3); margin-top:0.2rem;">Cross-partials create correlation.<br/>One person &gt; N specialists.</div>
+        </div>
+        <div style="font-family:var(--mono); font-size:0.72rem; color:var(--t1); line-height:1.9; margin-bottom:1rem;">
+          <div style="color:var(--t3); font-size:0.6rem; margin-bottom:0.3rem;">THE RARITY</div>
+          <div>P(&forall; &part;&sup2;&Phi;/&part;x<sub>i</sub>&part;x<sub>j</sub> &gt; 0)</div>
+          <div>&nbsp;&nbsp;&sim; exp(-n(n-1)/2)</div>
+          <div style="font-size:0.62rem; color:var(--t3); margin-top:0.2rem;">For 5 dimensions: ~1 in 22,000</div>
+        </div>
+        <div style="font-family:var(--mono); font-size:0.72rem; color:var(--t1); line-height:1.9;">
+          <div style="color:var(--t3); font-size:0.6rem; margin-bottom:0.3rem;">THE MORNING QUESTION</div>
+          <div>lim<sub>t&rarr;&infin;</sub> || &Phi;*(t) - &Phi;(t) || = &epsilon;</div>
+          <div style="font-weight:600; color:var(--w);">&epsilon; &gt; 0, strictly.</div>
+          <div style="font-size:0.62rem; color:var(--t3); margin-top:0.2rem;">The pursuit is asymptotic.<br/>There is always more to become.</div>
+        </div>
       </div>
     </div>
   </div>
