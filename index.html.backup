@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kaushik Sarkar | AI Engineering Leadership</title>
+  <meta name="description" content="Foundation model engineering, multi-agent systems, and enterprise data infrastructure across 17 countries." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --bg: #fafafa;
+      --bg2: #ffffff;
+      --bg3: #f0f0f0;
+      --border: #e5e5e5;
+      --border2: #d4d4d4;
+      --border3: #a3a3a3;
+      --w: #0a0a0a;
+      --t1: #171717;
+      --t2: #525252;
+      --t3: #737373;
+      --t4: #a3a3a3;
+      --sans: 'Inter', -apple-system, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--t2); line-height: 1.6; overflow-x: hidden; }
+    ::selection { background: #0a0a0a; color: #fff; }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+    a { color: var(--w); text-decoration: none; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+    section { padding: 5rem 0; border-bottom: 1px solid var(--border); }
+
+    /* NAV */
+    nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; background: rgba(250,250,250,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-logo { color: var(--w); }
+    .signature { font-family: 'Great Vibes', cursive; font-weight: 400; color: var(--w); letter-spacing: 0.02em; }
+    .nav-logo .signature { font-size: 1.4rem; }
+    .signature-lg { font-size: 2.2rem; display: block; margin-bottom: 0.5rem; }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+    .nav-links a { color: var(--t3); font-size: 0.82rem; font-weight: 500; letter-spacing: 0.02em; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--w); }
+
+    /* SECTION HEADERS */
+    .label { font-family: var(--mono); font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--t3); margin-bottom: 0.8rem; }
+    .title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; color: var(--w); letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 0.8rem; }
+    .sub { color: var(--t2); font-size: 0.9rem; max-width: 640px; }
+
+    /* HERO */
+    #hero { min-height: 70vh; display: flex; flex-direction: column; justify-content: center; padding: 6rem 2rem 2.5rem; position: relative; }
+    .hero-grid { position: absolute; inset: 0; opacity: 0.35; background-image: linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+    .hero-badge { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--t3); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; }
+    .hero-name { font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 800; color: var(--w); letter-spacing: -0.04em; line-height: 1.05; margin-bottom: 1rem; }
+    .hero-title { font-size: 1.05rem; color: var(--t2); max-width: 600px; margin-bottom: 1.5rem; }
+    .hero-title strong { color: var(--w); font-weight: 600; }
+    .hero-tags { font-family: var(--mono); font-size: 0.75rem; color: var(--t4); letter-spacing: 0.02em; }
+    .hero-actions { margin-top: 2.5rem; display: flex; gap: 1rem; }
+    .btn { padding: 0.7rem 1.6rem; border-radius: 4px; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; border: 1px solid var(--border2); display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-w { background: var(--w); color: #ffffff; border-color: var(--w); }
+    .btn-w:hover { background: var(--t1); color: #ffffff; }
+    .btn-g { background: transparent; color: var(--t2); }
+    .btn-g:hover { color: var(--w); border-color: var(--border3); }
+
+    /* STATS */
+    #stats { padding: 0; border-bottom: 1px solid var(--border); }
+    .stats-row { display: grid; grid-template-columns: repeat(6, 1fr); }
+    .stat { padding: 2rem 1.5rem; border-right: 1px solid var(--border); text-align: center; }
+    .stat:last-child { border-right: none; }
+    .stat-val { font-family: var(--mono); font-size: 1.6rem; font-weight: 700; color: var(--w); }
+    .stat-key { font-size: 0.72rem; color: var(--t3); margin-top: 0.3rem; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* ABOUT */
+    .about-text { max-width: none; }
+    .about-text p { margin-bottom: 1rem; font-size: 0.92rem; }
+    .about-text strong { color: var(--t1); }
+    .about-cred { font-family: var(--mono); font-size: 0.78rem; color: var(--t3); margin-top: 1.5rem; }
+
+    /* CARDS GRID */
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); margin-top: 2.5rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-top: 2.5rem; }
+    .card { background: var(--bg2); padding: 2rem; transition: background 0.2s; }
+    .card:hover { background: var(--bg3); }
+    .card-icon { color: var(--t3); margin-bottom: 1rem; }
+    .card h3 { font-size: 1rem; font-weight: 600; color: var(--w); margin-bottom: 0.6rem; }
+    .card p { font-size: 0.82rem; color: var(--t2); line-height: 1.6; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+    .tag { font-family: var(--mono); font-size: 0.65rem; padding: 0.25rem 0.6rem; border: 1px solid var(--border2); border-radius: 3px; color: var(--t3); }
+
+    /* PROJECTS */
+    .project { background: var(--bg2); border: 1px solid var(--border); padding: 2.5rem; margin-top: 2rem; }
+    .project-badge { font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--t3); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
+    .project h3 { font-size: 1.3rem; font-weight: 700; color: var(--w); margin-bottom: 0.8rem; }
+    .project p { font-size: 0.88rem; max-width: 700px; margin-bottom: 1.2rem; }
+    .project-metrics { display: flex; gap: 2.5rem; margin: 1.5rem 0; }
+    .metric-val { font-family: var(--mono); font-size: 1.4rem; font-weight: 700; color: var(--w); display: block; }
+    .metric-key { font-size: 0.7rem; color: var(--t3); text-transform: uppercase; letter-spacing: 0.05em; }
+    .project-arch { font-family: var(--mono); font-size: 0.78rem; color: var(--t3); margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); line-height: 1.8; }
+    .project-arch .kw { color: var(--w); }
+    .project-arch .cmt { color: var(--t4); }
+
+    /* REPOSITORIES */
+    .repo-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 2rem 0 1.5rem; }
+    .repo-filter { font-family: var(--mono); font-size: 0.7rem; padding: 0.35rem 0.8rem; border: 1px solid var(--border2); background: transparent; color: var(--t3); cursor: pointer; transition: all 0.2s; letter-spacing: 0.02em; }
+    .repo-filter:hover { border-color: var(--border3); color: var(--t2); }
+    .repo-filter.active { background: #0a0a0a; color: #ffffff; border-color: #0a0a0a; }
+    .repo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
+    .repo-card { background: var(--bg2); padding: 1.3rem 1.5rem; transition: background 0.2s; display: flex; flex-direction: column; }
+    .repo-card:hover { background: var(--bg3); }
+    .repo-card-head { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
+    .repo-card-name { font-family: var(--mono); font-size: 0.78rem; font-weight: 600; color: var(--w); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .repo-card-lang { font-family: var(--mono); font-size: 0.62rem; padding: 0.15rem 0.45rem; border: 1px solid var(--border2); color: var(--t3); flex-shrink: 0; }
+    .repo-card-desc { font-size: 0.75rem; color: var(--t3); line-height: 1.5; flex: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .repo-count { font-family: var(--mono); font-size: 0.78rem; color: var(--t3); margin-top: 1rem; }
+    @media (max-width: 900px) { .repo-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .repo-grid { grid-template-columns: 1fr; } }
+
+    /* CONTRIBUTIONS */
+    .chart-wrap { background: var(--bg2); border: 1px solid var(--border); padding: 2rem; margin-top: 1.5rem; }
+    .chart-wrap h3 { font-size: 0.95rem; font-weight: 600; color: var(--w); margin-bottom: 0.3rem; }
+    .chart-wrap .desc { font-size: 0.78rem; color: var(--t3); margin-bottom: 1.2rem; }
+    canvas { max-height: 300px; }
+    .contrib-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); margin-top: 2.5rem; }
+    .contrib-stat { background: var(--bg2); padding: 1.5rem; text-align: center; }
+    .contrib-stat .val { font-family: var(--mono); font-size: 1.5rem; font-weight: 700; color: var(--w); }
+    .contrib-stat .key { font-size: 0.7rem; color: var(--t3); margin-top: 0.3rem; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* PARTNERS */
+    .partner { background: var(--bg2); padding: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+    .partner-icon { color: var(--t3); flex-shrink: 0; }
+    .partner-name { font-size: 0.9rem; font-weight: 600; color: var(--w); }
+    .partner-role { font-size: 0.75rem; color: var(--t3); }
+
+    /* MAP */
+    #global-map { overflow: hidden; }
+    .map-wrap { position: relative; margin-top: 2rem; background: var(--bg2); border: 1px solid var(--border); padding: 1.5rem; }
+    .map-wrap svg { width: 100%; height: auto; display: block; }
+    .map-wrap .land { fill: #e5e5e5; stroke: #d4d4d4; stroke-width: 0.3; }
+    .map-wrap .highlight { fill: #0a0a0a; stroke: #0a0a0a; stroke-width: 0.5; opacity: 0.85; transition: opacity 0.3s; }
+    .map-wrap .highlight:hover { opacity: 1; }
+    .map-label { font-family: var(--mono); font-size: 8px; fill: #525252; text-anchor: middle; pointer-events: none; }
+    .map-dot { fill: #0a0a0a; opacity: 0.9; }
+    .map-pulse { fill: none; stroke: rgba(10,10,10,0.25); stroke-width: 0.5; }
+    @keyframes pulse-ring { 0% { r: 3; opacity: 0.6; } 100% { r: 8; opacity: 0; } }
+    .map-pulse { animation: pulse-ring 2.5s ease-out infinite; }
+    .map-legend { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.5rem; }
+    .map-legend-item { font-family: var(--mono); font-size: 0.7rem; color: var(--t3); display: flex; align-items: center; gap: 0.4rem; }
+    .map-legend-dot { width: 6px; height: 6px; background: #0a0a0a; border-radius: 50%; flex-shrink: 0; }
+
+    /* STACK */
+    .stack-group { margin-top: 2rem; }
+    .stack-label { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--t3); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
+    .stack-items { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .stack-tag { font-family: var(--mono); font-size: 0.72rem; padding: 0.35rem 0.8rem; border: 1px solid var(--border2); color: var(--t2); transition: all 0.2s; }
+    .stack-tag:hover { border-color: var(--border3); color: var(--w); }
+    .stack-tag.pri { color: var(--w); border-color: var(--border3); }
+
+    /* RESEARCH */
+    .research-card { background: var(--bg2); padding: 1.5rem; }
+    .research-card .type { font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--t3); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem; }
+    .research-card h4 { font-size: 0.9rem; font-weight: 600; color: var(--w); margin-bottom: 0.5rem; }
+    .research-card p { font-size: 0.8rem; color: var(--t2); }
+
+    /* TECHNICAL */
+    .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+    @media (max-width: 900px) { .tech-grid { grid-template-columns: 1fr; } }
+    .schematic { background: var(--bg2); border: 1px solid var(--border); padding: 2rem; position: relative; overflow: hidden; }
+    .schematic-label { font-family: var(--mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--t3); margin-bottom: 1.2rem; }
+    .schematic-title { font-size: 1rem; font-weight: 600; color: var(--w); margin-bottom: 1.5rem; }
+    .schematic svg { width: 100%; height: auto; display: block; }
+    .schematic svg text { font-family: 'Inter', sans-serif; }
+    .schematic svg .mono { font-family: 'JetBrains Mono', monospace; }
+    .schematic-full { grid-column: 1 / -1; }
+    .eq-block { background: var(--bg3); border-left: 2px solid var(--border3); padding: 1rem 1.2rem; margin: 0.8rem 0; font-family: var(--mono); font-size: 0.75rem; color: var(--t1); line-height: 1.8; overflow-x: auto; }
+    .eq-label { font-family: var(--mono); font-size: 0.62rem; color: var(--t3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.3rem; }
+    .eq-note { font-family: var(--sans); font-size: 0.72rem; color: var(--t3); margin-top: 0.4rem; font-style: italic; }
+    .flow-row { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin: 0.6rem 0; }
+    .flow-box { padding: 0.4rem 0.8rem; border: 1px solid var(--border2); font-family: var(--mono); font-size: 0.7rem; color: var(--t1); background: var(--bg2); white-space: nowrap; }
+    .flow-box.active { border-color: var(--w); color: var(--w); font-weight: 600; }
+    .flow-arrow { color: var(--t4); font-size: 0.8rem; }
+    .arch-layer { display: flex; align-items: stretch; margin: 0.4rem 0; gap: 0; }
+    .arch-cell { flex: 1; padding: 0.5rem 0.6rem; border: 1px solid var(--border); font-size: 0.68rem; text-align: center; }
+    .arch-cell.header { background: var(--bg3); font-weight: 600; color: var(--w); font-family: var(--mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .arch-cell.span { flex: unset; width: 100%; }
+    .param-table { width: 100%; border-collapse: collapse; margin-top: 0.8rem; }
+    .param-table th, .param-table td { padding: 0.35rem 0.5rem; font-size: 0.68rem; text-align: left; border-bottom: 1px solid var(--border); }
+    .param-table th { font-family: var(--mono); font-weight: 600; color: var(--w); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .param-table td { color: var(--t2); font-family: var(--mono); }
+    .param-table td:first-child { color: var(--t1); font-weight: 500; }
+
+    /* CONNECT */
+    #connect { text-align: center; }
+    .connect-links { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 2rem; }
+    .connect-link { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.7rem 1.5rem; border: 1px solid var(--border2); font-size: 0.85rem; font-weight: 500; color: var(--t2); transition: all 0.2s; }
+    .connect-link:hover { border-color: var(--border3); color: var(--w); }
+
+    /* FOOTER */
+    footer { padding: 2rem; text-align: center; font-size: 0.75rem; color: var(--t4); }
+
+    /* REVEAL */
+    .rv { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .rv.vis { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .stats-row { grid-template-columns: repeat(3, 1fr); }
+      .grid-3, .grid-2 { grid-template-columns: 1fr; }
+      .contrib-stats { grid-template-columns: repeat(2, 1fr); }
+      .project-metrics { flex-wrap: wrap; gap: 1.5rem; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .hero-name { font-size: 2.2rem; }
+      .hero-actions { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo"><span class="signature">Kaushik Sarkar</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#capabilities">Capabilities</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#technical">Systems</a></li>
+    <li><a href="#knowledge">Knowledge</a></li>
+    <li><a href="#repos">Repos</a></li>
+    <li><a href="#contributions">Engineering</a></li>
+    <li><a href="#tech">Stack</a></li>
+  </ul>
+  <a href="#connect" class="btn btn-w" style="padding:0.45rem 1rem; font-size:0.78rem;">Contact</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-badge"><i data-lucide="terminal" style="width:14px;height:14px;"></i> Engineering + Strategy + Business</div>
+    <h1 class="hero-name">Kaushik Sarkar</h1>
+    <p class="hero-title"><strong>AI Engineering Leadership</strong><br/>Two decades building AI systems that inform consequential decisions.</p>
+    <div class="hero-tags">// Foundation Models / Multi-Agent Systems / Enterprise Data Infrastructure / Global Programmes</div>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-w"><i data-lucide="arrow-down" style="width:16px;height:16px;"></i> See What I Built</a>
+      <a href="#connect" class="btn btn-g">Work Together</a>
+    </div>
+  </div>
+</section>
+
+<section id="stats">
+  <div class="stats-row">
+    <div class="stat rv"><div class="stat-val" data-target="17">0</div><div class="stat-key">Countries</div></div>
+    <div class="stat rv"><div class="stat-val" data-target="300" data-suffix="M+">0</div><div class="stat-key">End Users</div></div>
+    <div class="stat rv"><div class="stat-val" data-prefix="$" data-target="100" data-suffix="M+">0</div><div class="stat-key">Portfolio</div></div>
+    <div class="stat rv"><div class="stat-val" data-target="397" data-suffix="B">0</div><div class="stat-key">Param LLM</div></div>
+    <div class="stat rv"><div class="stat-val" data-target="50" data-suffix="TB+">0</div><div class="stat-key">Data Lake</div></div>
+    <div class="stat rv"><div class="stat-val" data-target="1000" data-suffix="+">0</div><div class="stat-key">Trained</div></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div style="display:grid; grid-template-columns:1fr 340px; gap:2.5rem; align-items:start;" class="rv">
+      <div class="about-text">
+        <div class="label">About</div>
+        <h2 class="title">Two decades of shipping AI systems<br/>that survive contact with reality.</h2>
+        <p><strong>Most AI and digital technologies never ship.</strong> They get presented in board decks, run in IDEs, make it through pilots, and then quietly disappear when the real constraints show up: the messy data, the interoperability challenges, the governance requirements, the stakeholders who all have to say yes, the infrastructure that was never built to run a model in production.</p>
+        <p>Over the past two decades, I have come to believe that the problem is rarely the data silos, the algorithms, or the infrastructure. <strong>It is almost always the absence of one person</strong> who can sit in the board conversation about AI strategy and then go and design the architecture the next morning, without losing anything in the translation.</p>
+        <p>Someone who has held the P&amp;L, navigated the institutional politics, put smiles on partners' faces, and still knows exactly why their team's retrieval pipeline is underperforming or why the loss function they landed on is working against them.</p>
+        <p style="border-left:2px solid var(--border3); padding-left:1rem; color:var(--t1); font-style:italic; margin-top:1.2rem;"><strong>That person is harder to find than any technology.</strong> And every single morning, I ask myself how much of that person I still have left to become.</p>
+        <div class="about-cred">Director of IMACS (An AI Centre of Excellence).<br/>Co-Principal Investigator, AI for disease forecasting using satellite data (funded by NASA Earth Sciences).<br/>PhD Researcher in AI | MBA | MDataSci | MS AI/ML</div>
+        <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:1rem;">
+          <span style="font-family:var(--mono); font-size:0.7rem; padding:0.3rem 0.7rem; background:var(--bg3); color:var(--t1); font-weight:500;">40 Under 40</span>
+          <span style="font-family:var(--mono); font-size:0.7rem; padding:0.3rem 0.7rem; background:var(--bg3); color:var(--t1); font-weight:500;">Outstanding Leadership Award</span>
+          <span style="font-family:var(--mono); font-size:0.7rem; padding:0.3rem 0.7rem; background:var(--bg3); color:var(--t1); font-weight:500;">Digital Transformation Leader</span>
+        </div>
+      </div>
+
+      <!-- Math formulation -->
+      <div style="background:var(--bg3); padding:1.5rem; position:sticky; top:5rem;">
+        <div style="font-family:var(--mono); font-size:0.62rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--t3); margin-bottom:1rem;">The Shipping Equation</div>
+        <div style="font-family:var(--mono); font-size:0.72rem; color:var(--t1); line-height:2; margin-bottom:1rem;">
+          <div style="color:var(--t3); font-size:0.6rem; margin-bottom:0.3rem;">DEFINE THE FIELD</div>
+          <div><strong>&Phi;</strong>(S, E, B, I, T, D, t)</div>
+          <div style="font-size:0.62rem; color:var(--t3);">S=strategy E=engineering B=business<br/>I=institutional T=technical D=domain t=time</div>
+        </div>
+        <div style="font-family:var(--mono); font-size:0.72rem; color:var(--t1); line-height:1.9; margin-bottom:1rem;">
+          <div style="color:var(--t3); font-size:0.6rem; margin-bottom:0.3rem;">THE EVOLUTION (PDE)</div>
+          <div>&part;&Phi;/&part;t = &alpha;&nabla;&sup2;&Phi;</div>
+          <div>&nbsp;&nbsp;+ &lambda;<sub>SE</sub> &middot; &part;&sup2;&Phi;/&part;S&part;E</div>
+          <div>&nbsp;&nbsp;+ &lambda;<sub>BT</sub> &middot; &part;&sup2;&Phi;/&part;B&part;T</div>
+          <div>&nbsp;&nbsp;+ &lambda;<sub>ID</sub> &middot; &part;&sup2;&Phi;/&part;I&part;D</div>
+          <div>&nbsp;&nbsp;- &delta; &middot; C(S,E,B,I,T,D,t)</div>
+        </div>
+        <div style="font-family:var(--mono); font-size:0.72rem; color:var(--t1); line-height:1.9; margin-bottom:1rem;">
+          <div style="color:var(--t3); font-size:0.6rem; margin-bottom:0.3rem;">WHY MOST AI NEVER SHIPS</div>
+          <div>Specialist: &part;&Phi;/&part;E &gt;&gt; 0, &part;&Phi;/&part;S &asymp; 0</div>
+          <div>That person: &part;&sup2;&Phi;/&part;S&part;E &gt;&gt; 0</div>
+          <div style="font-size:0.62rem; color:var(--t3); margin-top:0.2rem;">Cross-partials create correlation.<br/>One person &gt; N specialists.</div>
+        </div>
+        <div style="font-family:var(--mono); font-size:0.72rem; color:var(--t1); line-height:1.9; margin-bottom:1rem;">
+          <div style="color:var(--t3); font-size:0.6rem; margin-bottom:0.3rem;">THE RARITY</div>
+          <div>P(&forall; &part;&sup2;&Phi;/&part;x<sub>i</sub>&part;x<sub>j</sub> &gt; 0)</div>
+          <div>&nbsp;&nbsp;&sim; exp(-n(n-1)/2)</div>
+          <div style="font-size:0.62rem; color:var(--t3); margin-top:0.2rem;">For 6 dimensions: ~1 in 3.3 million</div>
+        </div>
+        <div style="font-family:var(--mono); font-size:0.72rem; color:var(--t1); line-height:1.9;">
+          <div style="color:var(--t3); font-size:0.6rem; margin-bottom:0.3rem;">THE MORNING QUESTION</div>
+          <div>lim<sub>t&rarr;&infin;</sub> || &Phi;*(t) - &Phi;(t) || = &epsilon;</div>
+          <div style="font-weight:600; color:var(--w);">&epsilon; &gt; 0, strictly.</div>
+          <div style="font-size:0.62rem; color:var(--t3); margin-top:0.2rem;">The pursuit is asymptotic.<br/>There is always more to become.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="capabilities">
+  <div class="container">
+    <div class="label rv">Capabilities</div>
+    <h2 class="title rv">What I Lead and Build</h2>
+    <p class="sub rv">Six domains spanning model training through production deployment.</p>
+    <div class="grid-3">
+      <div class="card rv"><div class="card-icon"><i data-lucide="brain" style="width:22px;height:22px;"></i></div><h3>Large Language Models</h3><p>End-to-end LLM engineering: domain-adaptive pre-training, SFT on 500K+ instruction pairs, DPO alignment with hard negative mining, Mixture of LoRA Experts across 6 scientific domains.</p><div class="tags"><span class="tag">LoRA / QLoRA</span><span class="tag">DPO</span><span class="tag">RLHF</span><span class="tag">MoLE</span><span class="tag">vLLM</span></div></div>
+      <div class="card rv"><div class="card-icon"><i data-lucide="bot" style="width:22px;height:22px;"></i></div><h3>Multi-Agent Systems</h3><p>Fan-out / fan-in agentic pipelines with 6+ specialised agents. MCP server architecture. Streaming SSE output. Real-time orchestration with graceful degradation.</p><div class="tags"><span class="tag">MCP</span><span class="tag">LangChain</span><span class="tag">ReAct</span><span class="tag">SSE</span></div></div>
+      <div class="card rv"><div class="card-icon"><i data-lucide="search" style="width:22px;height:22px;"></i></div><h3>RAG and Knowledge Systems</h3><p>Hybrid retrieval (dense + BM25) with Reciprocal Rank Fusion. Cross-encoder re-ranking. 250M+ evidence spans in OpenSearch. GraphRAG for structured knowledge.</p><div class="tags"><span class="tag">OpenSearch</span><span class="tag">FAISS</span><span class="tag">RRF</span><span class="tag">GraphRAG</span></div></div>
+      <div class="card rv"><div class="card-icon"><i data-lucide="database" style="width:22px;height:22px;"></i></div><h3>Enterprise Data Platforms</h3><p>50TB+ S3 data lakes with Apache Iceberg, 700M+ row analytical stores, Athena serverless SQL, 24 EventBridge ingestion pipelines. Query time from 8s to &lt;400ms.</p><div class="tags"><span class="tag">Iceberg</span><span class="tag">Athena</span><span class="tag">Glue</span><span class="tag">Airflow</span></div></div>
+      <div class="card rv"><div class="card-icon"><i data-lucide="zap" style="width:22px;height:22px;"></i></div><h3>Production ML Systems</h3><p>Real-time ML inference at 30+ geography scale. P95 latency &lt;150ms. Champion-challenger deployment. Canary rollouts with automated quality gates.</p><div class="tags"><span class="tag">SageMaker</span><span class="tag">MLOps</span><span class="tag">ONNX</span><span class="tag">Drift</span></div></div>
+      <div class="card rv"><div class="card-icon"><i data-lucide="shield" style="width:22px;height:22px;"></i></div><h3>AI Governance and Strategy</h3><p>AI governance frameworks for regulated environments across 17 countries. Responsible AI embedded in pipelines. National expert committee leadership. $100M+ portfolio accountability.</p><div class="tags"><span class="tag">Governance</span><span class="tag">Responsible AI</span><span class="tag">Strategy</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <div class="label rv">Selected Work</div>
+    <h2 class="title rv">Selected Work</h2>
+    <p class="sub rv">Systems operating at scale across multiple countries under governance constraints.</p>
+
+    <div class="project rv">
+      <div class="project-badge"><i data-lucide="trophy" style="width:14px;height:14px;"></i> Flagship Platform</div>
+      <h3>SAGE: Scientific Advisory and Guidance Engine</h3>
+      <p>A 397B-parameter domain-adapted foundation model trained through a 4-stage pipeline: domain-adaptive pre-training, supervised fine-tuning on 596K instruction pairs, DPO alignment on 192K preference pairs with 3-tier hard negative mining, Mixture of LoRA Experts across 6 scientific domains.</p>
+      <div class="project-metrics">
+        <div><span class="metric-val">397B</span><span class="metric-key">Parameters</span></div>
+        <div><span class="metric-val">6</span><span class="metric-key">Domain Adapters</span></div>
+        <div><span class="metric-val">&lt;3s</span><span class="metric-key">Fast Path SLA</span></div>
+        <div><span class="metric-val">12</span><span class="metric-key">Countries Live</span></div>
+      </div>
+      <div class="tags"><span class="tag">Foundation 397B</span><span class="tag">MoLE</span><span class="tag">DPO</span><span class="tag">QLoRA</span><span class="tag">OpenSearch AOSS</span><span class="tag">SSE Streaming</span></div>
+      <div class="project-arch">
+        <span class="cmt">// SAGE Multi-Agent Pipeline</span><br/>
+        <span class="kw">Router</span> &rarr; Claude Opus 4 &nbsp;&middot;&nbsp;
+        <span class="kw">RAG</span> &rarr; OpenSearch, 250M+ spans &nbsp;&middot;&nbsp;
+        <span class="kw">Foundation</span> &rarr; SAGE-397B<br/>
+        <span class="kw">Data</span> &rarr; 50TB+ S3, 700M+ rows Iceberg, 250M+ evidence spans, 30M+ causal relations<br/>
+        <span class="kw">SLAs</span> &rarr; fast path &lt;3s &middot; full report 45-90s &middot; dashboard P95 &lt;150ms
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="project rv" style="margin-top:0;">
+        <div class="project-badge"><i data-lucide="rocket" style="width:14px;height:14px;"></i> Upcoming 2026</div>
+        <h3>ARK Platform</h3>
+        <p>AI intelligence platform spanning 190+ countries for health, climate, and development finance. Funded by McGovern Foundation and Amazon.</p>
+        <div class="project-metrics"><div><span class="metric-val">190+</span><span class="metric-key">Countries</span></div><div><span class="metric-val">750M+</span><span class="metric-key">Records</span></div></div>
+      </div>
+      <div class="project rv" style="margin-top:0;">
+        <div class="project-badge"><i data-lucide="server" style="width:14px;height:14px;"></i> Data Infrastructure</div>
+        <h3>Global Evidence Data Platform</h3>
+        <p>Enterprise-grade data lake unifying 100M+ records across 17 national health systems. Iceberg on S3. 24 EventBridge pipelines. P95 from 8s to &lt;400ms.</p>
+        <div class="project-metrics"><div><span class="metric-val">50TB+</span><span class="metric-key">Data Lake</span></div><div><span class="metric-val">700M+</span><span class="metric-key">Rows</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="technical">
+  <div class="container">
+    <div class="label rv">Systems</div>
+    <h2 class="title rv">Architecture I Built</h2>
+    <p class="sub rv">Production systems engineering: foundation model training, data platforms, and multi-agent orchestration.</p>
+
+    <div class="tech-grid">
+
+      <!-- 1. SAGE Training Pipeline (6-Phase) -->
+      <div class="schematic schematic-full rv">
+        <div class="schematic-label">Foundation Model / 397B MoE (512 experts, 17B active/token)</div>
+        <div class="schematic-title">Six-Phase Domain Adaptation: CPT, ORPO, SPIN, RLAIF, Router Calibration</div>
+        <svg viewBox="0 0 940 260" xmlns="http://www.w3.org/2000/svg">
+          <!-- Phase 0 -->
+          <rect x="10" y="10" width="140" height="60" fill="none" stroke="#d4d4d4" stroke-width="1" stroke-dasharray="4,2"/>
+          <text x="80" y="28" text-anchor="middle" font-size="8" font-weight="600" fill="#525252" class="mono">PHASE 0</text>
+          <text x="80" y="40" text-anchor="middle" font-size="7.5" fill="#0a0a0a">Data Curation</text>
+          <text x="80" y="52" text-anchor="middle" font-size="6.5" fill="#737373">Cross-domain linking</text>
+          <text x="80" y="62" text-anchor="middle" font-size="6.5" fill="#737373">Curriculum design</text>
+
+          <line x1="150" y1="40" x2="165" y2="40" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="162,36 170,40 162,44" fill="#0a0a0a"/>
+
+          <!-- Phase 1: CPT -->
+          <rect x="170" y="10" width="140" height="60" fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="240" y="28" text-anchor="middle" font-size="8" font-weight="600" fill="#0a0a0a" class="mono">PHASE 1: CPT</text>
+          <text x="240" y="40" text-anchor="middle" font-size="7" fill="#525252">500M+ passages</text>
+          <text x="240" y="50" text-anchor="middle" font-size="6.5" fill="#737373">3-stage curriculum:</text>
+          <text x="240" y="60" text-anchor="middle" font-size="6.5" fill="#737373">warm-up, domain, cross-join</text>
+
+          <line x1="310" y1="40" x2="325" y2="40" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="322,36 330,40 322,44" fill="#0a0a0a"/>
+
+          <!-- Phase 2: ORPO -->
+          <rect x="330" y="10" width="140" height="60" fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="400" y="28" text-anchor="middle" font-size="8" font-weight="600" fill="#0a0a0a" class="mono">PHASE 2: ORPO</text>
+          <text x="400" y="40" text-anchor="middle" font-size="7" fill="#525252">Merged SFT + preference</text>
+          <text x="400" y="50" text-anchor="middle" font-size="6.5" fill="#737373">No reference model needed</text>
+          <text x="400" y="60" text-anchor="middle" font-size="6.5" fill="#737373">900K+ training pairs</text>
+
+          <line x1="470" y1="40" x2="485" y2="40" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="482,36 490,40 482,44" fill="#0a0a0a"/>
+
+          <!-- Phase 3: SPIN -->
+          <rect x="490" y="10" width="140" height="60" fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="560" y="28" text-anchor="middle" font-size="8" font-weight="600" fill="#0a0a0a" class="mono">PHASE 3: SPIN</text>
+          <text x="560" y="40" text-anchor="middle" font-size="7" fill="#525252">Self-play fine-tuning</text>
+          <text x="560" y="50" text-anchor="middle" font-size="6.5" fill="#737373">3 iterations, model beats</text>
+          <text x="560" y="60" text-anchor="middle" font-size="6.5" fill="#737373">its own prior outputs</text>
+
+          <line x1="630" y1="40" x2="645" y2="40" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="642,36 650,40 642,44" fill="#0a0a0a"/>
+
+          <!-- Phase 4: RLAIF/DAPO -->
+          <rect x="650" y="10" width="140" height="60" fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="720" y="28" text-anchor="middle" font-size="8" font-weight="600" fill="#0a0a0a" class="mono">PHASE 4: RLAIF</text>
+          <text x="720" y="40" text-anchor="middle" font-size="7" fill="#525252">DAPO (group-relative)</text>
+          <text x="720" y="50" text-anchor="middle" font-size="6.5" fill="#737373">Multi-dim reward:</text>
+          <text x="720" y="60" text-anchor="middle" font-size="6.5" fill="#737373">accuracy+cite+reason</text>
+
+          <line x1="790" y1="40" x2="805" y2="40" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="802,36 810,40 802,44" fill="#0a0a0a"/>
+
+          <!-- Phase 5: Router -->
+          <rect x="810" y="10" width="120" height="60" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="870" y="28" text-anchor="middle" font-size="7.5" font-weight="600" fill="#ffffff" class="mono">PHASE 5</text>
+          <text x="870" y="40" text-anchor="middle" font-size="7" fill="#a3a3a3">Expert Router Cal.</text>
+          <text x="870" y="52" text-anchor="middle" font-size="6.5" fill="#737373">MoE-Sieve profiling</text>
+          <text x="870" y="62" text-anchor="middle" font-size="6.5" fill="#737373">512 expert activation maps</text>
+
+          <!-- Detail rows -->
+          <rect x="10" y="82" width="460" height="50" fill="none" stroke="#d4d4d4" stroke-width="1" stroke-dasharray="4,2"/>
+          <text x="25" y="97" font-size="7.5" font-weight="600" fill="#0a0a0a" class="mono">BASE: Qwen 3.5-397B-A17B</text>
+          <text x="25" y="110" font-size="7" fill="#525252">512 experts, Gated DeltaNet hybrid attention, 262K context</text>
+          <text x="25" y="122" font-size="7" fill="#525252" class="mono">FP8 LoRA + FSDP ZeRO-3 on 8x g7e (768 GB VRAM)</text>
+
+          <rect x="480" y="82" width="450" height="50" fill="none" stroke="#d4d4d4" stroke-width="1" stroke-dasharray="4,2"/>
+          <text x="495" y="97" font-size="7.5" font-weight="600" fill="#0a0a0a" class="mono">LOSS FUNCTIONS</text>
+          <text x="495" y="110" font-size="7" fill="#525252" class="mono">CPT: L = -sum log P(x_t|x_&lt;t)  |  ORPO: L = L_SFT + beta.L_OR  |  SPIN: self-play DPO</text>
+          <text x="495" y="122" font-size="7" fill="#525252" class="mono">DAPO: group-relative advantage, clip-higher, token-level PG, dynamic sampling</text>
+
+          <rect x="10" y="142" width="920" height="42" fill="var(--bg3)" stroke="none"/>
+          <text x="25" y="157" font-size="7.5" font-weight="600" fill="#0a0a0a" class="mono">CORE INNOVATION: CROSS-DOMAIN QUANTITATIVE REASONING</text>
+          <text x="25" y="170" font-size="7" fill="#525252">Model trained on climate x health x finance cross-joins from 1B+ structured records. Not just text: grounded in actual time-series data.</text>
+          <text x="25" y="182" font-size="7" fill="#737373">Cross-domain experts activated simultaneously for multi-hop causal chains (e.g., temperature anomaly -> cholera incidence -> WASH funding gaps).</text>
+
+          <!-- Validation gates -->
+          <rect x="10" y="194" width="920" height="60" fill="none" stroke="#d4d4d4" stroke-width="1"/>
+          <text x="25" y="210" font-size="7" font-weight="600" fill="#525252" class="mono">12 VALIDATION GATES (fail-fast at every boundary)</text>
+          <text x="25" y="224" font-size="6.5" fill="#737373" class="mono">G0: data counts  G1: loss decreasing  G2: perplexity -10%  G3: knowledge probe 60%+  G4: reward margins  G5: eval loss &lt;2.0</text>
+          <text x="25" y="236" font-size="6.5" fill="#737373" class="mono">G6: coherence  G7: loss floor [0.15,1.5]  G8: SPIN iteration gain  G9: no regression  G10: reward positive  G11: cross-domain 70%+</text>
+          <text x="25" y="248" font-size="6.5" fill="#737373">RLAIF reward = 0.35 accuracy + 0.25 citation verifiability + 0.20 causal reasoning + 0.20 completeness (judged by frontier model via Bedrock)</text>
+        </svg>
+      </div>
+
+      <!-- 2. Data Lake (3-Layer Lakehouse) -->
+      <div class="schematic schematic-full rv">
+        <div class="schematic-label">Data Platform / 50TB+ Lakehouse / 85+ Organizations / 9 Domains</div>
+        <div class="schematic-title">Three-Layer Architecture: Raw, Silver, Gold</div>
+        <svg viewBox="0 0 940 310" xmlns="http://www.w3.org/2000/svg">
+          <!-- Sources row -->
+          <text x="20" y="14" font-size="7.5" font-weight="600" fill="#525252" class="mono">150+ SOURCES (REST APIs, Bulk Files, XML, NetCDF, CDC, Event Streams)</text>
+          <text x="700" y="14" font-size="7" fill="#737373" class="mono">85+ orgs / 20+ EventBridge rules</text>
+
+          <!-- 9 Domain boxes -->
+          <rect x="10" y="22" width="95" height="24" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="57" y="38" text-anchor="middle" font-size="6.5" fill="#0a0a0a" class="mono">Climate 1.3B+</text>
+          <rect x="112" y="22" width="95" height="24" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="159" y="38" text-anchor="middle" font-size="6.5" fill="#0a0a0a" class="mono">Health 290M+</text>
+          <rect x="214" y="22" width="95" height="24" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="261" y="38" text-anchor="middle" font-size="6.5" fill="#0a0a0a" class="mono">Economics 120M+</text>
+          <rect x="316" y="22" width="82" height="24" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="357" y="38" text-anchor="middle" font-size="6.5" fill="#0a0a0a" class="mono">Population</text>
+          <rect x="405" y="22" width="82" height="24" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="446" y="38" text-anchor="middle" font-size="6.5" fill="#0a0a0a" class="mono">Nutrition</text>
+          <rect x="494" y="22" width="82" height="24" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="535" y="38" text-anchor="middle" font-size="6.5" fill="#0a0a0a" class="mono">WASH</text>
+          <rect x="583" y="22" width="82" height="24" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="624" y="38" text-anchor="middle" font-size="6.5" fill="#0a0a0a" class="mono">Governance</text>
+          <rect x="672" y="22" width="82" height="24" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="713" y="38" text-anchor="middle" font-size="6.5" fill="#0a0a0a" class="mono">Education</text>
+          <rect x="761" y="22" width="82" height="24" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="802" y="38" text-anchor="middle" font-size="6.5" fill="#0a0a0a" class="mono">Environment</text>
+          <rect x="850" y="22" width="80" height="24" fill="none" stroke="#d4d4d4" stroke-width="1" stroke-dasharray="3,2"/>
+          <text x="890" y="38" text-anchor="middle" font-size="6.5" fill="#737373" class="mono">Extensible</text>
+
+          <line x1="470" y1="46" x2="470" y2="58" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="466,55 470,63 474,55" fill="#0a0a0a"/>
+
+          <!-- Canonical Pipeline -->
+          <rect x="10" y="63" width="920" height="28" fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="30" y="79" font-size="7.5" font-weight="600" fill="#0a0a0a" class="mono">CANONICAL PIPELINE</text>
+          <text x="200" y="79" font-size="6.5" fill="#525252" class="mono">Typed adapters</text>
+          <text x="300" y="79" font-size="6.5" fill="#525252" class="mono">Schema validation</text>
+          <text x="420" y="79" font-size="6.5" fill="#525252" class="mono">Dedup</text>
+          <text x="490" y="79" font-size="6.5" fill="#525252" class="mono">WAL checkpoint</text>
+          <text x="610" y="79" font-size="6.5" fill="#525252" class="mono">Parallel runner</text>
+          <text x="730" y="79" font-size="6.5" fill="#525252" class="mono">Partition (source_org, year)</text>
+
+          <!-- Three arrows down to three layers -->
+          <line x1="160" y1="91" x2="160" y2="107" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="156,104 160,112 164,104" fill="#0a0a0a"/>
+          <line x1="470" y1="91" x2="470" y2="107" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="466,104 470,112 474,104" fill="#0a0a0a"/>
+          <line x1="780" y1="91" x2="780" y2="107" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="776,104 780,112 784,104" fill="#0a0a0a"/>
+
+          <!-- LAYER 1: RAW -->
+          <rect x="10" y="112" width="300" height="55" fill="none" stroke="#d4d4d4" stroke-width="1" stroke-dasharray="4,2"/>
+          <text x="30" y="128" font-size="8" font-weight="600" fill="#525252" class="mono">RAW LAYER</text>
+          <text x="140" y="128" font-size="7" fill="#737373">S3 landing zone</text>
+          <text x="30" y="142" font-size="6.5" fill="#525252">Original formats preserved: JSON, CSV, XML, NetCDF, PDF</text>
+          <text x="30" y="154" font-size="6.5" fill="#737373">Schema-on-read, full lineage, immutable audit trail</text>
+          <text x="30" y="164" font-size="6.5" fill="#737373" class="mono">partitioned by source_org / ingestion_date</text>
+
+          <!-- LAYER 2: SILVER -->
+          <rect x="320" y="112" width="300" height="55" fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="340" y="128" font-size="8" font-weight="600" fill="#0a0a0a" class="mono">SILVER LAYER</text>
+          <text x="460" y="128" font-size="7" fill="#737373">180+ Glue tables</text>
+          <text x="340" y="142" font-size="6.5" fill="#525252">Parquet + Snappy, typed schemas, deduplication</text>
+          <text x="340" y="154" font-size="6.5" fill="#737373">Canonical columns: indicator, value, geo, period, source</text>
+          <text x="340" y="164" font-size="6.5" fill="#737373" class="mono">700M+ rows / Athena serverless SQL</text>
+
+          <!-- LAYER 3: GOLD -->
+          <rect x="630" y="112" width="300" height="55" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="650" y="128" font-size="8" font-weight="600" fill="#ffffff" class="mono">GOLD LAYER</text>
+          <text x="770" y="128" font-size="7" fill="#a3a3a3">Apache Iceberg</text>
+          <text x="650" y="142" font-size="6.5" fill="#a3a3a3">ZSTD compression, ACID transactions, time-travel</text>
+          <text x="650" y="154" font-size="6.5" fill="#737373">40K+ indicators, 58K+ geo entities, 1800-2100 span</text>
+          <text x="650" y="164" font-size="6.5" fill="#737373" class="mono">Athena v3 / partition pruning / snapshot rollback</text>
+
+          <!-- Arrows from three layers down to serving -->
+          <line x1="160" y1="167" x2="160" y2="186" stroke="#d4d4d4" stroke-width="1"/>
+          <line x1="470" y1="167" x2="470" y2="186" stroke="#d4d4d4" stroke-width="1"/>
+          <line x1="780" y1="167" x2="780" y2="186" stroke="#d4d4d4" stroke-width="1"/>
+
+          <!-- Serving layer: 3 stores -->
+          <rect x="10" y="186" width="300" height="45" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="30" y="202" font-size="8" font-weight="600" fill="#ffffff" class="mono">VECTOR STORE</text>
+          <text x="30" y="215" font-size="6.5" fill="#a3a3a3" class="mono">250M+ embeddings / 1024d / HNSW</text>
+          <text x="30" y="226" font-size="6.5" fill="#737373">Hybrid BM25 + dense rerank, kNN retrieval</text>
+
+          <rect x="320" y="186" width="300" height="45" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="340" y="202" font-size="8" font-weight="600" fill="#ffffff" class="mono">KNOWLEDGE GRAPH</text>
+          <text x="340" y="215" font-size="6.5" fill="#a3a3a3" class="mono">30M+ causal relations / entity-linked</text>
+          <text x="340" y="226" font-size="6.5" fill="#737373">BM25 retrieval, relation triples, GraphRAG</text>
+
+          <rect x="630" y="186" width="300" height="45" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="650" y="202" font-size="8" font-weight="600" fill="#ffffff" class="mono">ANALYTICAL VIEWS</text>
+          <text x="650" y="215" font-size="6.5" fill="#a3a3a3" class="mono">Cross-domain materialized views</text>
+          <text x="650" y="226" font-size="6.5" fill="#737373">Dashboards, P95 &lt;400ms, training data gen</text>
+
+          <!-- Bottom summary -->
+          <rect x="10" y="244" width="920" height="58" fill="var(--bg3)" stroke="none"/>
+          <text x="30" y="260" font-size="7.5" font-weight="600" fill="#0a0a0a" class="mono">DATA ESTATE</text>
+          <text x="30" y="276" font-size="7" fill="#525252">50TB+ S3 lakehouse across 9 domains. Temporal coverage 1800-2100. Automated weekly ingestion via EventBridge + canonical pipeline.</text>
+          <text x="30" y="290" font-size="7" fill="#525252">Cross-domain joins power the foundation model: climate x health x economics x population for multi-hop causal reasoning.</text>
+        </svg>
+      </div>
+
+      <!-- 3. Multi-Agent System -->
+      <div class="schematic rv">
+        <div class="schematic-label">AI Platform / 6-Agent System</div>
+        <div class="schematic-title">Evidence Intelligence Orchestration</div>
+        <svg viewBox="0 0 380 250" xmlns="http://www.w3.org/2000/svg">
+          <rect x="130" y="5" width="120" height="22" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="190" y="20" text-anchor="middle" font-size="7.5" fill="#0a0a0a" class="mono">User Query</text>
+          <line x1="190" y1="27" x2="190" y2="40" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="186,37 190,45 194,37" fill="#0a0a0a"/>
+          <rect x="115" y="45" width="150" height="25" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="190" y="62" text-anchor="middle" font-size="8" font-weight="600" fill="#ffffff" class="mono">INTENT ROUTER</text>
+          <line x1="140" y1="70" x2="55" y2="90" stroke="#d4d4d4" stroke-width="1"/>
+          <line x1="190" y1="70" x2="190" y2="90" stroke="#d4d4d4" stroke-width="1"/>
+          <line x1="240" y1="70" x2="325" y2="90" stroke="#d4d4d4" stroke-width="1"/>
+          <rect x="5" y="90" width="100" height="35" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="55" y="106" text-anchor="middle" font-size="7.5" font-weight="500" fill="#0a0a0a">Synthesis</text>
+          <text x="55" y="118" text-anchor="middle" font-size="6.5" fill="#737373" class="mono">Evidence fusion</text>
+          <rect x="140" y="90" width="100" height="35" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="190" y="106" text-anchor="middle" font-size="7.5" font-weight="500" fill="#0a0a0a">KG Reasoning</text>
+          <text x="190" y="118" text-anchor="middle" font-size="6.5" fill="#737373" class="mono">Causal chains</text>
+          <rect x="275" y="90" width="100" height="35" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="325" y="106" text-anchor="middle" font-size="7.5" font-weight="500" fill="#0a0a0a">Domain Expert</text>
+          <text x="325" y="118" text-anchor="middle" font-size="6.5" fill="#737373" class="mono">Specialist routing</text>
+          <line x1="55" y1="125" x2="55" y2="145" stroke="#d4d4d4" stroke-width="1"/>
+          <line x1="190" y1="125" x2="190" y2="145" stroke="#d4d4d4" stroke-width="1"/>
+          <line x1="325" y1="125" x2="325" y2="145" stroke="#d4d4d4" stroke-width="1"/>
+          <rect x="5" y="145" width="370" height="28" fill="none" stroke="#0a0a0a" stroke-width="1" stroke-dasharray="4,2"/>
+          <text x="20" y="160" font-size="6.5" font-weight="600" fill="#525252" class="mono">RETRIEVAL</text>
+          <text x="90" y="160" font-size="6.5" fill="#525252" class="mono">BM25</text>
+          <text x="140" y="160" font-size="6.5" fill="#525252" class="mono">kNN</text>
+          <text x="190" y="160" font-size="6.5" fill="#525252" class="mono">Hybrid rerank</text>
+          <text x="280" y="160" font-size="6.5" fill="#525252" class="mono">KG traverse</text>
+          <text x="20" y="170" font-size="5.5" fill="#737373" class="mono">Vector + structured + graph</text>
+          <line x1="190" y1="173" x2="190" y2="188" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="186,185 190,193 194,185" fill="#0a0a0a"/>
+          <rect x="75" y="193" width="230" height="22" fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="190" y="208" text-anchor="middle" font-size="7.5" font-weight="500" fill="#0a0a0a">Evidence Grounding + Citation</text>
+          <line x1="190" y1="215" x2="190" y2="227" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="186,224 190,232 194,224" fill="#0a0a0a"/>
+          <rect x="75" y="232" width="230" height="18" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="190" y="245" text-anchor="middle" font-size="7" font-weight="600" fill="#ffffff" class="mono">GROUNDED RESPONSE</text>
+        </svg>
+      </div>
+
+      <!-- 4. Distributed GPU Layout -->
+      <div class="schematic rv">
+        <div class="schematic-label">Infrastructure / 8-GPU Cluster</div>
+        <div class="schematic-title">Distributed Training on AWS</div>
+        <div class="arch-layer">
+          <div class="arch-cell header span" style="width:100%">torchrun / DDP</div>
+        </div>
+        <div style="height:0.4rem;border-left:1px dashed var(--border2);margin-left:50%;width:0;"></div>
+        <div class="arch-layer">
+          <div class="arch-cell header">GPU 0</div>
+          <div class="arch-cell header">GPU 1</div>
+          <div class="arch-cell header">...</div>
+          <div class="arch-cell header">GPU 7</div>
+        </div>
+        <div class="arch-layer">
+          <div class="arch-cell" style="font-size:0.58rem;">NF4 model</div>
+          <div class="arch-cell" style="font-size:0.58rem;">NF4 model</div>
+          <div class="arch-cell" style="font-size:0.58rem;">...</div>
+          <div class="arch-cell" style="font-size:0.58rem;">NF4 model</div>
+        </div>
+        <div class="arch-layer">
+          <div class="arch-cell" style="font-size:0.58rem;">LoRA + optim</div>
+          <div class="arch-cell" style="font-size:0.58rem;">LoRA + optim</div>
+          <div class="arch-cell" style="font-size:0.58rem;">...</div>
+          <div class="arch-cell" style="font-size:0.58rem;">LoRA + optim</div>
+        </div>
+        <div style="height:0.4rem;border-left:1px dashed var(--border2);margin-left:50%;width:0;"></div>
+        <div class="arch-layer">
+          <div class="arch-cell header span" style="width:100%">NCCL All-Reduce / EFA</div>
+        </div>
+        <div class="arch-layer">
+          <div class="arch-cell span" style="width:100%;font-size:0.6rem;font-family:var(--mono);">effective_batch = per_device x grad_accum x 8</div>
+        </div>
+        <div class="eq-block" style="margin-top:0.8rem;font-size:0.65rem;">Checkpoint-resume on spot interruption<br>Rank 0 saves to EBS + S3<br>Each GPU sees 1/8 of data shards</div>
+      </div>
+
+      <!-- 5. SPECTRA: Deep Generative Forecasting Architecture -->
+      <div class="schematic schematic-full rv">
+        <div class="schematic-label">Published Research / Deep Generative Time Series</div>
+        <div class="schematic-title">SPECTRA: Adversarial Climate-Disease Forecasting with Transfer Learning</div>
+        <svg viewBox="0 0 940 280" xmlns="http://www.w3.org/2000/svg">
+          <!-- Pipeline label -->
+          <text x="470" y="14" text-anchor="middle" font-size="7.5" font-weight="600" fill="#525252" class="mono">TRAINING PIPELINE: VAE > FEATURE ENGINEERING > GAN</text>
+
+          <!-- Stage 1: Climate Encoder (Cbeta-VAE) -->
+          <rect x="10" y="28" width="200" height="90" fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="110" y="44" text-anchor="middle" font-size="9" font-weight="600" fill="#0a0a0a">Climate Encoder</text>
+          <text x="110" y="58" text-anchor="middle" font-size="7.5" fill="#525252" class="mono">Conditional beta-VAE</text>
+          <text x="110" y="72" text-anchor="middle" font-size="6.5" fill="#737373">Meteorological variables -> latent z</text>
+          <text x="110" y="84" text-anchor="middle" font-size="6.5" fill="#737373">beta-term penalizes deviation from</text>
+          <text x="110" y="94" text-anchor="middle" font-size="6.5" fill="#737373">N(0,1), limits noise sensitivity</text>
+          <text x="110" y="108" text-anchor="middle" font-size="6.5" fill="#525252" class="mono">L = recon + beta.KL(q(z|c)||p(z))</text>
+
+          <!-- Arrow -->
+          <line x1="210" y1="73" x2="235" y2="73" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="232,69 240,73 232,77" fill="#0a0a0a"/>
+
+          <!-- Stage 2: Feature Engineering -->
+          <rect x="240" y="28" width="180" height="90" fill="none" stroke="#d4d4d4" stroke-width="1" stroke-dasharray="4,2"/>
+          <text x="330" y="44" text-anchor="middle" font-size="9" font-weight="600" fill="#525252">Feature Engineering</text>
+          <text x="330" y="60" text-anchor="middle" font-size="6.5" fill="#737373">Latent variables from VAE</text>
+          <text x="330" y="72" text-anchor="middle" font-size="6.5" fill="#737373">1, 3, 6-month lagged features</text>
+          <text x="330" y="84" text-anchor="middle" font-size="6.5" fill="#737373">Rolling means + std (3, 6 month)</text>
+          <text x="330" y="96" text-anchor="middle" font-size="6.5" fill="#737373">Seasonal (sin/cos) + country embed</text>
+          <text x="330" y="108" text-anchor="middle" font-size="6.5" fill="#737373">Linear noise projection</text>
+
+          <!-- Arrow -->
+          <line x1="420" y1="73" x2="445" y2="73" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="442,69 450,73 442,77" fill="#0a0a0a"/>
+
+          <!-- Stage 3: Generator -->
+          <rect x="450" y="28" width="220" height="90" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="560" y="44" text-anchor="middle" font-size="9" font-weight="600" fill="#ffffff">Generator (Forecaster)</text>
+          <text x="560" y="60" text-anchor="middle" font-size="7" fill="#a3a3a3" class="mono">Causal TCN</text>
+          <text x="560" y="74" text-anchor="middle" font-size="7" fill="#a3a3a3" class="mono">LSTM (sequence memory)</text>
+          <text x="560" y="88" text-anchor="middle" font-size="7" fill="#a3a3a3" class="mono">Multi-Head Self-Attention</text>
+          <text x="560" y="102" text-anchor="middle" font-size="7" fill="#a3a3a3" class="mono">Projection Head -> P(d|c)</text>
+          <text x="560" y="114" text-anchor="middle" font-size="6.5" fill="#737373">Outputs full predictive distribution</text>
+
+          <!-- Adversarial arrow (bidirectional) -->
+          <line x1="670" y1="55" x2="710" y2="55" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="707,51 715,55 707,59" fill="#0a0a0a"/>
+          <line x1="670" y1="95" x2="710" y2="95" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="673,91 665,95 673,99" fill="#0a0a0a"/>
+          <text x="692" y="78" text-anchor="middle" font-size="6" fill="#737373" transform="rotate(-90, 692, 78)">adversarial</text>
+
+          <!-- Stage 4: Critic -->
+          <rect x="715" y="28" width="215" height="90" fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="822" y="44" text-anchor="middle" font-size="9" font-weight="600" fill="#0a0a0a">Critic</text>
+          <text x="822" y="60" text-anchor="middle" font-size="7" fill="#525252" class="mono">LSTM + FC layer</text>
+          <text x="822" y="74" text-anchor="middle" font-size="6.5" fill="#737373">Same config as Generator</text>
+          <text x="822" y="88" text-anchor="middle" font-size="6.5" fill="#737373">Distinguishes real disease</text>
+          <text x="822" y="100" text-anchor="middle" font-size="6.5" fill="#737373">sequences from generated</text>
+          <text x="822" y="114" text-anchor="middle" font-size="6.5" fill="#525252" class="mono">WGAN gradient penalty</text>
+
+          <!-- Composite Loss -->
+          <rect x="10" y="130" width="460" height="55" fill="var(--bg3)" stroke="none"/>
+          <text x="30" y="147" font-size="7.5" font-weight="600" fill="#0a0a0a" class="mono">COMPOSITE LOSS (distribution-aware)</text>
+          <text x="30" y="162" font-size="7" fill="#525252" class="mono">L = L_NLL + lambda_q.L_quantile + lambda_f.L_feature_match + lambda_a.L_WGAN-GP</text>
+          <text x="30" y="176" font-size="6.5" fill="#737373">NLL for likelihood, quantile for calibrated uncertainty, feature matching for stability, WGAN-GP for distribution fidelity</text>
+
+          <!-- Transfer Learning -->
+          <rect x="480" y="130" width="450" height="55" fill="var(--bg3)" stroke="none"/>
+          <text x="500" y="147" font-size="7.5" font-weight="600" fill="#0a0a0a" class="mono">TRANSFER LEARNING (cross-geography)</text>
+          <text x="500" y="162" font-size="7" fill="#525252">Pre-trained generator weights transferred to country-specific models</text>
+          <text x="500" y="176" font-size="6.5" fill="#737373">Validated across 8 countries. Outperforms supervised baselines on accuracy and probabilistic calibration.</text>
+
+          <!-- Key innovations -->
+          <rect x="10" y="198" width="920" height="72" fill="none" stroke="#d4d4d4" stroke-width="1"/>
+          <text x="30" y="216" font-size="7" font-weight="600" fill="#0a0a0a" class="mono">KEY CONTRIBUTIONS</text>
+          <text x="30" y="232" font-size="7" fill="#525252">1. Decouples representation learning (VAE) from sequence modeling (GAN) to handle ill-posed climate-disease inference</text>
+          <text x="30" y="246" font-size="7" fill="#525252">2. Addresses non-Markovian, non-stationary disease signals via causal TCN + LSTM + multi-head self-attention</text>
+          <text x="30" y="260" font-size="7" fill="#525252">3. Produces full predictive distributions (not point estimates) with calibrated uncertainty bounds</text>
+        </svg>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 2: Engineering Knowledge -->
+<section id="knowledge">
+  <div class="container">
+    <div class="label rv">Knowledge</div>
+    <h2 class="title rv">Engineering Perspectives</h2>
+    <p class="sub rv">Architecture selection, loss functions, model families, and design patterns from hands-on R&D.</p>
+
+    <div class="tech-grid">
+
+      <!-- 1. Generative Architecture Taxonomy -->
+      <div class="schematic schematic-full rv">
+        <div class="schematic-label">Architecture Selection</div>
+        <div class="schematic-title">Generative Model Taxonomy: When to Use What</div>
+        <svg viewBox="0 0 940 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Autoregressive -->
+          <rect x="10" y="10" width="170" height="80" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="95" y="30" text-anchor="middle" font-size="9" font-weight="600" fill="#ffffff">Autoregressive</text>
+          <text x="95" y="44" text-anchor="middle" font-size="7" fill="#a3a3a3" class="mono">P(x) = prod P(x_t | x_&lt;t)</text>
+          <text x="95" y="58" text-anchor="middle" font-size="6.5" fill="#737373">GPT, Llama, Qwen, Gemma</text>
+          <text x="95" y="70" text-anchor="middle" font-size="6.5" fill="#737373">Best: text generation, code,</text>
+          <text x="95" y="80" text-anchor="middle" font-size="6.5" fill="#737373">reasoning, chat, agents</text>
+
+          <!-- Diffusion -->
+          <rect x="195" y="10" width="170" height="80" fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="280" y="30" text-anchor="middle" font-size="9" font-weight="600" fill="#0a0a0a">Diffusion</text>
+          <text x="280" y="44" text-anchor="middle" font-size="7" fill="#525252" class="mono">x_t = sqrt(a_t).x_0 + noise</text>
+          <text x="280" y="58" text-anchor="middle" font-size="6.5" fill="#737373">DDPM, Stable Diffusion, DALL-E 3</text>
+          <text x="280" y="70" text-anchor="middle" font-size="6.5" fill="#737373">Best: image synthesis, video,</text>
+          <text x="280" y="80" text-anchor="middle" font-size="6.5" fill="#737373">controllable generation</text>
+
+          <!-- GAN -->
+          <rect x="380" y="10" width="170" height="80" fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="465" y="30" text-anchor="middle" font-size="9" font-weight="600" fill="#0a0a0a">GAN</text>
+          <text x="465" y="44" text-anchor="middle" font-size="7" fill="#525252" class="mono">min_G max_D V(D,G)</text>
+          <text x="465" y="58" text-anchor="middle" font-size="6.5" fill="#737373">StyleGAN, CycleGAN, Pix2Pix</text>
+          <text x="465" y="70" text-anchor="middle" font-size="6.5" fill="#737373">Best: fast inference, style</text>
+          <text x="465" y="80" text-anchor="middle" font-size="6.5" fill="#737373">transfer, super-resolution</text>
+
+          <!-- VAE -->
+          <rect x="565" y="10" width="170" height="80" fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="650" y="30" text-anchor="middle" font-size="9" font-weight="600" fill="#0a0a0a">VAE</text>
+          <text x="650" y="44" text-anchor="middle" font-size="7" fill="#525252" class="mono">ELBO = E[log p] - KL(q||p)</text>
+          <text x="650" y="58" text-anchor="middle" font-size="6.5" fill="#737373">VAE, VQ-VAE, Beta-VAE</text>
+          <text x="650" y="70" text-anchor="middle" font-size="6.5" fill="#737373">Best: latent representation,</text>
+          <text x="650" y="80" text-anchor="middle" font-size="6.5" fill="#737373">disentangled features, compression</text>
+
+          <!-- Flow -->
+          <rect x="750" y="10" width="180" height="80" fill="none" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="840" y="30" text-anchor="middle" font-size="9" font-weight="600" fill="#0a0a0a">Normalizing Flow</text>
+          <text x="840" y="44" text-anchor="middle" font-size="7" fill="#525252" class="mono">p(x) = p(z)|det dz/dx|</text>
+          <text x="840" y="58" text-anchor="middle" font-size="6.5" fill="#737373">RealNVP, Glow, Flow Matching</text>
+          <text x="840" y="70" text-anchor="middle" font-size="6.5" fill="#737373">Best: exact likelihood, density</text>
+          <text x="840" y="80" text-anchor="middle" font-size="6.5" fill="#737373">estimation, invertible transforms</text>
+
+          <!-- Decision guide -->
+          <rect x="10" y="105" width="920" height="85" fill="var(--bg3)" stroke="none"/>
+          <text x="30" y="122" font-size="7.5" font-weight="600" fill="#0a0a0a" class="mono">SELECTION GUIDE</text>
+          <text x="30" y="138" font-size="7" fill="#525252">Need text/code/reasoning? Autoregressive (decoder-only transformer). Scale with compute. Use RLHF/DPO for alignment.</text>
+          <text x="30" y="152" font-size="7" fill="#525252">Need high-fidelity images? Diffusion (quality) or GAN (speed). Diffusion dominates for quality; GAN for real-time.</text>
+          <text x="30" y="166" font-size="7" fill="#525252">Need structured latent space? VAE. Need exact density? Flow. Need both generation + understanding? Multimodal autoregressive.</text>
+          <text x="30" y="180" font-size="7" fill="#525252">State space models (Mamba, RWKV) emerging for long-sequence efficiency. Hybrid transformer-SSM architectures gaining traction.</text>
+        </svg>
+      </div>
+
+      <!-- 2. Loss Function Engineering -->
+      <div class="schematic rv">
+        <div class="schematic-label">Optimization</div>
+        <div class="schematic-title">Loss Function Selection</div>
+        <table class="param-table">
+          <tr><th>Loss</th><th>Formula</th><th>When</th></tr>
+          <tr><td>Cross-Entropy</td><td class="mono" style="font-size:0.6rem;">-sum y.log(p)</td><td>Classification, LM</td></tr>
+          <tr><td>NLL</td><td class="mono" style="font-size:0.6rem;">-log P(x|theta)</td><td>Sequence modeling</td></tr>
+          <tr><td>KL Divergence</td><td class="mono" style="font-size:0.6rem;">sum p.log(p/q)</td><td>VAE, distillation</td></tr>
+          <tr><td>Wasserstein</td><td class="mono" style="font-size:0.6rem;">inf E[|x-y|]</td><td>WGAN, Earth mover</td></tr>
+          <tr><td>Spectral</td><td class="mono" style="font-size:0.6rem;">||sigma(W)||</td><td>GAN stabilization</td></tr>
+          <tr><td>Contrastive</td><td class="mono" style="font-size:0.6rem;">-log(sim+/sim-)</td><td>Embeddings, CLIP</td></tr>
+          <tr><td>Triplet</td><td class="mono" style="font-size:0.6rem;">max(d+-d-+m,0)</td><td>Metric learning</td></tr>
+          <tr><td>Focal</td><td class="mono" style="font-size:0.6rem;">-a(1-p)^g.log p</td><td>Imbalanced data</td></tr>
+          <tr><td>DPO</td><td class="mono" style="font-size:0.6rem;">-log sigma(b.dr)</td><td>Preference tuning</td></tr>
+          <tr><td>Hinge</td><td class="mono" style="font-size:0.6rem;">max(0, 1-y.f)</td><td>SVM, GAN variants</td></tr>
+        </table>
+        <div class="eq-note" style="margin-top:0.6rem;">Choose based on the signal: classification uses CE, generation uses NLL, alignment uses DPO, representation learning uses contrastive/triplet, distribution matching uses KL/Wasserstein.</div>
+      </div>
+
+      <!-- 3. Foundation Model Families -->
+      <div class="schematic rv">
+        <div class="schematic-label">Model Selection</div>
+        <div class="schematic-title">Open-Source FM Comparison</div>
+        <table class="param-table">
+          <tr><th>Family</th><th>Sizes</th><th>Strength</th><th>Use Case</th></tr>
+          <tr><td>Llama 3</td><td>8-405B</td><td>General, code</td><td>Broad reasoning</td></tr>
+          <tr><td>Qwen 2.5</td><td>0.5-72B</td><td>Multilingual</td><td>Domain adaptation</td></tr>
+          <tr><td>Mistral</td><td>7-8x22B</td><td>MoE efficiency</td><td>Cost-sensitive</td></tr>
+          <tr><td>DeepSeek</td><td>7-236B</td><td>Math, code</td><td>Technical tasks</td></tr>
+          <tr><td>Gemma 2</td><td>2-27B</td><td>Compact, fast</td><td>Edge, mobile</td></tr>
+          <tr><td>Phi 3/4</td><td>3-14B</td><td>Small but capable</td><td>On-device</td></tr>
+          <tr><td>Command R+</td><td>35-104B</td><td>RAG, grounding</td><td>Enterprise RAG</td></tr>
+          <tr><td>Yi</td><td>6-34B</td><td>Long context</td><td>Document analysis</td></tr>
+        </table>
+        <div class="eq-label" style="margin-top:0.8rem;">Selection Criteria</div>
+        <div class="eq-block">1. Task type (reasoning, code, chat, RAG)<br>2. Context length requirement<br>3. Deployment constraint (GPU budget)<br>4. Multilingual needs<br>5. Fine-tunability (license, LoRA support)<br>6. MoE vs dense (latency vs throughput)</div>
+      </div>
+
+      <!-- 4. Multimodal Architecture -->
+      <div class="schematic schematic-full rv">
+        <div class="schematic-label">Multimodal Systems</div>
+        <div class="schematic-title">Vision-Language Model Architecture Patterns</div>
+        <svg viewBox="0 0 940 170" xmlns="http://www.w3.org/2000/svg">
+          <!-- Pattern 1: Late Fusion -->
+          <text x="20" y="16" font-size="7.5" font-weight="600" fill="#525252" class="mono">PATTERN 1: LATE FUSION (CLIP-style)</text>
+          <rect x="10" y="22" width="120" height="35" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="70" y="38" text-anchor="middle" font-size="8" fill="#0a0a0a" class="mono">Vision Encoder</text>
+          <text x="70" y="50" text-anchor="middle" font-size="6.5" fill="#737373">ViT / SigLIP</text>
+          <rect x="150" y="22" width="120" height="35" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="210" y="38" text-anchor="middle" font-size="8" fill="#0a0a0a" class="mono">Text Encoder</text>
+          <text x="210" y="50" text-anchor="middle" font-size="6.5" fill="#737373">Transformer</text>
+          <line x1="130" y1="39" x2="150" y2="39" stroke="#d4d4d4" stroke-width="1" stroke-dasharray="3,3"/>
+          <text x="140" y="35" text-anchor="middle" font-size="6" fill="#737373">contrastive</text>
+
+          <!-- Pattern 2: Cross-Attention -->
+          <text x="320" y="16" font-size="7.5" font-weight="600" fill="#525252" class="mono">PATTERN 2: CROSS-ATTENTION (Flamingo-style)</text>
+          <rect x="310" y="22" width="100" height="35" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="360" y="38" text-anchor="middle" font-size="7.5" fill="#0a0a0a" class="mono">Vision Enc.</text>
+          <text x="360" y="50" text-anchor="middle" font-size="6.5" fill="#737373">Frozen ViT</text>
+          <line x1="410" y1="39" x2="430" y2="39" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="427,35 435,39 427,43" fill="#0a0a0a"/>
+          <rect x="435" y="22" width="120" height="35" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="495" y="38" text-anchor="middle" font-size="7.5" font-weight="600" fill="#ffffff" class="mono">LLM Decoder</text>
+          <text x="495" y="50" text-anchor="middle" font-size="6.5" fill="#a3a3a3">Cross-attn layers</text>
+
+          <!-- Pattern 3: Early Fusion -->
+          <text x="620" y="16" font-size="7.5" font-weight="600" fill="#525252" class="mono">PATTERN 3: EARLY FUSION (LLaVA-style)</text>
+          <rect x="610" y="22" width="90" height="35" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="655" y="38" text-anchor="middle" font-size="7.5" fill="#0a0a0a" class="mono">Vision</text>
+          <text x="655" y="50" text-anchor="middle" font-size="6.5" fill="#737373">ViT patches</text>
+          <line x1="700" y1="39" x2="715" y2="39" stroke="#0a0a0a" stroke-width="1"/>
+          <rect x="715" y="22" width="60" height="35" fill="none" stroke="#d4d4d4" stroke-width="1" stroke-dasharray="3,3"/>
+          <text x="745" y="42" text-anchor="middle" font-size="6.5" fill="#525252" class="mono">Projector</text>
+          <line x1="775" y1="39" x2="790" y2="39" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="787,35 795,39 787,43" fill="#0a0a0a"/>
+          <rect x="795" y="22" width="135" height="35" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="862" y="38" text-anchor="middle" font-size="7.5" font-weight="600" fill="#ffffff" class="mono">LLM Decoder</text>
+          <text x="862" y="50" text-anchor="middle" font-size="6.5" fill="#a3a3a3">Visual tokens in seq</text>
+
+          <!-- Comparison -->
+          <rect x="10" y="70" width="920" height="90" fill="var(--bg3)" stroke="none"/>
+          <text x="30" y="88" font-size="7.5" font-weight="600" fill="#0a0a0a" class="mono">TRADE-OFFS</text>
+          <text x="30" y="104" font-size="7" fill="#525252">Late fusion: Separate encoders, contrastive alignment. Fast retrieval. No deep cross-modal reasoning.</text>
+          <text x="30" y="118" font-size="7" fill="#525252">Cross-attention: Vision features attend into LLM layers. Strong reasoning. Higher compute per layer. Flamingo, Idefics.</text>
+          <text x="30" y="132" font-size="7" fill="#525252">Early fusion: Project visual patches into token space. Simple, scalable. State of the art. LLaVA, Qwen-VL, InternVL.</text>
+          <text x="30" y="148" font-size="7" fill="#525252">Audio/video: Same patterns + temporal encoders. Whisper for audio. Frame sampling + 3D convolution for video.</text>
+        </svg>
+      </div>
+
+      <!-- 5. Reasoning Agent Design -->
+      <div class="schematic rv">
+        <div class="schematic-label">Agent Engineering</div>
+        <div class="schematic-title">Reasoning Agent Patterns</div>
+        <svg viewBox="0 0 380 300" xmlns="http://www.w3.org/2000/svg">
+          <!-- ReAct -->
+          <text x="10" y="14" font-size="7" font-weight="600" fill="#525252" class="mono">REACT LOOP</text>
+          <rect x="10" y="20" width="170" height="70" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="95" y="36" text-anchor="middle" font-size="7" fill="#0a0a0a" class="mono">Thought: reason about task</text>
+          <text x="95" y="50" text-anchor="middle" font-size="7" fill="#0a0a0a" class="mono">Action: call tool / API</text>
+          <text x="95" y="64" text-anchor="middle" font-size="7" fill="#0a0a0a" class="mono">Observe: parse result</text>
+          <text x="95" y="78" text-anchor="middle" font-size="7" fill="#0a0a0a" class="mono">Repeat until done</text>
+          <text x="95" y="106" text-anchor="middle" font-size="6.5" fill="#737373">Best: tool-use agents, API</text>
+          <text x="95" y="116" text-anchor="middle" font-size="6.5" fill="#737373">orchestration, web browsing</text>
+
+          <!-- Multi-Agent -->
+          <text x="200" y="14" font-size="7" font-weight="600" fill="#525252" class="mono">MULTI-AGENT</text>
+          <rect x="200" y="20" width="170" height="70" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="285" y="36" text-anchor="middle" font-size="7" fill="#0a0a0a" class="mono">Router: classify intent</text>
+          <text x="285" y="50" text-anchor="middle" font-size="7" fill="#0a0a0a" class="mono">Dispatch: specialist agent</text>
+          <text x="285" y="64" text-anchor="middle" font-size="7" fill="#0a0a0a" class="mono">Aggregate: merge results</text>
+          <text x="285" y="78" text-anchor="middle" font-size="7" fill="#0a0a0a" class="mono">Ground: add citations</text>
+          <text x="285" y="106" text-anchor="middle" font-size="6.5" fill="#737373">Best: complex domains,</text>
+          <text x="285" y="116" text-anchor="middle" font-size="6.5" fill="#737373">evidence synthesis, QA</text>
+
+          <!-- CoT / Reasoning -->
+          <text x="10" y="140" font-size="7" font-weight="600" fill="#525252" class="mono">CHAIN-OF-THOUGHT</text>
+          <rect x="10" y="146" width="170" height="55" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="95" y="162" text-anchor="middle" font-size="7" fill="#0a0a0a" class="mono">Decompose -> step by step</text>
+          <text x="95" y="176" text-anchor="middle" font-size="7" fill="#0a0a0a" class="mono">Self-consistency: sample N</text>
+          <text x="95" y="190" text-anchor="middle" font-size="7" fill="#0a0a0a" class="mono">Majority vote for answer</text>
+          <text x="95" y="214" text-anchor="middle" font-size="6.5" fill="#737373">Best: math, logic, planning</text>
+
+          <!-- RAG Agent -->
+          <text x="200" y="140" font-size="7" font-weight="600" fill="#525252" class="mono">RAG AGENT</text>
+          <rect x="200" y="146" width="170" height="55" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="285" y="162" text-anchor="middle" font-size="7" fill="#0a0a0a" class="mono">Query rewrite -> retrieve</text>
+          <text x="285" y="176" text-anchor="middle" font-size="7" fill="#0a0a0a" class="mono">Rerank -> filter relevance</text>
+          <text x="285" y="190" text-anchor="middle" font-size="7" fill="#0a0a0a" class="mono">Generate with context</text>
+          <text x="285" y="214" text-anchor="middle" font-size="6.5" fill="#737373">Best: grounded generation,</text>
+          <text x="285" y="224" text-anchor="middle" font-size="6.5" fill="#737373">enterprise knowledge</text>
+
+          <!-- Key principle -->
+          <rect x="10" y="240" width="360" height="52" fill="var(--bg3)" stroke="none"/>
+          <text x="25" y="256" font-size="7" font-weight="600" fill="#0a0a0a" class="mono">DESIGN PRINCIPLES</text>
+          <text x="25" y="270" font-size="6.5" fill="#525252">Agents should fail gracefully, with bounded retries and escalation paths.</text>
+          <text x="25" y="282" font-size="6.5" fill="#525252">Separate intent routing from execution. Use typed tool schemas. Log every step.</text>
+        </svg>
+      </div>
+
+      <!-- 6. Real-Time Data + Load Balancing -->
+      <div class="schematic rv">
+        <div class="schematic-label">Systems Engineering</div>
+        <div class="schematic-title">Real-Time Data + Load Balancing</div>
+
+        <div class="eq-label">Stream Processing</div>
+        <div class="eq-block">Source -> Ingest (Kafka/SQS/Kinesis)<br>  -> Transform (Flink/Lambda)<br>  -> Serve (OpenSearch/Redis)<br>  -> Alert (threshold + anomaly)</div>
+        <div class="eq-note">Back-pressure handling: producer slows when consumer queue depth exceeds threshold. Dead-letter queues for poison messages.</div>
+
+        <div class="eq-label" style="margin-top:1rem;">Load Balancing Strategies</div>
+        <div class="eq-block">Round-robin: equal distribution<br>Weighted: capacity-aware routing<br>Least-connections: latency-optimal<br>Consistent hash: session affinity<br>Rate limiting: token bucket / leaky</div>
+
+        <div class="eq-label" style="margin-top:1rem;">Resilience Patterns</div>
+        <div class="eq-block">Circuit breaker: fail-open after N errors<br>Bulkhead: isolate failure domains<br>Retry with jitter: exp backoff<br>Timeout cascade: strict per-hop SLAs<br>Graceful degradation: serve stale data</div>
+        <div class="eq-note">Design for failure. Every external call has a timeout. Every queue has a DLQ. Every service has health checks.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section id="repos">
+  <div class="container">
+    <div class="label rv">Open Source</div>
+    <h2 class="title rv">All Repositories</h2>
+    <p class="sub rv">56 public repositories across personal and organization accounts. Production systems, research platforms, and foundational tools.</p>
+    <div class="repo-filters rv">
+      <button class="repo-filter active" data-cat="all">All</button>
+      <button class="repo-filter" data-cat="sage">SAGE Platform</button>
+      <button class="repo-filter" data-cat="ai">AI / Deep Learning</button>
+      <button class="repo-filter" data-cat="surveillance">Surveillance</button>
+      <button class="repo-filter" data-cat="data">Data Engineering</button>
+      <button class="repo-filter" data-cat="climate">Climate / Global Health</button>
+      <button class="repo-filter" data-cat="apps">Applications</button>
+      <button class="repo-filter" data-cat="org">Organization</button>
+      <button class="repo-filter" data-cat="foundation">Foundation</button>
+    </div>
+    <div class="repo-count rv">Showing <span id="repo-shown">56</span> of 56 repositories</div>
+    <div class="repo-grid rv" id="repoGrid"></div>
+  </div>
+</section>
+
+<section id="contributions">
+  <div class="container">
+    <div class="label rv">Engineering Activity</div>
+    <h2 class="title rv">Contribution History</h2>
+    <p class="sub rv">17 years of continuous open source development across AI, epidemiology, and global health platforms.</p>
+
+    <div class="contrib-stats rv">
+      <div class="contrib-stat"><div class="val" id="c-total">0</div><div class="key">Total Contributions</div></div>
+      <div class="contrib-stat"><div class="val">17</div><div class="key">Active Years</div></div>
+      <div class="contrib-stat"><div class="val" id="c-peak">0</div><div class="key">Peak Year</div></div>
+      <div class="contrib-stat"><div class="val" id="c-month">0</div><div class="key">Last 30 Days</div></div>
+    </div>
+
+    <div class="chart-wrap rv">
+      <h3>Since 2009</h3>
+      <div class="desc">Annual contributions. Growth from academic research through clinical AI, pandemic response, and production AI platform engineering.</div>
+      <canvas id="yearlyChart"></canvas>
+    </div>
+
+    <div class="chart-wrap rv">
+      <h3>Last 30 Days</h3>
+      <div class="desc">Daily engineering velocity across active repositories.</div>
+      <canvas id="monthlyChart"></canvas>
+    </div>
+  </div>
+</section>
+
+<section id="partners">
+  <div class="container">
+    <div class="label rv">Institutional Partnerships</div>
+    <h2 class="title rv">Who I Have Built With</h2>
+    <p class="sub rv">Technical roadmaps that became funded, multi-year programs.</p>
+    <div class="grid-3">
+      <div class="partner rv"><div class="partner-icon"><i data-lucide="rocket" style="width:20px;height:20px;"></i></div><div><div class="partner-name">NASA</div><div class="partner-role">Strategic Technology Partnership</div></div></div>
+      <div class="partner rv"><div class="partner-icon"><i data-lucide="globe" style="width:20px;height:20px;"></i></div><div><div class="partner-name">The Global Fund</div><div class="partner-role">Health Data Infrastructure</div></div></div>
+      <div class="partner rv"><div class="partner-icon"><i data-lucide="sparkles" style="width:20px;height:20px;"></i></div><div><div class="partner-name">McGovern Foundation</div><div class="partner-role">ARK Platform Funder</div></div></div>
+      <div class="partner rv"><div class="partner-icon"><i data-lucide="cloud" style="width:20px;height:20px;"></i></div><div><div class="partner-name">Amazon</div><div class="partner-role">Environmental Equity Initiative</div></div></div>
+      <div class="partner rv"><div class="partner-icon"><i data-lucide="graduation-cap" style="width:20px;height:20px;"></i></div><div><div class="partner-name">UCL</div><div class="partner-role">UKRI/MRC Research, GBP 2M</div></div></div>
+      <div class="partner rv"><div class="partner-icon"><i data-lucide="building-2" style="width:20px;height:20px;"></i></div><div><div class="partner-name">Ministry of Health India</div><div class="partner-role">$116M National Program, 8 States</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="global-map">
+  <div class="container">
+    <div class="label rv">Global Reach</div>
+    <h2 class="title rv">17 Countries</h2>
+    <p class="sub rv">Each highlighted country represents a program I designed, built, or delivered. Technical and strategic leadership on the ground.</p>
+    <div class="map-wrap rv" id="mapContainer"></div>
+    <div class="map-legend rv">
+      <div class="map-legend-item"><div class="map-legend-dot"></div>India</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Bangladesh</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Indonesia</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Zambia</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Rwanda</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Ethiopia</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>DR Congo</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Central African Rep.</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Niger</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Sierra Leone</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Egypt</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Jordan</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Lebanon</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Oman</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Iraq</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Chile</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>United Kingdom</div>
+    </div>
+  </div>
+</section>
+
+<section id="tech">
+  <div class="container">
+    <div class="label rv">Technical Stack</div>
+    <h2 class="title rv">Tools I Build With</h2>
+    <p class="sub rv">Production-grade proficiency. Primary tools highlighted.</p>
+    <div class="stack-group rv">
+      <div class="stack-label"><i data-lucide="brain" style="width:14px;height:14px;"></i> AI / LLM</div>
+      <div class="stack-items"><span class="stack-tag pri">Claude / Anthropic</span><span class="stack-tag pri">Mistral</span><span class="stack-tag pri">LoRA / QLoRA</span><span class="stack-tag pri">DPO / RLHF</span><span class="stack-tag">LangChain</span><span class="stack-tag">LlamaIndex</span><span class="stack-tag">vLLM</span><span class="stack-tag">HuggingFace</span><span class="stack-tag">ONNX</span></div>
+    </div>
+    <div class="stack-group rv">
+      <div class="stack-label"><i data-lucide="bot" style="width:14px;height:14px;"></i> Agentic / Dev Tools</div>
+      <div class="stack-items"><span class="stack-tag pri">Claude Code</span><span class="stack-tag pri">MCP Servers</span><span class="stack-tag pri">Cursor</span><span class="stack-tag">Lovable</span><span class="stack-tag">v0 by Vercel</span><span class="stack-tag">Windsurf</span><span class="stack-tag">Replit</span><span class="stack-tag">GitHub Copilot</span></div>
+    </div>
+    <div class="stack-group rv">
+      <div class="stack-label"><i data-lucide="cloud" style="width:14px;height:14px;"></i> Cloud / Infrastructure</div>
+      <div class="stack-items"><span class="stack-tag pri">AWS SageMaker</span><span class="stack-tag pri">AWS Bedrock</span><span class="stack-tag">Fargate</span><span class="stack-tag">Glue</span><span class="stack-tag">Athena</span><span class="stack-tag">EventBridge</span><span class="stack-tag">Azure</span><span class="stack-tag">Kubernetes</span><span class="stack-tag">Terraform</span><span class="stack-tag">Docker</span></div>
+    </div>
+    <div class="stack-group rv">
+      <div class="stack-label"><i data-lucide="bar-chart-3" style="width:14px;height:14px;"></i> Data Engineering</div>
+      <div class="stack-items"><span class="stack-tag pri">Apache Iceberg</span><span class="stack-tag pri">OpenSearch</span><span class="stack-tag">Spark</span><span class="stack-tag">Airflow</span><span class="stack-tag">Flink</span><span class="stack-tag">FAISS</span><span class="stack-tag">Kafka</span><span class="stack-tag">dbt</span></div>
+    </div>
+    <div class="stack-group rv">
+      <div class="stack-label"><i data-lucide="flask-conical" style="width:14px;height:14px;"></i> ML / Research</div>
+      <div class="stack-items"><span class="stack-tag pri">PyTorch</span><span class="stack-tag">TensorFlow</span><span class="stack-tag">XGBoost</span><span class="stack-tag">scikit-learn</span><span class="stack-tag">SHAP</span><span class="stack-tag">MLflow</span><span class="stack-tag">Python</span><span class="stack-tag">Triton</span></div>
+    </div>
+  </div>
+</section>
+
+
+<section id="connect" style="border-bottom:none;">
+  <div class="container">
+    <div class="label rv">Contact</div>
+    <h2 class="title rv">Get in Touch</h2>
+    <p class="sub rv" style="margin:0 auto;">Open to conversations about AI engineering, foundation models, health systems, and climate intelligence.</p>
+    <div class="connect-links rv">
+      <a href="https://linkedin.com/in/kaushik-sarkar-ai" target="_blank" class="connect-link"><i data-lucide="linkedin" style="width:16px;height:16px;"></i> LinkedIn</a>
+      <a href="mailto:kaushik.sarkar.ai@gmail.com" class="connect-link"><i data-lucide="mail" style="width:16px;height:16px;"></i> kaushik.sarkar.ai@gmail.com</a>
+      <a href="https://github.com/drkaushiksarkar" target="_blank" class="connect-link"><i data-lucide="github" style="width:16px;height:16px;"></i> GitHub</a>
+      <a href="https://www.drkaushiks.com" target="_blank" class="connect-link"><i data-lucide="globe" style="width:16px;height:16px;"></i> drkaushiks.com</a>
+    </div>
+  </div>
+</section>
+
+<footer><span class="signature signature-lg">Kaushik Sarkar</span><span style="font-size:0.72rem; color:var(--t4); display:block;">AI Engineering Leadership</span></footer>
+
+<script>
+const yearlyData = [{"year": 2009, "total": 623, "commits": 623, "issues": 0, "prs": 0}, {"year": 2010, "total": 999, "commits": 999, "issues": 0, "prs": 0}, {"year": 2011, "total": 2053, "commits": 2053, "issues": 0, "prs": 0}, {"year": 2012, "total": 3802, "commits": 3802, "issues": 0, "prs": 0}, {"year": 2013, "total": 11848, "commits": 11848, "issues": 0, "prs": 0}, {"year": 2014, "total": 16056, "commits": 16056, "issues": 0, "prs": 0}, {"year": 2015, "total": 11994, "commits": 11994, "issues": 0, "prs": 0}, {"year": 2016, "total": 14585, "commits": 14585, "issues": 0, "prs": 0}, {"year": 2017, "total": 15292, "commits": 15292, "issues": 0, "prs": 0}, {"year": 2018, "total": 18076, "commits": 18076, "issues": 0, "prs": 0}, {"year": 2019, "total": 21400, "commits": 21400, "issues": 0, "prs": 0}, {"year": 2020, "total": 24904, "commits": 24900, "issues": 0, "prs": 0}, {"year": 2021, "total": 15117, "commits": 15102, "issues": 0, "prs": 0}, {"year": 2022, "total": 10495, "commits": 10426, "issues": 0, "prs": 0}, {"year": 2023, "total": 8640, "commits": 8586, "issues": 0, "prs": 0}, {"year": 2024, "total": 8064, "commits": 8053, "issues": 0, "prs": 0}, {"year": 2025, "total": 67227, "commits": 67172, "issues": 0, "prs": 0}, {"year": 2026, "total": 53180, "commits": 48741, "issues": 450, "prs": 315}];
+const monthlyData = [{"date": "2026-05-26", "count": 0}, {"date": "2026-05-27", "count": 0}, {"date": "2026-05-28", "count": 0}, {"date": "2026-05-29", "count": 0}, {"date": "2026-05-30", "count": 0}, {"date": "2026-05-31", "count": 0}, {"date": "2026-06-01", "count": 0}, {"date": "2026-06-02", "count": 0}, {"date": "2026-06-03", "count": 0}, {"date": "2026-06-04", "count": 0}, {"date": "2026-06-05", "count": 0}, {"date": "2026-06-06", "count": 0}, {"date": "2026-06-07", "count": 0}, {"date": "2026-06-08", "count": 0}, {"date": "2026-06-09", "count": 0}, {"date": "2026-06-10", "count": 0}, {"date": "2026-06-11", "count": 0}, {"date": "2026-06-12", "count": 0}, {"date": "2026-06-13", "count": 0}, {"date": "2026-06-14", "count": 0}, {"date": "2026-06-15", "count": 0}, {"date": "2026-06-16", "count": 0}, {"date": "2026-06-17", "count": 0}, {"date": "2026-06-18", "count": 0}, {"date": "2026-06-19", "count": 0}, {"date": "2026-06-20", "count": 0}, {"date": "2026-06-21", "count": 0}, {"date": "2026-06-22", "count": 0}, {"date": "2026-06-23", "count": 0}, {"date": "2026-06-24", "count": 0}, {"date": "2026-06-25", "count": 0}];
+
+// Stats
+const total = yearlyData.reduce((s,y) => s + y.total, 0);
+document.getElementById('c-total').textContent = total.toLocaleString();
+const peak = yearlyData.reduce((a,b) => a.total > b.total ? a : b);
+document.getElementById('c-peak').textContent = peak.year;
+const mTotal = monthlyData.reduce((s,d) => s + d.count, 0);
+document.getElementById('c-month').textContent = mTotal.toLocaleString();
+
+// Chart config
+Chart.defaults.color = '#737373';
+Chart.defaults.borderColor = '#e5e5e5';
+Chart.defaults.font.family = "'JetBrains Mono', monospace";
+Chart.defaults.font.size = 11;
+
+// Yearly chart
+new Chart(document.getElementById('yearlyChart'), {
+  type: 'bar',
+  data: {
+    labels: yearlyData.map(d => d.year),
+    datasets: [{
+      label: 'Contributions',
+      data: yearlyData.map(d => d.total),
+      backgroundColor: 'rgba(10,10,10,0.08)',
+      borderColor: 'rgba(10,10,10,0.2)',
+      borderWidth: 1,
+      borderRadius: 2,
+      borderSkipped: false,
+    },{
+      label: 'Trend',
+      data: yearlyData.map(d => d.total),
+      type: 'line',
+      borderColor: 'rgba(10,10,10,0.5)',
+      backgroundColor: 'rgba(10,10,10,0.03)',
+      fill: true,
+      tension: 0.35,
+      pointRadius: 3,
+      pointBackgroundColor: '#0a0a0a',
+      pointBorderColor: '#ffffff',
+      pointBorderWidth: 2,
+      borderWidth: 2,
+    }]
+  },
+  options: {
+    responsive: true,
+    interaction: { intersect: false, mode: 'index' },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#ffffff',
+        borderColor: '#d4d4d4',
+        borderWidth: 1,
+        callbacks: { label: ctx => ctx.datasetIndex === 1 ? null : ctx.parsed.y.toLocaleString() + ' contributions' }
+      }
+    },
+    scales: {
+      y: { beginAtZero: true, grid: { color: '#e5e5e5' }, ticks: { callback: v => v >= 1000 ? (v/1000).toFixed(0) + 'K' : v } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// Monthly chart
+new Chart(document.getElementById('monthlyChart'), {
+  type: 'bar',
+  data: {
+    labels: monthlyData.map(d => { const dt = new Date(d.date+'T00:00:00'); return dt.toLocaleDateString('en-US',{month:'short',day:'numeric'}); }),
+    datasets: [{
+      label: 'Daily',
+      data: monthlyData.map(d => d.count),
+      backgroundColor: monthlyData.map(d => d.count > 5000 ? 'rgba(10,10,10,0.25)' : d.count > 1000 ? 'rgba(10,10,10,0.14)' : 'rgba(10,10,10,0.06)'),
+      borderColor: 'rgba(10,10,10,0.2)',
+      borderWidth: 1,
+      borderRadius: 2,
+      borderSkipped: false,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { backgroundColor: '#ffffff', borderColor: '#d4d4d4', titleColor: '#171717', bodyColor: '#525252', borderWidth: 1, callbacks: { label: ctx => ctx.parsed.y.toLocaleString() + ' contributions' } }
+    },
+    scales: {
+      y: { beginAtZero: true, grid: { color: '#e5e5e5' }, ticks: { callback: v => v >= 1000 ? (v/1000).toFixed(1) + 'K' : v } },
+      x: { grid: { display: false }, ticks: { maxRotation: 45 } }
+    }
+  }
+});
+
+// Repository data: advanced first, foundation last
+const repos = [
+  // SAGE AI Platform (most advanced)
+  {name:"sage-realtime-health-surveillance",desc:"Production real-time health anomaly detection engine processing 50K+ events/sec with sub-200ms latency across 190+ countries",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-evidence-rag-engine",desc:"Multi-hop RAG engine over 250M+ PubMed embeddings and 30M+ causal knowledge graph triples with hybrid BM25+vector retrieval",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-dengue-gnn-forecaster",desc:"Spatio-temporal graph neural network for dengue outbreak prediction using 5M+ case records, ERA5 climate reanalysis, and WorldPop density rasters",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-climate-health-forecaster",desc:"Temporal fusion transformer for climate-health outcome prediction using ERA5 (362M rows), CMIP6 projections, and WHO health indicators",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-vaccine-equity-agent",desc:"Agentic AI platform with MCP tool servers for vaccine coverage equity analysis using UNICEF (8.8M rows), WHO immunization, and OECD ODA data",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-genomic-amr-tracker",desc:"Graph neural network for antimicrobial resistance tracking using CARD AMR genomes (271K), WHO GLASS surveillance, and transformer sequence classification",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-geospatial-health-platform",desc:"Full-stack geospatial health intelligence platform with TiTiler COG serving, interactive choropleth mapping, and cross-domain spatial statistics",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-ncd-risk-transformer",desc:"Transformer-based non-communicable disease risk stratification using longitudinal IHME GBD (47M rows) and World Bank socioeconomic indicators",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-pharma-supply-agent",desc:"Multi-agent pharmaceutical supply chain optimizer using OECD Pharma data (19.6M rows), World Bank financing, and reinforcement learning with MCP orchestration",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-population-dynamics-dashboard",desc:"Interactive population dynamics forecasting dashboard with uncertainty quantification using UN Population (11M rows), UNDP demographics, and D3.js",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-lulc-population-mapper",desc:"Geospatial AI for land use/land cover change detection correlated with population dynamics using WorldPop COGs and satellite imagery segmentation",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-climate-agent-orchestrator",desc:"Multi-agent climate data pipeline with MCP servers for SAGE Lake access, n8n workflow automation, and LLM-powered climate-health report generation",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+
+  // AI / Deep Learning
+  {name:"deep-neural-epi",desc:"Deep learning for epidemiological forecasting: LSTM, Transformer, GNN models for outbreak prediction and surveillance",lang:"Python",cat:"ai",owner:"drkaushiksarkar"},
+  {name:"biomedical-ai-framework",desc:"Biomedical AI framework for multi-modal learning, drug discovery, genomic analysis, and clinical knowledge graphs",lang:"Python",cat:"ai",owner:"drkaushiksarkar"},
+  {name:"clinical-ml-pipeline",desc:"Production ML pipeline for clinical decision support: risk scoring, treatment optimization, outcome prediction",lang:"Python",cat:"ai",owner:"drkaushiksarkar"},
+  {name:"medical-imaging-dx",desc:"Enterprise medical imaging diagnostics with automated triage, CNN-based classification, and clinical decision support integration",lang:"Python",cat:"ai",owner:"drkaushiksarkar"},
+  {name:"health-nlp-engine",desc:"Production NLP pipeline with agentic text processing, automated health communication analysis, and full-stack deployment",lang:"Python",cat:"ai",owner:"drkaushiksarkar"},
+  {name:"fever-prediction-platform",desc:"Production fever and malaria prediction platform with LSTM-Attention fusion models, SHAP explainability, and Bayesian hyperparameter optimization",lang:"Python",cat:"ai",owner:"drkaushiksarkar"},
+  {name:"pandemic-response-analytics",desc:"Real-time pandemic surveillance and response analytics: variant tracking, contact tracing, hospital capacity modeling",lang:"Python",cat:"ai",owner:"drkaushiksarkar"},
+
+  // Disease Surveillance
+  {name:"disease-surveillance-platform",desc:"Distributed disease surveillance system with real-time alerting and geospatial analytics",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"epidemiological-forecasting-engine",desc:"Advanced epidemiological forecasting using ensemble ML methods and real-time surveillance data",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"real-time-disease-monitor",desc:"Real-time disease outbreak monitoring with alerting, dashboards and automated situation reports",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"slewars",desc:"SLEWARS: Spatial-Longitudinal Early Warning and Response System for epidemic intelligence and outbreak prediction",lang:"JavaScript",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"epidemic-prediction-framework",desc:"Research framework for autonomous early warning algorithms with self-tuning thresholds and agent-driven anomaly detection",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"epidemic-intelligence-bd",desc:"AI-powered autonomous early warning system for infectious disease surveillance in Bangladesh with agent-driven alerting",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"bangladesh-disease-surveillance",desc:"Bangladesh disease early warning system with operational surveillance and alerting platform",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"pandemic-preparedness-index",desc:"Composite pandemic preparedness scoring system using WHO JEE, GHS Index and custom indicators",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"malaria-forecasting-system",desc:"ML-powered malaria incidence forecasting using climate, demographic and epidemiological data",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"malaria-surveillance-analytics",desc:"Malaria surveillance analytics platform with district-level monitoring, outbreak detection, and automated reporting",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+
+  // Data Engineering
+  {name:"vector-embedding-pipeline",desc:"High-throughput vector embedding pipeline for 237M+ biomedical text spans using Titan Embeddings",lang:"Python",cat:"data",owner:"drkaushiksarkar"},
+  {name:"global-health-data-pipeline",desc:"Scalable ETL pipeline for ingesting, normalizing and serving 150+ global health data sources",lang:"Python",cat:"data",owner:"drkaushiksarkar"},
+  {name:"health-analytics-studio",desc:"Interactive analytics studio for health data exploration, visualization and insight generation",lang:"Python",cat:"data",owner:"drkaushiksarkar"},
+  {name:"health-intelligence-dashboard",desc:"Real-time health intelligence dashboard with agent-driven indicator monitoring, geospatial mapping, and automated insights",lang:"Python",cat:"data",owner:"drkaushiksarkar"},
+  {name:"geospatial-health-toolkit",desc:"Geospatial analysis toolkit for health facility mapping, catchment modeling and spatial epidemiology",lang:"Python",cat:"data",owner:"drkaushiksarkar"},
+  {name:"health-informatics-toolkit",desc:"Health informatics platform with FHIR/HL7 integration, clinical data pipelines, and EHR interoperability",lang:"Python",cat:"data",owner:"drkaushiksarkar"},
+
+  // Climate / Global Health
+  {name:"climate-disease-forecast",desc:"Climate-disease correlation engine linking environmental data to health outcomes",lang:"Python",cat:"climate",owner:"drkaushiksarkar"},
+  {name:"climate-profiler-app",desc:"Country-level climate profiling with automated indicator benchmarking, temporal trend analysis, and multi-source data integration",lang:"Python",cat:"climate",owner:"drkaushiksarkar"},
+  {name:"environmental-health-correlator",desc:"Environmental exposure to health outcome correlation engine using ERA5 climate and WHO mortality data",lang:"Python",cat:"climate",owner:"drkaushiksarkar"},
+  {name:"vaccine-coverage-optimizer",desc:"Vaccine coverage optimization and equity analysis using WUENIC, administrative and survey data",lang:"Python",cat:"climate",owner:"drkaushiksarkar"},
+  {name:"antimicrobial-resistance-tracker",desc:"AMR surveillance and resistance pattern tracking using CARD genomics and WHO GLASS data",lang:"Python",cat:"climate",owner:"drkaushiksarkar"},
+  {name:"nutrition-deficiency-mapper",desc:"Nutritional deficiency mapping and intervention targeting using DHS, MICS and WASH survey data",lang:"Python",cat:"climate",owner:"drkaushiksarkar"},
+  {name:"epi-stat-computing",desc:"Statistical computing for epidemiological research: survival analysis, spatial statistics, Bayesian hierarchical models",lang:"Python",cat:"climate",owner:"drkaushiksarkar"},
+  {name:"global-ews-catalogue",desc:"Systematic global catalogue of 79 early warning systems with capability mapping, coverage analysis, and gap identification",lang:"Python",cat:"climate",owner:"drkaushiksarkar"},
+
+  // Applications
+  {name:"spectra-enterprise",desc:"High-performance spectral analysis platform for real-time disease pattern detection and forecasting",lang:"Python",cat:"apps",owner:"drkaushiksarkar"},
+  {name:"forecast-engine",desc:"Agentic forecasting application with autonomous model selection, multi-indicator prediction, and self-correcting pipelines",lang:"Python",cat:"apps",owner:"drkaushiksarkar"},
+  {name:"timeseries-explorer",desc:"Interactive time-series exploration platform with automated anomaly detection, statistical profiling, and Streamlit visualization",lang:"Python",cat:"apps",owner:"drkaushiksarkar"},
+  {name:"sit742",desc:"SIT742: Modern Data Science course materials and computational notebooks",lang:"Jupyter Notebook",cat:"apps",owner:"drkaushiksarkar"},
+  {name:"drkaushiksarkar.github.io",desc:"Personal contribution dashboard and activity analytics",lang:"HTML",cat:"apps",owner:"drkaushiksarkar"},
+
+  // Organization
+  {name:"DISHA",desc:"Data Integrated Solutions for Healthy Futures with AI: climate-informed health decision support platform",lang:"Jupyter Notebook",cat:"org",org:"Forecasting-Healthy-Futures"},
+  {name:"Global-EWS-Catalogue",desc:"Comprehensive catalogue of global early warning systems for infectious disease outbreaks",lang:"HTML",cat:"org",org:"Forecasting-Healthy-Futures"},
+  {name:"Odisha_2021_Official_Boundaries",desc:"Official administrative boundary shapefiles for Odisha state, India",lang:"GIS",cat:"org",org:"Forecasting-Healthy-Futures"},
+  {name:"Indonesia",desc:"Indonesia health system analytics: country-specific surveillance and forecasting deployment",lang:"N/A",cat:"org",org:"IMACS-Health-Modeling"},
+
+  // Foundation / Early Career
+  {name:"epidemiological-methods",desc:"Computational epidemiology: spatial statistics, meta-analysis, outbreak modeling, Bayesian hierarchical models, disease mapping",lang:"Python",cat:"foundation",owner:"drkaushiksarkar"},
+  {name:"global-health-statistics",desc:"R and Stata analysis of global health data: WHO GHO, World Bank WDI, UN Population, DHS surveys, GBD estimates",lang:"R",cat:"foundation",owner:"drkaushiksarkar"},
+  {name:"survival-analysis-matlab",desc:"MATLAB toolbox for survival analysis and time-varying models: Cox PH, Kaplan-Meier, competing risks, frailty models, cure rate models",lang:"R",cat:"foundation",owner:"drkaushiksarkar"},
+  {name:"numerical-methods-cpp",desc:"C++ implementations of numerical methods and data structures: sorting, graph algorithms, dynamic programming, matrix operations, Monte Carlo simulation",lang:"C++",cat:"foundation",owner:"drkaushiksarkar"},
+];
+
+const catLabels = {sage:"SAGE Platform",ai:"AI / Deep Learning",surveillance:"Surveillance",data:"Data Engineering",climate:"Climate / Global Health",apps:"Applications",org:"Organization",foundation:"Foundation"};
+
+function renderRepos(filter) {
+  const grid = document.getElementById('repoGrid');
+  const filtered = filter === 'all' ? repos : repos.filter(r => r.cat === filter);
+  document.getElementById('repo-shown').textContent = filtered.length;
+  grid.innerHTML = filtered.map(r => {
+    const owner = r.org || r.owner;
+    const url = r.org ? 'https://github.com/' + r.org + '/' + r.name : 'https://github.com/' + r.owner + '/' + r.name;
+    const orgBadge = r.org ? '<span class="repo-card-lang" style="color:#888;">' + r.org + '</span>' : '';
+    return '<a href="' + url + '" target="_blank" class="repo-card">' +
+      '<div class="repo-card-head">' +
+        '<i data-lucide="git-branch" style="width:13px;height:13px;color:var(--t4);flex-shrink:0;"></i>' +
+        '<span class="repo-card-name">' + r.name + '</span>' +
+        '<span class="repo-card-lang">' + r.lang + '</span>' +
+        orgBadge +
+      '</div>' +
+      '<div class="repo-card-desc">' + r.desc + '</div>' +
+    '</a>';
+  }).join('');
+  lucide.createIcons();
+}
+
+document.querySelectorAll('.repo-filter').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.repo-filter').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderRepos(btn.dataset.cat);
+  });
+});
+renderRepos('all');
+
+// World map with D3
+const highlightCountries = {
+  356:"India", 50:"Bangladesh", 360:"Indonesia", 894:"Zambia", 646:"Rwanda",
+  231:"Ethiopia", 180:"DR Congo", 140:"Central African Rep.", 562:"Niger",
+  694:"Sierra Leone", 818:"Egypt", 400:"Jordan", 422:"Lebanon", 512:"Oman",
+  368:"Iraq", 152:"Chile", 826:"United Kingdom"
+};
+
+const countryCoords = [
+  {name:"India",lat:20.5,lon:79},{name:"Bangladesh",lat:23.7,lon:90.4},
+  {name:"Indonesia",lat:-2,lon:118},{name:"Zambia",lat:-13.1,lon:28},
+  {name:"Rwanda",lat:-1.9,lon:29.9},{name:"Ethiopia",lat:9.1,lon:40.5},
+  {name:"DR Congo",lat:-4,lon:21.8},{name:"CAR",lat:6.6,lon:20.9},
+  {name:"Niger",lat:17.6,lon:8.1},{name:"Sierra Leone",lat:8.5,lon:-11.8},
+  {name:"Egypt",lat:26.8,lon:30.8},{name:"Jordan",lat:31.5,lon:36.2},
+  {name:"Lebanon",lat:33.9,lon:35.9},{name:"Oman",lat:21.5,lon:55.9},
+  {name:"Iraq",lat:33.2,lon:43.7},{name:"Chile",lat:-35.7,lon:-71.5},
+  {name:"UK",lat:54,lon:-2}
+];
+
+fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+  .then(r => r.json())
+  .then(world => {
+    const container = document.getElementById('mapContainer');
+    const w = container.clientWidth - 48;
+    const h = Math.min(w * 0.5, 480);
+
+    const svg = d3.select('#mapContainer')
+      .append('svg')
+      .attr('viewBox', '0 0 ' + w + ' ' + h)
+      .attr('preserveAspectRatio', 'xMidYMid meet');
+
+    const projection = d3.geoNaturalEarth1()
+      .fitSize([w, h], topojson.feature(world, world.objects.countries));
+
+    const path = d3.geoPath().projection(projection);
+    const countries = topojson.feature(world, world.objects.countries);
+    const highlightIds = Object.keys(highlightCountries).map(Number);
+
+    svg.selectAll('.land')
+      .data(countries.features)
+      .enter().append('path')
+      .attr('d', path)
+      .attr('class', d => highlightIds.includes(+d.id) ? 'highlight' : 'land');
+
+    const g = svg.append('g');
+    countryCoords.forEach(c => {
+      const p = projection([c.lon, c.lat]);
+      if (!p) return;
+      g.append('circle').attr('class','map-pulse').attr('cx',p[0]).attr('cy',p[1]).attr('r',3)
+        .style('animation-delay', (Math.random()*2).toFixed(1)+'s');
+      g.append('circle').attr('class','map-dot').attr('cx',p[0]).attr('cy',p[1]).attr('r',2.5);
+    });
+  });
+
+// Counter animation
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  const prefix = el.dataset.prefix || '';
+  const duration = 1400;
+  const start = performance.now();
+  function tick(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = p < 0.5 ? 2*p*p : -1+(4-2*p)*p;
+    el.textContent = prefix + Math.round(ease * target).toLocaleString() + suffix;
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+// Reveal observer
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('vis');
+    const counter = e.target.querySelector('[data-target]');
+    if (counter && !counter.dataset.animated) { counter.dataset.animated = '1'; animateCounter(counter); }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+// Init Lucide icons
+lucide.createIcons();
+</script>
+</body>
+</html>
