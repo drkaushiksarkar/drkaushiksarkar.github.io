@@ -627,53 +627,6 @@
       </div>
 
 
-      <!-- 3.5. Hospital AI / Patient Intelligence -->
-      <div class="schematic rv">
-        <div class="schematic-label">Hospital AI / Patient Intelligence</div>
-        <div class="schematic-title">Real-Time Multi-Modal Inference at the Individual Patient Level</div>
-        <div class="arch-layer">
-          <div class="arch-cell header span" style="width:100%">STREAM FUSION / 60-second resolution / HL7 &middot; FHIR R4 &middot; DICOM &middot; MAR</div>
-        </div>
-        <div class="arch-layer">
-          <div class="arch-cell" style="font-size:0.6rem;">Vitals<br><span style="font-size:0.55rem;color:var(--t3);font-family:var(--mono);">HR &middot; BP &middot; SpO&#x2082; &middot; RR &middot; GCS</span></div>
-          <div class="arch-cell" style="font-size:0.6rem;">Labs<br><span style="font-size:0.55rem;color:var(--t3);font-family:var(--mono);">CBC &middot; ABG &middot; Lactate &middot; PCT</span></div>
-          <div class="arch-cell" style="font-size:0.6rem;">Medications<br><span style="font-size:0.55rem;color:var(--t3);font-family:var(--mono);">IV &middot; PO &middot; PRN &middot; MAR</span></div>
-          <div class="arch-cell" style="font-size:0.6rem;">Imaging<br><span style="font-size:0.55rem;color:var(--t3);font-family:var(--mono);">DICOM &middot; Vision Transformer</span></div>
-          <div class="arch-cell" style="font-size:0.6rem;">Clinical Notes<br><span style="font-size:0.55rem;color:var(--t3);font-family:var(--mono);">Physician &middot; Nursing &middot; NLP</span></div>
-          <div class="arch-cell" style="font-size:0.6rem;">Genomics<br><span style="font-size:0.55rem;color:var(--t3);font-family:var(--mono);">Admission biomarkers</span></div>
-        </div>
-        <div style="height:0.4rem;border-left:1px dashed var(--border2);margin-left:50%;width:0;"></div>
-        <div class="arch-layer">
-          <div class="arch-cell header span" style="width:100%">PATIENT-LEVEL TRANSFORMER / Cross-modal attention &middot; Temporal encoding &middot; Missingness representation &middot; Per-hospital LoRA</div>
-        </div>
-        <div class="arch-layer">
-          <div class="arch-cell" style="font-size:0.58rem;font-family:var(--mono);">vitals &times; labs &times; text &times; imaging</div>
-          <div class="arch-cell" style="font-size:0.58rem;font-family:var(--mono);">abs. time + inter-event intervals</div>
-          <div class="arch-cell" style="font-size:0.58rem;font-family:var(--mono);">structured absence encoding</div>
-          <div class="arch-cell" style="font-size:0.58rem;font-family:var(--mono);">federated fine-tuning per facility</div>
-        </div>
-        <div style="height:0.4rem;border-left:1px dashed var(--border2);margin-left:50%;width:0;"></div>
-        <div class="arch-layer">
-          <div class="arch-cell" style="font-size:0.6rem;">Deterioration<br><span style="font-size:0.55rem;color:var(--t3);font-family:var(--mono);">0&ndash;100 &middot; every 60s</span></div>
-          <div class="arch-cell" style="font-size:0.6rem;">Sepsis risk<br><span style="font-size:0.55rem;color:var(--t3);font-family:var(--mono);">6h &middot; SOFA sub-models</span></div>
-          <div class="arch-cell" style="font-size:0.6rem;">ICU transfer<br><span style="font-size:0.55rem;color:var(--t3);font-family:var(--mono);">12h / 24h probability</span></div>
-          <div class="arch-cell" style="font-size:0.6rem;">Length of stay<br><span style="font-size:0.55rem;color:var(--t3);font-family:var(--mono);">regression &middot; 6h update</span></div>
-          <div class="arch-cell" style="font-size:0.6rem;">Readmission<br><span style="font-size:0.55rem;color:var(--t3);font-family:var(--mono);">30-day &middot; AUC 0.84</span></div>
-        </div>
-        <div style="height:0.4rem;border-left:1px dashed var(--border2);margin-left:50%;width:0;"></div>
-        <div class="arch-layer">
-          <div class="arch-cell header">Causal Engine</div>
-          <div class="arch-cell header">Federated Learning</div>
-          <div class="arch-cell header">EMR Integration</div>
-        </div>
-        <div class="arch-layer">
-          <div class="arch-cell" style="font-size:0.58rem;">POMDP + neural rollout<br>PK/PD dose-response curves</div>
-          <div class="arch-cell" style="font-size:0.58rem;">&epsilon;=0.5 &middot; &delta;=1e&#8209;5<br>Per-facility LoRA adaptation</div>
-          <div class="arch-cell" style="font-size:0.58rem;">Epic &middot; Cerner &middot; MocDoc<br>SHAP attribution &middot; audit log</div>
-        </div>
-        <div class="eq-block" style="margin-top:0.8rem;font-size:0.65rem;">Sepsis sensitivity at 6h: 0.91 &nbsp;(NEWS2 baseline: 0.74) &nbsp;&middot;&nbsp; LOS MAE: 0.9 days &nbsp;&middot;&nbsp; Readmission AUC: 0.84 &nbsp;&middot;&nbsp; Alert fatigue: &lt;8%<br>Patient data never leaves facility &nbsp;&middot;&nbsp; Auto-escalates rapid response at deterioration score &gt; 85</div>
-      </div>
-
       <!-- 4. Distributed GPU Layout -->
       <div class="schematic rv">
         <div class="schematic-label">Infrastructure / 8-GPU Cluster</div>
@@ -708,6 +661,164 @@
           <div class="arch-cell span" style="width:100%;font-size:0.6rem;font-family:var(--mono);">effective_batch = per_device x grad_accum x 8</div>
         </div>
         <div class="eq-block" style="margin-top:0.8rem;font-size:0.65rem;">Checkpoint-resume on spot interruption<br>Rank 0 saves to EBS + S3<br>Each GPU sees 1/8 of data shards</div>
+      </div>
+
+      <!-- 3.5. Hospital AI / Patient Intelligence -->
+      <div class="schematic schematic-full rv">
+        <div class="schematic-label">Hospital AI / Patient Intelligence</div>
+        <div class="schematic-title">Real-Time Multi-Modal Inference at the Individual Patient Level</div>
+        <svg viewBox="0 0 940 280" xmlns="http://www.w3.org/2000/svg">
+          <!-- Column labels -->
+          <text x="83" y="9" text-anchor="middle" font-size="6.5" font-weight="600" fill="#525252" class="mono">DATA STREAMS</text>
+          <text x="292" y="9" text-anchor="middle" font-size="6.5" font-weight="600" fill="#525252" class="mono">PATIENT-LEVEL TRANSFORMER</text>
+          <text x="516" y="9" text-anchor="middle" font-size="6.5" font-weight="600" fill="#525252" class="mono">INFERENCE HEADS</text>
+          <text x="789" y="9" text-anchor="middle" font-size="6.5" font-weight="600" fill="#525252" class="mono">CLINICAL OUTPUT</text>
+
+          <!-- DATA STREAMS (x=5-162, 6 boxes each 39h, 4px gap) -->
+          <rect x="5" y="14" width="157" height="39" fill="none" stroke="#d4d4d4" stroke-width="0.8"/>
+          <text x="83" y="28" text-anchor="middle" font-size="7.5" font-weight="500" fill="#0a0a0a">Vitals</text>
+          <text x="83" y="39" text-anchor="middle" font-size="6" fill="#737373" class="mono">HR &middot; BP &middot; SpO&#x2082; &middot; RR &middot; GCS / HL7</text>
+          <text x="83" y="49" text-anchor="middle" font-size="5.5" fill="#a3a3a3" class="mono">60-second resolution</text>
+
+          <rect x="5" y="57" width="157" height="39" fill="none" stroke="#d4d4d4" stroke-width="0.8"/>
+          <text x="83" y="71" text-anchor="middle" font-size="7.5" font-weight="500" fill="#0a0a0a">Labs</text>
+          <text x="83" y="82" text-anchor="middle" font-size="6" fill="#737373" class="mono">CBC &middot; ABG &middot; Lactate &middot; PCT / FHIR R4</text>
+          <text x="83" y="92" text-anchor="middle" font-size="5.5" fill="#a3a3a3" class="mono">Delta triggers + streaming</text>
+
+          <rect x="5" y="100" width="157" height="39" fill="none" stroke="#d4d4d4" stroke-width="0.8"/>
+          <text x="83" y="114" text-anchor="middle" font-size="7.5" font-weight="500" fill="#0a0a0a">Medications</text>
+          <text x="83" y="125" text-anchor="middle" font-size="6" fill="#737373" class="mono">IV &middot; PO &middot; PRN &middot; Dose timing / MAR</text>
+          <text x="83" y="135" text-anchor="middle" font-size="5.5" fill="#a3a3a3" class="mono">PK/PD reconciliation</text>
+
+          <rect x="5" y="143" width="157" height="39" fill="none" stroke="#d4d4d4" stroke-width="0.8"/>
+          <text x="83" y="157" text-anchor="middle" font-size="7.5" font-weight="500" fill="#0a0a0a">Imaging</text>
+          <text x="83" y="168" text-anchor="middle" font-size="6" fill="#737373" class="mono">CXR &middot; CT &middot; PACS / DICOM + ViT</text>
+          <text x="83" y="178" text-anchor="middle" font-size="5.5" fill="#a3a3a3" class="mono">Vision Transformer embeddings</text>
+
+          <rect x="5" y="186" width="157" height="39" fill="none" stroke="#d4d4d4" stroke-width="0.8"/>
+          <text x="83" y="200" text-anchor="middle" font-size="7.5" font-weight="500" fill="#0a0a0a">Clinical Notes</text>
+          <text x="83" y="211" text-anchor="middle" font-size="6" fill="#737373" class="mono">Physician &middot; Nursing &middot; PT / NLP</text>
+          <text x="83" y="221" text-anchor="middle" font-size="5.5" fill="#a3a3a3" class="mono">Temporal tagging + embedding</text>
+
+          <rect x="5" y="229" width="157" height="39" fill="none" stroke="#d4d4d4" stroke-width="0.8"/>
+          <text x="83" y="243" text-anchor="middle" font-size="7.5" font-weight="500" fill="#0a0a0a">Genomics</text>
+          <text x="83" y="254" text-anchor="middle" font-size="6" fill="#737373" class="mono">Admission biomarkers &middot; PGx / sparse</text>
+          <text x="83" y="264" text-anchor="middle" font-size="5.5" fill="#a3a3a3" class="mono">Variant risk stratification</text>
+
+          <!-- Converging arrows: streams -> PLT -->
+          <line x1="162" y1="33" x2="174" y2="141" stroke="#a3a3a3" stroke-width="0.8"/>
+          <line x1="162" y1="76" x2="174" y2="141" stroke="#a3a3a3" stroke-width="0.8"/>
+          <line x1="162" y1="119" x2="174" y2="141" stroke="#a3a3a3" stroke-width="0.8"/>
+          <line x1="162" y1="162" x2="174" y2="141" stroke="#a3a3a3" stroke-width="0.8"/>
+          <line x1="162" y1="205" x2="174" y2="141" stroke="#a3a3a3" stroke-width="0.8"/>
+          <line x1="162" y1="248" x2="174" y2="141" stroke="#a3a3a3" stroke-width="0.8"/>
+          <line x1="174" y1="141" x2="183" y2="141" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="180,137 188,141 180,145" fill="#0a0a0a"/>
+
+          <!-- PATIENT-LEVEL TRANSFORMER (x=188-397, full height) -->
+          <rect x="188" y="14" width="209" height="254" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="292" y="35" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff" class="mono">PATIENT-LEVEL</text>
+          <text x="292" y="48" text-anchor="middle" font-size="9" font-weight="700" fill="#ffffff" class="mono">TRANSFORMER</text>
+          <line x1="198" y1="54" x2="386" y2="54" stroke="#222222" stroke-width="0.5"/>
+          <text x="292" y="66" text-anchor="middle" font-size="7" fill="#a3a3a3" class="mono">Cross-modal attention</text>
+          <text x="292" y="77" text-anchor="middle" font-size="6" fill="#525252" class="mono">vitals &times; labs &times; text &times; imaging</text>
+          <line x1="198" y1="83" x2="386" y2="83" stroke="#1a1a1a" stroke-width="0.5"/>
+          <text x="292" y="95" text-anchor="middle" font-size="7" fill="#a3a3a3" class="mono">Temporal positional encoding</text>
+          <text x="292" y="106" text-anchor="middle" font-size="6" fill="#525252" class="mono">abs. time + inter-event intervals</text>
+          <line x1="198" y1="112" x2="386" y2="112" stroke="#1a1a1a" stroke-width="0.5"/>
+          <text x="292" y="124" text-anchor="middle" font-size="7" fill="#a3a3a3" class="mono">Missingness representation</text>
+          <text x="292" y="135" text-anchor="middle" font-size="6" fill="#525252" class="mono">structured absence encoding</text>
+          <line x1="198" y1="141" x2="386" y2="141" stroke="#1a1a1a" stroke-width="0.5"/>
+          <text x="292" y="153" text-anchor="middle" font-size="7" fill="#a3a3a3" class="mono">Per-hospital LoRA adapter</text>
+          <text x="292" y="164" text-anchor="middle" font-size="6" fill="#525252" class="mono">federated fine-tuning per facility</text>
+          <line x1="198" y1="170" x2="386" y2="170" stroke="#1a1a1a" stroke-width="0.5"/>
+          <text x="292" y="182" text-anchor="middle" font-size="7" fill="#a3a3a3" class="mono">Qwen3 base &middot; 3.5B parameters</text>
+          <text x="292" y="193" text-anchor="middle" font-size="6" fill="#525252" class="mono">domain-adapted on clinical corpora</text>
+          <line x1="198" y1="199" x2="386" y2="199" stroke="#1a1a1a" stroke-width="0.5"/>
+          <text x="292" y="213" text-anchor="middle" font-size="6.5" fill="#404040" class="mono">10M+ patient episodes</text>
+          <text x="292" y="225" text-anchor="middle" font-size="6.5" fill="#404040" class="mono">multi-facility &middot; multi-country</text>
+          <text x="292" y="245" text-anchor="middle" font-size="7" fill="#333333" class="mono">60-second inference cycle</text>
+          <text x="292" y="260" text-anchor="middle" font-size="5.5" fill="#2a2a2a" class="mono">HL7 &middot; FHIR R4 &middot; DICOM &middot; MAR</text>
+
+          <!-- Diverging arrows: PLT -> inference heads -->
+          <line x1="397" y1="141" x2="407" y2="141" stroke="#0a0a0a" stroke-width="1"/>
+          <line x1="407" y1="141" x2="416" y2="37" stroke="#a3a3a3" stroke-width="0.8"/>
+          <line x1="407" y1="141" x2="416" y2="88" stroke="#a3a3a3" stroke-width="0.8"/>
+          <line x1="407" y1="141" x2="416" y2="139" stroke="#a3a3a3" stroke-width="0.8"/>
+          <line x1="407" y1="141" x2="416" y2="190" stroke="#a3a3a3" stroke-width="0.8"/>
+          <line x1="407" y1="141" x2="416" y2="241" stroke="#a3a3a3" stroke-width="0.8"/>
+
+          <!-- INFERENCE HEADS (x=418-614, 5 boxes each 47h + 3gap) -->
+          <rect x="418" y="14" width="196" height="47" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="516" y="29" text-anchor="middle" font-size="7.5" font-weight="600" fill="#0a0a0a">Deterioration Score</text>
+          <text x="516" y="40" text-anchor="middle" font-size="6" fill="#525252" class="mono">0&ndash;100 continuous &middot; every 60 seconds</text>
+          <text x="516" y="51" text-anchor="middle" font-size="6" fill="#737373" class="mono">Escalation at score &gt; 85 &rarr; rapid response</text>
+
+          <rect x="418" y="64" width="196" height="47" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="516" y="79" text-anchor="middle" font-size="7.5" font-weight="600" fill="#0a0a0a">Sepsis Prediction</text>
+          <text x="516" y="90" text-anchor="middle" font-size="6" fill="#525252" class="mono">6h horizon &middot; SOFA organ sub-models</text>
+          <text x="516" y="101" text-anchor="middle" font-size="6" fill="#737373" class="mono">Sensitivity 0.91 vs NEWS2: 0.74</text>
+
+          <rect x="418" y="114" width="196" height="47" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="516" y="129" text-anchor="middle" font-size="7.5" font-weight="600" fill="#0a0a0a">ICU Transfer Risk</text>
+          <text x="516" y="140" text-anchor="middle" font-size="6" fill="#525252" class="mono">12h / 24h probability output</text>
+          <text x="516" y="151" text-anchor="middle" font-size="6" fill="#737373" class="mono">Ward nurse escalation integration</text>
+
+          <rect x="418" y="164" width="196" height="47" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="516" y="179" text-anchor="middle" font-size="7.5" font-weight="600" fill="#0a0a0a">Length of Stay</text>
+          <text x="516" y="190" text-anchor="middle" font-size="6" fill="#525252" class="mono">Regression head &middot; 6h refresh</text>
+          <text x="516" y="201" text-anchor="middle" font-size="6" fill="#737373" class="mono">MAE: 0.9 days &middot; bed planning feed</text>
+
+          <rect x="418" y="214" width="196" height="54" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="516" y="229" text-anchor="middle" font-size="7.5" font-weight="600" fill="#0a0a0a">Readmission + Drug Alert</text>
+          <text x="516" y="240" text-anchor="middle" font-size="6" fill="#525252" class="mono">30-day AUC 0.84 &middot; at discharge</text>
+          <text x="516" y="251" text-anchor="middle" font-size="6" fill="#737373" class="mono">200M+ interaction pairs &middot; real-time</text>
+          <text x="516" y="262" text-anchor="middle" font-size="5.5" fill="#a3a3a3" class="mono">Contraindication + polypharmacy flagging</text>
+
+          <!-- Converging arrows: heads -> output -->
+          <line x1="614" y1="37" x2="625" y2="141" stroke="#a3a3a3" stroke-width="0.8"/>
+          <line x1="614" y1="87" x2="625" y2="141" stroke="#a3a3a3" stroke-width="0.8"/>
+          <line x1="614" y1="137" x2="625" y2="141" stroke="#a3a3a3" stroke-width="0.8"/>
+          <line x1="614" y1="187" x2="625" y2="141" stroke="#a3a3a3" stroke-width="0.8"/>
+          <line x1="614" y1="241" x2="625" y2="141" stroke="#a3a3a3" stroke-width="0.8"/>
+          <line x1="625" y1="141" x2="634" y2="141" stroke="#0a0a0a" stroke-width="1"/>
+          <polygon points="631,137 639,141 631,145" fill="#0a0a0a"/>
+
+          <!-- Diverging arrows: output fans to 3 boxes -->
+          <line x1="639" y1="141" x2="644" y2="60" stroke="#a3a3a3" stroke-width="0.8"/>
+          <line x1="639" y1="141" x2="644" y2="148" stroke="#a3a3a3" stroke-width="0.8"/>
+          <line x1="639" y1="141" x2="644" y2="224" stroke="#a3a3a3" stroke-width="0.8"/>
+
+          <!-- CLINICAL OUTPUT (x=644-935) -->
+          <!-- Causal Engine -->
+          <rect x="644" y="14" width="291" height="75" fill="none" stroke="#0a0a0a" stroke-width="1"/>
+          <text x="789" y="30" text-anchor="middle" font-size="8" font-weight="600" fill="#0a0a0a">Causal Intervention Engine</text>
+          <text x="789" y="42" text-anchor="middle" font-size="6" fill="#525252" class="mono">POMDP + neural rollout &middot; counterfactual simulation</text>
+          <text x="789" y="53" text-anchor="middle" font-size="6" fill="#737373" class="mono">P(MAP &gt; 65 at 4h | vasopressor + fluid) = 0.82</text>
+          <text x="789" y="64" text-anchor="middle" font-size="6" fill="#737373" class="mono">PK/PD dose-response per patient cohort</text>
+          <text x="789" y="75" text-anchor="middle" font-size="5.5" fill="#a3a3a3" class="mono">Optimal intervention ranking &middot; physician-in-the-loop</text>
+
+          <!-- Federated Learning -->
+          <rect x="644" y="93" width="291" height="75" fill="none" stroke="#0a0a0a" stroke-width="1" stroke-dasharray="4,2"/>
+          <text x="789" y="109" text-anchor="middle" font-size="8" font-weight="600" fill="#0a0a0a">Federated Learning</text>
+          <text x="789" y="121" text-anchor="middle" font-size="6" fill="#525252" class="mono">Patient data never leaves facility &middot; &epsilon;=0.5 &middot; &delta;=1e&#8209;5</text>
+          <text x="789" y="132" text-anchor="middle" font-size="6" fill="#737373" class="mono">Per-facility LoRA &middot; meta-learning convergence</text>
+          <text x="789" y="143" text-anchor="middle" font-size="6" fill="#737373" class="mono">HIPAA &middot; DPDP &middot; NHS DSP Toolkit compliant</text>
+          <text x="789" y="154" text-anchor="middle" font-size="5.5" fill="#a3a3a3" class="mono">Global model improves &middot; no raw patient data shared</text>
+          <text x="789" y="165" text-anchor="middle" font-size="5.5" fill="#a3a3a3" class="mono">Differential privacy guaranteed per aggregation round</text>
+
+          <!-- EMR Integration (filled black) -->
+          <rect x="644" y="172" width="291" height="75" fill="#0a0a0a" stroke="#0a0a0a" stroke-width="1.5"/>
+          <text x="789" y="190" text-anchor="middle" font-size="8" font-weight="600" fill="#ffffff">EMR Integration + Output</text>
+          <text x="789" y="202" text-anchor="middle" font-size="6" fill="#a3a3a3" class="mono">Epic &middot; Cerner &middot; MocDoc &middot; Meditech &middot; Apollo HMS</text>
+          <text x="789" y="213" text-anchor="middle" font-size="6" fill="#a3a3a3" class="mono">SHAP attribution &middot; audit trail &middot; alert fatigue &lt;8%</text>
+          <text x="789" y="224" text-anchor="middle" font-size="6" fill="#a3a3a3" class="mono">Auto-escalates rapid response at deterioration score &gt; 85</text>
+          <text x="789" y="235" text-anchor="middle" font-size="5.5" fill="#737373" class="mono">Nurse dashboard &middot; CDSS overlay &middot; BI reporting</text>
+
+          <!-- Metrics bar -->
+          <rect x="644" y="252" width="291" height="18" fill="none" stroke="#d4d4d4" stroke-width="0.6"/>
+          <text x="789" y="264" text-anchor="middle" font-size="6" fill="#525252" class="mono">Sepsis sensitivity 0.91 &middot; LOS MAE 0.9d &middot; Readmission AUC 0.84 &middot; Alert fatigue &lt;8% &middot; 60-sec cycle</text>
+        </svg>
       </div>
 
       <!-- 5. SPECTRA: Deep Generative Forecasting Architecture -->
