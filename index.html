@@ -1,7 +1,3 @@
-https://raw.githubusercontent.com/drkaushiksarkar/drkaushiksarkar.github.io/main/index.html
-→ https://raw.githubusercontent.com/drkaushiksarkar/drkaushiksarkar.github.io/main/index.html
-Content-Type: text/plain; charset=utf-8
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -630,54 +626,6 @@ Content-Type: text/plain; charset=utf-8
         </svg>
       </div>
 
-
-      <!-- 3.5. Hospital AI / Patient Intelligence -->
-      <div class="schematic rv">
-        <div class="schematic-label">Hospital AI / Patient Intelligence</div>
-        <div class="schematic-title">Real-Time Multi-Modal Inference at the Individual Patient Level</div>
-        <div class="arch-layer">
-          <div class="arch-cell header span" style="width:100%">STREAM FUSION / 60-second resolution / HL7 &middot; FHIR R4 &middot; DICOM &middot; MAR</div>
-        </div>
-        <div class="arch-layer">
-          <div class="arch-cell" style="font-size:0.6rem;">Vitals<br><span style="font-size:0.55rem;color:var(--t3);font-family:var(--mono);">HR &middot; BP &middot; SpO&#x2082; &middot; RR &middot; GCS</span></div>
-          <div class="arch-cell" style="font-size:0.6rem;">Labs<br><span style="font-size:0.55rem;color:var(--t3);font-family:var(--mono);">CBC &middot; ABG &middot; Lactate &middot; PCT</span></div>
-          <div class="arch-cell" style="font-size:0.6rem;">Medications<br><span style="font-size:0.55rem;color:var(--t3);font-family:var(--mono);">IV &middot; PO &middot; PRN &middot; MAR</span></div>
-          <div class="arch-cell" style="font-size:0.6rem;">Imaging<br><span style="font-size:0.55rem;color:var(--t3);font-family:var(--mono);">DICOM &middot; Vision Transformer</span></div>
-          <div class="arch-cell" style="font-size:0.6rem;">Clinical Notes<br><span style="font-size:0.55rem;color:var(--t3);font-family:var(--mono);">Physician &middot; Nursing &middot; NLP</span></div>
-          <div class="arch-cell" style="font-size:0.6rem;">Genomics<br><span style="font-size:0.55rem;color:var(--t3);font-family:var(--mono);">Admission biomarkers</span></div>
-        </div>
-        <div style="height:0.4rem;border-left:1px dashed var(--border2);margin-left:50%;width:0;"></div>
-        <div class="arch-layer">
-          <div class="arch-cell header span" style="width:100%">PATIENT-LEVEL TRANSFORMER / Cross-modal attention &middot; Temporal encoding &middot; Missingness representation &middot; Per-hospital LoRA</div>
-        </div>
-        <div class="arch-layer">
-          <div class="arch-cell" style="font-size:0.58rem;font-family:var(--mono);">vitals &times; labs &times; text &times; imaging</div>
-          <div class="arch-cell" style="font-size:0.58rem;font-family:var(--mono);">abs. time + inter-event intervals</div>
-          <div class="arch-cell" style="font-size:0.58rem;font-family:var(--mono);">structured absence encoding</div>
-          <div class="arch-cell" style="font-size:0.58rem;font-family:var(--mono);">federated fine-tuning per facility</div>
-        </div>
-        <div style="height:0.4rem;border-left:1px dashed var(--border2);margin-left:50%;width:0;"></div>
-        <div class="arch-layer">
-          <div class="arch-cell" style="font-size:0.6rem;">Deterioration<br><span style="font-size:0.55rem;color:var(--t3);font-family:var(--mono);">0&ndash;100 &middot; every 60s</span></div>
-          <div class="arch-cell" style="font-size:0.6rem;">Sepsis risk<br><span style="font-size:0.55rem;color:var(--t3);font-family:var(--mono);">6h &middot; SOFA sub-models</span></div>
-          <div class="arch-cell" style="font-size:0.6rem;">ICU transfer<br><span style="font-size:0.55rem;color:var(--t3);font-family:var(--mono);">12h / 24h probability</span></div>
-          <div class="arch-cell" style="font-size:0.6rem;">Length of stay<br><span style="font-size:0.55rem;color:var(--t3);font-family:var(--mono);">regression &middot; 6h update</span></div>
-          <div class="arch-cell" style="font-size:0.6rem;">Readmission<br><span style="font-size:0.55rem;color:var(--t3);font-family:var(--mono);">30-day &middot; AUC 0.84</span></div>
-        </div>
-        <div style="height:0.4rem;border-left:1px dashed var(--border2);margin-left:50%;width:0;"></div>
-        <div class="arch-layer">
-          <div class="arch-cell header">Causal Engine</div>
-          <div class="arch-cell header">Federated Learning</div>
-          <div class="arch-cell header">EMR Integration</div>
-        </div>
-        <div class="arch-layer">
-          <div class="arch-cell" style="font-size:0.58rem;">POMDP + neural rollout<br>PK/PD dose-response curves</div>
-          <div class="arch-cell" style="font-size:0.58rem;">&epsilon;=0.5 &middot; &delta;=1e&#8209;5<br>Per-facility LoRA adaptation</div>
-          <div class="arch-cell" style="font-size:0.58rem;">Epic &middot; Cerner &middot; MocDoc<br>SHAP attribution &middot; audit log</div>
-        </div>
-        <div class="eq-block" style="margin-top:0.8rem;font-size:0.65rem;">Sepsis sensitivity at 6h: 0.91 &nbsp;(NEWS2 baseline: 0.74) &nbsp;&middot;&nbsp; LOS MAE: 0.9 days &nbsp;&middot;&nbsp; Readmission AUC: 0.84 &nbsp;&middot;&nbsp; Alert fatigue: &lt;8%<br>Patient data never leaves facility &nbsp;&middot;&nbsp; Auto-escalates rapid response at deterioration score &gt; 85</div>
-      </div>
-
       <!-- 4. Distributed GPU Layout -->
       <div class="schematic rv">
         <div class="schematic-label">Infrastructure / 8-GPU Cluster</div>
@@ -1106,4 +1054,346 @@ Content-Type: text/plain; charset=utf-8
       <div class="map-legend-item"><div class="map-legend-dot"></div>Central African Rep.</div>
       <div class="map-legend-item"><div class="map-legend-dot"></div>Niger</div>
       <div class="map-legend-item"><div class="map-legend-dot"></div>Sierra Leone</div>
-      <div class="map-legend-item"><div class="map-legend-
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Egypt</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Jordan</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Lebanon</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Oman</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Iraq</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>Chile</div>
+      <div class="map-legend-item"><div class="map-legend-dot"></div>United Kingdom</div>
+    </div>
+  </div>
+</section>
+
+<section id="tech">
+  <div class="container">
+    <div class="label rv">Technical Stack</div>
+    <h2 class="title rv">Tools I Build With</h2>
+    <p class="sub rv">Production-grade proficiency. Primary tools highlighted.</p>
+    <div class="stack-group rv">
+      <div class="stack-label"><i data-lucide="brain" style="width:14px;height:14px;"></i> AI / LLM</div>
+      <div class="stack-items"><span class="stack-tag pri">Claude / Anthropic</span><span class="stack-tag pri">Mistral</span><span class="stack-tag pri">LoRA / QLoRA</span><span class="stack-tag pri">DPO / RLHF</span><span class="stack-tag">LangChain</span><span class="stack-tag">LlamaIndex</span><span class="stack-tag">vLLM</span><span class="stack-tag">HuggingFace</span><span class="stack-tag">ONNX</span></div>
+    </div>
+    <div class="stack-group rv">
+      <div class="stack-label"><i data-lucide="bot" style="width:14px;height:14px;"></i> Agentic / Dev Tools</div>
+      <div class="stack-items"><span class="stack-tag pri">Claude Code</span><span class="stack-tag pri">MCP Servers</span><span class="stack-tag pri">Cursor</span><span class="stack-tag">Lovable</span><span class="stack-tag">v0 by Vercel</span><span class="stack-tag">Windsurf</span><span class="stack-tag">Replit</span><span class="stack-tag">GitHub Copilot</span></div>
+    </div>
+    <div class="stack-group rv">
+      <div class="stack-label"><i data-lucide="cloud" style="width:14px;height:14px;"></i> Cloud / Infrastructure</div>
+      <div class="stack-items"><span class="stack-tag pri">AWS SageMaker</span><span class="stack-tag pri">AWS Bedrock</span><span class="stack-tag">Fargate</span><span class="stack-tag">Glue</span><span class="stack-tag">Athena</span><span class="stack-tag">EventBridge</span><span class="stack-tag">Azure</span><span class="stack-tag">Kubernetes</span><span class="stack-tag">Terraform</span><span class="stack-tag">Docker</span></div>
+    </div>
+    <div class="stack-group rv">
+      <div class="stack-label"><i data-lucide="bar-chart-3" style="width:14px;height:14px;"></i> Data Engineering</div>
+      <div class="stack-items"><span class="stack-tag pri">Apache Iceberg</span><span class="stack-tag pri">OpenSearch</span><span class="stack-tag">Spark</span><span class="stack-tag">Airflow</span><span class="stack-tag">Flink</span><span class="stack-tag">FAISS</span><span class="stack-tag">Kafka</span><span class="stack-tag">dbt</span></div>
+    </div>
+    <div class="stack-group rv">
+      <div class="stack-label"><i data-lucide="flask-conical" style="width:14px;height:14px;"></i> ML / Research</div>
+      <div class="stack-items"><span class="stack-tag pri">PyTorch</span><span class="stack-tag">TensorFlow</span><span class="stack-tag">XGBoost</span><span class="stack-tag">scikit-learn</span><span class="stack-tag">SHAP</span><span class="stack-tag">MLflow</span><span class="stack-tag">Python</span><span class="stack-tag">Triton</span></div>
+    </div>
+  </div>
+</section>
+
+
+<section id="connect" style="border-bottom:none;">
+  <div class="container">
+    <div class="label rv">Contact</div>
+    <h2 class="title rv">Get in Touch</h2>
+    <p class="sub rv" style="margin:0 auto;">Open to conversations about AI engineering, foundation models, health systems, and climate intelligence.</p>
+    <div class="connect-links rv">
+      <a href="https://linkedin.com/in/kaushik-sarkar-ai" target="_blank" class="connect-link"><i data-lucide="linkedin" style="width:16px;height:16px;"></i> LinkedIn</a>
+      <a href="mailto:kaushik.sarkar.ai@gmail.com" class="connect-link"><i data-lucide="mail" style="width:16px;height:16px;"></i> kaushik.sarkar.ai@gmail.com</a>
+      <a href="https://github.com/drkaushiksarkar" target="_blank" class="connect-link"><i data-lucide="github" style="width:16px;height:16px;"></i> GitHub</a>
+      <a href="https://www.drkaushiks.com" target="_blank" class="connect-link"><i data-lucide="globe" style="width:16px;height:16px;"></i> drkaushiks.com</a>
+    </div>
+  </div>
+</section>
+
+<footer><span class="signature signature-lg">Kaushik Sarkar</span><span style="font-size:0.72rem; color:var(--t4); display:block;">AI Engineering Leadership</span></footer>
+
+<script>
+const yearlyData = [{"year": 2009, "total": 623, "commits": 623, "issues": 0, "prs": 0}, {"year": 2010, "total": 999, "commits": 999, "issues": 0, "prs": 0}, {"year": 2011, "total": 2053, "commits": 2053, "issues": 0, "prs": 0}, {"year": 2012, "total": 3802, "commits": 3802, "issues": 0, "prs": 0}, {"year": 2013, "total": 11848, "commits": 11848, "issues": 0, "prs": 0}, {"year": 2014, "total": 16056, "commits": 16056, "issues": 0, "prs": 0}, {"year": 2015, "total": 11994, "commits": 11994, "issues": 0, "prs": 0}, {"year": 2016, "total": 14585, "commits": 14585, "issues": 0, "prs": 0}, {"year": 2017, "total": 15292, "commits": 15292, "issues": 0, "prs": 0}, {"year": 2018, "total": 18076, "commits": 18076, "issues": 0, "prs": 0}, {"year": 2019, "total": 21400, "commits": 21400, "issues": 0, "prs": 0}, {"year": 2020, "total": 24904, "commits": 24900, "issues": 0, "prs": 0}, {"year": 2021, "total": 15117, "commits": 15102, "issues": 0, "prs": 0}, {"year": 2022, "total": 10495, "commits": 10426, "issues": 0, "prs": 0}, {"year": 2023, "total": 8640, "commits": 8586, "issues": 0, "prs": 0}, {"year": 2024, "total": 8064, "commits": 8053, "issues": 0, "prs": 0}, {"year": 2025, "total": 67227, "commits": 67172, "issues": 0, "prs": 0}, {"year": 2026, "total": 53180, "commits": 48741, "issues": 450, "prs": 315}];
+const monthlyData = [{"date": "2026-05-26", "count": 0}, {"date": "2026-05-27", "count": 0}, {"date": "2026-05-28", "count": 0}, {"date": "2026-05-29", "count": 0}, {"date": "2026-05-30", "count": 0}, {"date": "2026-05-31", "count": 0}, {"date": "2026-06-01", "count": 0}, {"date": "2026-06-02", "count": 0}, {"date": "2026-06-03", "count": 0}, {"date": "2026-06-04", "count": 0}, {"date": "2026-06-05", "count": 0}, {"date": "2026-06-06", "count": 0}, {"date": "2026-06-07", "count": 0}, {"date": "2026-06-08", "count": 0}, {"date": "2026-06-09", "count": 0}, {"date": "2026-06-10", "count": 0}, {"date": "2026-06-11", "count": 0}, {"date": "2026-06-12", "count": 0}, {"date": "2026-06-13", "count": 0}, {"date": "2026-06-14", "count": 0}, {"date": "2026-06-15", "count": 0}, {"date": "2026-06-16", "count": 0}, {"date": "2026-06-17", "count": 0}, {"date": "2026-06-18", "count": 0}, {"date": "2026-06-19", "count": 0}, {"date": "2026-06-20", "count": 0}, {"date": "2026-06-21", "count": 0}, {"date": "2026-06-22", "count": 0}, {"date": "2026-06-23", "count": 0}, {"date": "2026-06-24", "count": 0}, {"date": "2026-06-25", "count": 0}];
+
+// Stats
+const total = yearlyData.reduce((s,y) => s + y.total, 0);
+document.getElementById('c-total').textContent = total.toLocaleString();
+const peak = yearlyData.reduce((a,b) => a.total > b.total ? a : b);
+document.getElementById('c-peak').textContent = peak.year;
+const mTotal = monthlyData.reduce((s,d) => s + d.count, 0);
+document.getElementById('c-month').textContent = mTotal.toLocaleString();
+
+// Chart config
+Chart.defaults.color = '#737373';
+Chart.defaults.borderColor = '#e5e5e5';
+Chart.defaults.font.family = "'JetBrains Mono', monospace";
+Chart.defaults.font.size = 11;
+
+// Yearly chart
+new Chart(document.getElementById('yearlyChart'), {
+  type: 'bar',
+  data: {
+    labels: yearlyData.map(d => d.year),
+    datasets: [{
+      label: 'Contributions',
+      data: yearlyData.map(d => d.total),
+      backgroundColor: 'rgba(10,10,10,0.08)',
+      borderColor: 'rgba(10,10,10,0.2)',
+      borderWidth: 1,
+      borderRadius: 2,
+      borderSkipped: false,
+    },{
+      label: 'Trend',
+      data: yearlyData.map(d => d.total),
+      type: 'line',
+      borderColor: 'rgba(10,10,10,0.5)',
+      backgroundColor: 'rgba(10,10,10,0.03)',
+      fill: true,
+      tension: 0.35,
+      pointRadius: 3,
+      pointBackgroundColor: '#0a0a0a',
+      pointBorderColor: '#ffffff',
+      pointBorderWidth: 2,
+      borderWidth: 2,
+    }]
+  },
+  options: {
+    responsive: true,
+    interaction: { intersect: false, mode: 'index' },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#ffffff',
+        borderColor: '#d4d4d4',
+        borderWidth: 1,
+        callbacks: { label: ctx => ctx.datasetIndex === 1 ? null : ctx.parsed.y.toLocaleString() + ' contributions' }
+      }
+    },
+    scales: {
+      y: { beginAtZero: true, grid: { color: '#e5e5e5' }, ticks: { callback: v => v >= 1000 ? (v/1000).toFixed(0) + 'K' : v } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// Monthly chart
+new Chart(document.getElementById('monthlyChart'), {
+  type: 'bar',
+  data: {
+    labels: monthlyData.map(d => { const dt = new Date(d.date+'T00:00:00'); return dt.toLocaleDateString('en-US',{month:'short',day:'numeric'}); }),
+    datasets: [{
+      label: 'Daily',
+      data: monthlyData.map(d => d.count),
+      backgroundColor: monthlyData.map(d => d.count > 5000 ? 'rgba(10,10,10,0.25)' : d.count > 1000 ? 'rgba(10,10,10,0.14)' : 'rgba(10,10,10,0.06)'),
+      borderColor: 'rgba(10,10,10,0.2)',
+      borderWidth: 1,
+      borderRadius: 2,
+      borderSkipped: false,
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { backgroundColor: '#ffffff', borderColor: '#d4d4d4', titleColor: '#171717', bodyColor: '#525252', borderWidth: 1, callbacks: { label: ctx => ctx.parsed.y.toLocaleString() + ' contributions' } }
+    },
+    scales: {
+      y: { beginAtZero: true, grid: { color: '#e5e5e5' }, ticks: { callback: v => v >= 1000 ? (v/1000).toFixed(1) + 'K' : v } },
+      x: { grid: { display: false }, ticks: { maxRotation: 45 } }
+    }
+  }
+});
+
+// Repository data: advanced first, foundation last
+const repos = [
+  // SAGE AI Platform (most advanced)
+  {name:"sage-realtime-health-surveillance",desc:"Production real-time health anomaly detection engine processing 50K+ events/sec with sub-200ms latency across 190+ countries",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-evidence-rag-engine",desc:"Multi-hop RAG engine over 250M+ PubMed embeddings and 30M+ causal knowledge graph triples with hybrid BM25+vector retrieval",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-dengue-gnn-forecaster",desc:"Spatio-temporal graph neural network for dengue outbreak prediction using 5M+ case records, ERA5 climate reanalysis, and WorldPop density rasters",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-climate-health-forecaster",desc:"Temporal fusion transformer for climate-health outcome prediction using ERA5 (362M rows), CMIP6 projections, and WHO health indicators",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-vaccine-equity-agent",desc:"Agentic AI platform with MCP tool servers for vaccine coverage equity analysis using UNICEF (8.8M rows), WHO immunization, and OECD ODA data",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-genomic-amr-tracker",desc:"Graph neural network for antimicrobial resistance tracking using CARD AMR genomes (271K), WHO GLASS surveillance, and transformer sequence classification",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-geospatial-health-platform",desc:"Full-stack geospatial health intelligence platform with TiTiler COG serving, interactive choropleth mapping, and cross-domain spatial statistics",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-ncd-risk-transformer",desc:"Transformer-based non-communicable disease risk stratification using longitudinal IHME GBD (47M rows) and World Bank socioeconomic indicators",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-pharma-supply-agent",desc:"Multi-agent pharmaceutical supply chain optimizer using OECD Pharma data (19.6M rows), World Bank financing, and reinforcement learning with MCP orchestration",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-population-dynamics-dashboard",desc:"Interactive population dynamics forecasting dashboard with uncertainty quantification using UN Population (11M rows), UNDP demographics, and D3.js",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-lulc-population-mapper",desc:"Geospatial AI for land use/land cover change detection correlated with population dynamics using WorldPop COGs and satellite imagery segmentation",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+  {name:"sage-climate-agent-orchestrator",desc:"Multi-agent climate data pipeline with MCP servers for SAGE Lake access, n8n workflow automation, and LLM-powered climate-health report generation",lang:"Python",cat:"sage",owner:"drkaushiksarkar"},
+
+  // AI / Deep Learning
+  {name:"deep-neural-epi",desc:"Deep learning for epidemiological forecasting: LSTM, Transformer, GNN models for outbreak prediction and surveillance",lang:"Python",cat:"ai",owner:"drkaushiksarkar"},
+  {name:"biomedical-ai-framework",desc:"Biomedical AI framework for multi-modal learning, drug discovery, genomic analysis, and clinical knowledge graphs",lang:"Python",cat:"ai",owner:"drkaushiksarkar"},
+  {name:"clinical-ml-pipeline",desc:"Production ML pipeline for clinical decision support: risk scoring, treatment optimization, outcome prediction",lang:"Python",cat:"ai",owner:"drkaushiksarkar"},
+  {name:"medical-imaging-dx",desc:"Enterprise medical imaging diagnostics with automated triage, CNN-based classification, and clinical decision support integration",lang:"Python",cat:"ai",owner:"drkaushiksarkar"},
+  {name:"health-nlp-engine",desc:"Production NLP pipeline with agentic text processing, automated health communication analysis, and full-stack deployment",lang:"Python",cat:"ai",owner:"drkaushiksarkar"},
+  {name:"fever-prediction-platform",desc:"Production fever and malaria prediction platform with LSTM-Attention fusion models, SHAP explainability, and Bayesian hyperparameter optimization",lang:"Python",cat:"ai",owner:"drkaushiksarkar"},
+  {name:"pandemic-response-analytics",desc:"Real-time pandemic surveillance and response analytics: variant tracking, contact tracing, hospital capacity modeling",lang:"Python",cat:"ai",owner:"drkaushiksarkar"},
+
+  // Disease Surveillance
+  {name:"disease-surveillance-platform",desc:"Distributed disease surveillance system with real-time alerting and geospatial analytics",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"epidemiological-forecasting-engine",desc:"Advanced epidemiological forecasting using ensemble ML methods and real-time surveillance data",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"real-time-disease-monitor",desc:"Real-time disease outbreak monitoring with alerting, dashboards and automated situation reports",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"slewars",desc:"SLEWARS: Spatial-Longitudinal Early Warning and Response System for epidemic intelligence and outbreak prediction",lang:"JavaScript",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"epidemic-prediction-framework",desc:"Research framework for autonomous early warning algorithms with self-tuning thresholds and agent-driven anomaly detection",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"epidemic-intelligence-bd",desc:"AI-powered autonomous early warning system for infectious disease surveillance in Bangladesh with agent-driven alerting",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"bangladesh-disease-surveillance",desc:"Bangladesh disease early warning system with operational surveillance and alerting platform",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"pandemic-preparedness-index",desc:"Composite pandemic preparedness scoring system using WHO JEE, GHS Index and custom indicators",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"malaria-forecasting-system",desc:"ML-powered malaria incidence forecasting using climate, demographic and epidemiological data",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+  {name:"malaria-surveillance-analytics",desc:"Malaria surveillance analytics platform with district-level monitoring, outbreak detection, and automated reporting",lang:"Python",cat:"surveillance",owner:"drkaushiksarkar"},
+
+  // Data Engineering
+  {name:"vector-embedding-pipeline",desc:"High-throughput vector embedding pipeline for 237M+ biomedical text spans using Titan Embeddings",lang:"Python",cat:"data",owner:"drkaushiksarkar"},
+  {name:"global-health-data-pipeline",desc:"Scalable ETL pipeline for ingesting, normalizing and serving 150+ global health data sources",lang:"Python",cat:"data",owner:"drkaushiksarkar"},
+  {name:"health-analytics-studio",desc:"Interactive analytics studio for health data exploration, visualization and insight generation",lang:"Python",cat:"data",owner:"drkaushiksarkar"},
+  {name:"health-intelligence-dashboard",desc:"Real-time health intelligence dashboard with agent-driven indicator monitoring, geospatial mapping, and automated insights",lang:"Python",cat:"data",owner:"drkaushiksarkar"},
+  {name:"geospatial-health-toolkit",desc:"Geospatial analysis toolkit for health facility mapping, catchment modeling and spatial epidemiology",lang:"Python",cat:"data",owner:"drkaushiksarkar"},
+  {name:"health-informatics-toolkit",desc:"Health informatics platform with FHIR/HL7 integration, clinical data pipelines, and EHR interoperability",lang:"Python",cat:"data",owner:"drkaushiksarkar"},
+
+  // Climate / Global Health
+  {name:"climate-disease-forecast",desc:"Climate-disease correlation engine linking environmental data to health outcomes",lang:"Python",cat:"climate",owner:"drkaushiksarkar"},
+  {name:"climate-profiler-app",desc:"Country-level climate profiling with automated indicator benchmarking, temporal trend analysis, and multi-source data integration",lang:"Python",cat:"climate",owner:"drkaushiksarkar"},
+  {name:"environmental-health-correlator",desc:"Environmental exposure to health outcome correlation engine using ERA5 climate and WHO mortality data",lang:"Python",cat:"climate",owner:"drkaushiksarkar"},
+  {name:"vaccine-coverage-optimizer",desc:"Vaccine coverage optimization and equity analysis using WUENIC, administrative and survey data",lang:"Python",cat:"climate",owner:"drkaushiksarkar"},
+  {name:"antimicrobial-resistance-tracker",desc:"AMR surveillance and resistance pattern tracking using CARD genomics and WHO GLASS data",lang:"Python",cat:"climate",owner:"drkaushiksarkar"},
+  {name:"nutrition-deficiency-mapper",desc:"Nutritional deficiency mapping and intervention targeting using DHS, MICS and WASH survey data",lang:"Python",cat:"climate",owner:"drkaushiksarkar"},
+  {name:"epi-stat-computing",desc:"Statistical computing for epidemiological research: survival analysis, spatial statistics, Bayesian hierarchical models",lang:"Python",cat:"climate",owner:"drkaushiksarkar"},
+  {name:"global-ews-catalogue",desc:"Systematic global catalogue of 79 early warning systems with capability mapping, coverage analysis, and gap identification",lang:"Python",cat:"climate",owner:"drkaushiksarkar"},
+
+  // Applications
+  {name:"spectra-enterprise",desc:"High-performance spectral analysis platform for real-time disease pattern detection and forecasting",lang:"Python",cat:"apps",owner:"drkaushiksarkar"},
+  {name:"forecast-engine",desc:"Agentic forecasting application with autonomous model selection, multi-indicator prediction, and self-correcting pipelines",lang:"Python",cat:"apps",owner:"drkaushiksarkar"},
+  {name:"timeseries-explorer",desc:"Interactive time-series exploration platform with automated anomaly detection, statistical profiling, and Streamlit visualization",lang:"Python",cat:"apps",owner:"drkaushiksarkar"},
+  {name:"sit742",desc:"SIT742: Modern Data Science course materials and computational notebooks",lang:"Jupyter Notebook",cat:"apps",owner:"drkaushiksarkar"},
+  {name:"drkaushiksarkar.github.io",desc:"Personal contribution dashboard and activity analytics",lang:"HTML",cat:"apps",owner:"drkaushiksarkar"},
+
+  // Organization
+  {name:"DISHA",desc:"Data Integrated Solutions for Healthy Futures with AI: climate-informed health decision support platform",lang:"Jupyter Notebook",cat:"org",org:"Forecasting-Healthy-Futures"},
+  {name:"Global-EWS-Catalogue",desc:"Comprehensive catalogue of global early warning systems for infectious disease outbreaks",lang:"HTML",cat:"org",org:"Forecasting-Healthy-Futures"},
+  {name:"Odisha_2021_Official_Boundaries",desc:"Official administrative boundary shapefiles for Odisha state, India",lang:"GIS",cat:"org",org:"Forecasting-Healthy-Futures"},
+  {name:"Indonesia",desc:"Indonesia health system analytics: country-specific surveillance and forecasting deployment",lang:"N/A",cat:"org",org:"IMACS-Health-Modeling"},
+
+  // Foundation / Early Career
+  {name:"epidemiological-methods",desc:"Computational epidemiology: spatial statistics, meta-analysis, outbreak modeling, Bayesian hierarchical models, disease mapping",lang:"Python",cat:"foundation",owner:"drkaushiksarkar"},
+  {name:"global-health-statistics",desc:"R and Stata analysis of global health data: WHO GHO, World Bank WDI, UN Population, DHS surveys, GBD estimates",lang:"R",cat:"foundation",owner:"drkaushiksarkar"},
+  {name:"survival-analysis-matlab",desc:"MATLAB toolbox for survival analysis and time-varying models: Cox PH, Kaplan-Meier, competing risks, frailty models, cure rate models",lang:"R",cat:"foundation",owner:"drkaushiksarkar"},
+  {name:"numerical-methods-cpp",desc:"C++ implementations of numerical methods and data structures: sorting, graph algorithms, dynamic programming, matrix operations, Monte Carlo simulation",lang:"C++",cat:"foundation",owner:"drkaushiksarkar"},
+];
+
+const catLabels = {sage:"SAGE Platform",ai:"AI / Deep Learning",surveillance:"Surveillance",data:"Data Engineering",climate:"Climate / Global Health",apps:"Applications",org:"Organization",foundation:"Foundation"};
+
+function renderRepos(filter) {
+  const grid = document.getElementById('repoGrid');
+  const filtered = filter === 'all' ? repos : repos.filter(r => r.cat === filter);
+  document.getElementById('repo-shown').textContent = filtered.length;
+  grid.innerHTML = filtered.map(r => {
+    const owner = r.org || r.owner;
+    const url = r.org ? 'https://github.com/' + r.org + '/' + r.name : 'https://github.com/' + r.owner + '/' + r.name;
+    const orgBadge = r.org ? '<span class="repo-card-lang" style="color:#888;">' + r.org + '</span>' : '';
+    return '<a href="' + url + '" target="_blank" class="repo-card">' +
+      '<div class="repo-card-head">' +
+        '<i data-lucide="git-branch" style="width:13px;height:13px;color:var(--t4);flex-shrink:0;"></i>' +
+        '<span class="repo-card-name">' + r.name + '</span>' +
+        '<span class="repo-card-lang">' + r.lang + '</span>' +
+        orgBadge +
+      '</div>' +
+      '<div class="repo-card-desc">' + r.desc + '</div>' +
+    '</a>';
+  }).join('');
+  lucide.createIcons();
+}
+
+document.querySelectorAll('.repo-filter').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.repo-filter').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderRepos(btn.dataset.cat);
+  });
+});
+renderRepos('all');
+
+// World map with D3
+const highlightCountries = {
+  356:"India", 50:"Bangladesh", 360:"Indonesia", 894:"Zambia", 646:"Rwanda",
+  231:"Ethiopia", 180:"DR Congo", 140:"Central African Rep.", 562:"Niger",
+  694:"Sierra Leone", 818:"Egypt", 400:"Jordan", 422:"Lebanon", 512:"Oman",
+  368:"Iraq", 152:"Chile", 826:"United Kingdom"
+};
+
+const countryCoords = [
+  {name:"India",lat:20.5,lon:79},{name:"Bangladesh",lat:23.7,lon:90.4},
+  {name:"Indonesia",lat:-2,lon:118},{name:"Zambia",lat:-13.1,lon:28},
+  {name:"Rwanda",lat:-1.9,lon:29.9},{name:"Ethiopia",lat:9.1,lon:40.5},
+  {name:"DR Congo",lat:-4,lon:21.8},{name:"CAR",lat:6.6,lon:20.9},
+  {name:"Niger",lat:17.6,lon:8.1},{name:"Sierra Leone",lat:8.5,lon:-11.8},
+  {name:"Egypt",lat:26.8,lon:30.8},{name:"Jordan",lat:31.5,lon:36.2},
+  {name:"Lebanon",lat:33.9,lon:35.9},{name:"Oman",lat:21.5,lon:55.9},
+  {name:"Iraq",lat:33.2,lon:43.7},{name:"Chile",lat:-35.7,lon:-71.5},
+  {name:"UK",lat:54,lon:-2}
+];
+
+fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+  .then(r => r.json())
+  .then(world => {
+    const container = document.getElementById('mapContainer');
+    const w = container.clientWidth - 48;
+    const h = Math.min(w * 0.5, 480);
+
+    const svg = d3.select('#mapContainer')
+      .append('svg')
+      .attr('viewBox', '0 0 ' + w + ' ' + h)
+      .attr('preserveAspectRatio', 'xMidYMid meet');
+
+    const projection = d3.geoNaturalEarth1()
+      .fitSize([w, h], topojson.feature(world, world.objects.countries));
+
+    const path = d3.geoPath().projection(projection);
+    const countries = topojson.feature(world, world.objects.countries);
+    const highlightIds = Object.keys(highlightCountries).map(Number);
+
+    svg.selectAll('.land')
+      .data(countries.features)
+      .enter().append('path')
+      .attr('d', path)
+      .attr('class', d => highlightIds.includes(+d.id) ? 'highlight' : 'land');
+
+    const g = svg.append('g');
+    countryCoords.forEach(c => {
+      const p = projection([c.lon, c.lat]);
+      if (!p) return;
+      g.append('circle').attr('class','map-pulse').attr('cx',p[0]).attr('cy',p[1]).attr('r',3)
+        .style('animation-delay', (Math.random()*2).toFixed(1)+'s');
+      g.append('circle').attr('class','map-dot').attr('cx',p[0]).attr('cy',p[1]).attr('r',2.5);
+    });
+  });
+
+// Counter animation
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  const prefix = el.dataset.prefix || '';
+  const duration = 1400;
+  const start = performance.now();
+  function tick(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = p < 0.5 ? 2*p*p : -1+(4-2*p)*p;
+    el.textContent = prefix + Math.round(ease * target).toLocaleString() + suffix;
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+// Reveal observer
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('vis');
+    const counter = e.target.querySelector('[data-target]');
+    if (counter && !counter.dataset.animated) { counter.dataset.animated = '1'; animateCounter(counter); }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+// Init Lucide icons
+lucide.createIcons();
+</script>
+</body>
+</html>
